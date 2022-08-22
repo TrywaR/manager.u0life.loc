@@ -90,5 +90,8 @@
       <i class="fa-solid fa-spin fa-spinner"></i>
     </div>
   </div>
+
+  <!-- bg -->
+  <div class="body_bg"></div>
 </body>
 </html>

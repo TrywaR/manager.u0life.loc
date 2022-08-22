@@ -142,6 +142,10 @@
 		}
 
 
+		body > .loader {
+			position: relative;
+			z-index: -1;
+		}
 		body > .loader ._full{
 			position: fixed;
 			top: 0;
@@ -205,4 +209,4 @@
 	<meta property="og:image" content="<?=config::$site_url . '/template/imgs/logos/logo.svg'?>" />
 </head>
 
-<body class="animate__animated animate__fadeIn _load_">
+<body class="_load_">

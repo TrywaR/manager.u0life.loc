@@ -104,6 +104,10 @@
       </div>
     </div>
 
+    <div class="_seporator" style="text-align: center; padding: 1rem; opacity: .1; font-size: 5rem;">
+      <i class="fa-brands fa-grav"></i>
+    </div>
+
     <div class="_section _cards">
       <div class="_section_title">
         <h2 class="sub_title"><?=$oLang->get('Cards')?></h2>

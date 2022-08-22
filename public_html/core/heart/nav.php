@@ -173,6 +173,14 @@ class nav
         'access' => 0,
         'onlyapp' => true,
         'subs' => [
+          '/moneys/' => array(
+            'name' => $oLang->get('Moneys'),
+            'description' => $oLang->get('Moneys'),
+            'url' => '/moneys/',
+            'icon' => '<i class="fa-solid fa-bars"></i>',
+            'access' => 0,
+            'onlyapp' => true,
+          ),
           '/moneys/data/cards/' => array(
             'name' => $oLang->get('Cards'),
             'description' => $oLang->get('Cards'),
@@ -208,6 +216,14 @@ class nav
         'access' => 0,
         'onlyapp' => true,
         'subs' => [
+          '/times/' => array(
+            'name' => $oLang->get('Times'),
+            'description' => $oLang->get('Times'),
+            'url' => '/times/',
+            'icon' => '<i class="fa-solid fa-bars"></i>',
+            'access' => 0,
+            'onlyapp' => true,
+          ),
           '/times/analytics/costs/' => array(
             'name' => $oLang->get('Costs'),
             'description' => $oLang->get('Costs'),
@@ -283,6 +299,14 @@ class nav
         'menu_hide' => false,
         'onlysite' => true,
         'subs' => [
+          '/info/' => array(
+            'name' => $oLang->get('Info'),
+            'description' => $oLang->get('Info'),
+            'url' => '/info/',
+            'icon' => '<i class="fa-solid fa-bars"></i>',
+            'access' => 0,
+            'onlyapp' => true,
+          ),
           '/info/versions/' => array(
             'name' => $oLang->get('Versions'),
             'description' => $oLang->get('Versions'),

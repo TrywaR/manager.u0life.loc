@@ -72,14 +72,17 @@ body {
     cursor: pointer; }
   body::-webkit-scrollbar-thumb:hover {
     background: #edf3fe; }
-  body:before, body:after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1; }
+  body .body_bg {
+    position: relative;
+    z-index: -2; }
+    body .body_bg:before, body .body_bg:after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1; }
   body header {
     position: fixed;
     top: 0;
@@ -1877,11 +1880,11 @@ body .content_manager_buttons {
 .info_container > ._block {
   padding: 2rem 0 3rem; }
 
-body:before {
+body .body_bg:before {
   background: linear-gradient(0deg, rgba(255, 255, 255, 0.8) 0, rgba(233, 239, 255, 0.8) 100%);
   opacity: 0.8;
   z-index: -1; }
-body:after {
+body .body_bg:after {
   filter: blur(0.1rem);
   background: radial-gradient(circle, white 7%, #1c1a1a white);
   z-index: -2; }
