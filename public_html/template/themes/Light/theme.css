@@ -1648,6 +1648,18 @@ body .content_manager_buttons {
   box-shadow: 0 0 0.2rem 0rem rgba(200, 200, 200, 0.1), 0 0 0.6rem 0.6rem rgba(200, 200, 200, 0.1), inset 0 0 0.1rem 0 rgba(250, 250, 250, 0.1);
   transition: all 0.3s ease-in-out 0s; }
 
+.block_donate {
+  display: flex;
+  flex-direction: column; }
+  .block_donate ._item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    font-size: 2em;
+    line-height: 2em; }
+    .block_donate ._item ._icon {
+      padding-right: 0.5rem; }
+
 .welcome_container {
   padding: 0;
   overflow-x: hidden; }

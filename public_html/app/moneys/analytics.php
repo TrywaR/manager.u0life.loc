@@ -79,13 +79,6 @@ switch ($_REQUEST['form']) {
       $iIndex++;
     }
 
-    // Сортируем суммы категорий
-    usort($arrResults['categories'], function($a, $b){
-      return -($a['sum'] - $b['sum']);
-    });
-    // округляем
-    foreach ($arrResults['categories'] as &$arrCategory) $arrCategory['sum'] = round($arrCategory['sum']);
-
     // Создаём график
     $oChart = new chart();
     $oChart->arrDataset = $arrResults['data'];
@@ -99,6 +92,13 @@ switch ($_REQUEST['form']) {
 
     $arrResults['chart'] = $oChart->show();
     $arrResults['chart_sum'] = $oChart->show_sum();
+
+    // Сортируем суммы категорий
+    usort($arrResults['categories'], function($a, $b){
+      return -($a['sum'] - $b['sum']);
+    });
+    // округляем
+    foreach ($arrResults['categories'] as &$arrCategory) $arrCategory['sum'] = round($arrCategory['sum']);
 
     notification::success($arrResults);
     break;
@@ -164,13 +164,6 @@ switch ($_REQUEST['form']) {
       $arrResults['sum'] = floor((float)$arrResults['sum'] + (float)$iMounthSum);
     }
 
-    // Сортируем суммы категорий
-    usort($arrResults['categories'], function($a, $b){
-      return -($a['sum'] - $b['sum']);
-    });
-    // округляем
-    foreach ($arrResults['categories'] as &$arrCategory) $arrCategory['sum'] = round($arrCategory['sum']);
-
     // Создаём график
     $oChart = new chart();
     $oChart->arrDataset = $arrResults['data'];
@@ -186,6 +179,13 @@ switch ($_REQUEST['form']) {
 
     $arrResults['chart'] = $oChart->show();
     $arrResults['chart_sum'] = $oChart->show_sum();
+
+    // Сортируем суммы категорий
+    usort($arrResults['categories'], function($a, $b){
+      return -($a['sum'] - $b['sum']);
+    });
+    // округляем
+    foreach ($arrResults['categories'] as &$arrCategory) $arrCategory['sum'] = round($arrCategory['sum']);
 
     notification::success($arrResults);
     break;
@@ -247,13 +247,6 @@ switch ($_REQUEST['form']) {
       $arrResults['sum'] = floor((float)$arrResults['sum'] + (float)$iMounthSum);
     }
 
-    // Сортируем суммы категорий
-    usort($arrResults['categories'], function($a, $b){
-      return -($a['sum'] - $b['sum']);
-    });
-    // округляем
-    foreach ($arrResults['categories'] as &$arrCategory) $arrCategory['sum'] = round($arrCategory['sum']);
-
     // Создаём график
     $oChart = new chart();
     $oChart->arrDataset = $arrResults['data'];
@@ -267,6 +260,13 @@ switch ($_REQUEST['form']) {
 
     $arrResults['chart'] = $oChart->show();
     $arrResults['chart_sum'] = $oChart->show_sum();
+
+    // Сортируем суммы категорий
+    usort($arrResults['categories'], function($a, $b){
+      return -($a['sum'] - $b['sum']);
+    });
+    // округляем
+    foreach ($arrResults['categories'] as &$arrCategory) $arrCategory['sum'] = round($arrCategory['sum']);
 
     notification::success($arrResults);
     break;

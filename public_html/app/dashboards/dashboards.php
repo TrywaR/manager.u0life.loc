@@ -192,7 +192,7 @@ switch ($_REQUEST['form']) {
     else $arrResults['moneys']['balance'] = 0;
 
     // Money from hour
-    $arrTime = explode(':',$arrResults['work']);
+    $arrTime = explode(':',$arrResults['times']['works']);
     $iTimeSum = $arrTime[0] + $arrTime[1] / 60;
     $iMoneyForHour = $iMonthSummSalaryWork / $iTimeSum;
     if ( (int)$iMoneyForHour > 0 ) $arrResults['moneyforhour'] = number_format($iMoneyForHour, 2, '.', ' ');
