@@ -1,0 +1,82 @@
+// STYLE
+body
+  position: relative
+  z-index: 1
+  display: flex
+  flex-direction: column
+  color: $color_text
+  background: $color_body_bg
+  font-family: $font_default
+  font-size: 16px
+  line-height: 20px
+  font-weight: 400
+  @include scroll
+
+  &:before,
+  &:after
+    content: ''
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: -1
+
+  header
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    height: 4rem
+    display: flex
+    justify-content: space-between
+    max-width: 1000px
+    width: 100%
+    background: $color_body_bg
+    margin: 0 auto
+    z-index: 3
+
+    &:after
+      content: ''
+      position: absolute
+      top: -4rem
+      right: -1rem
+      width: 10rem
+      height: 10rem
+      border-radius: 50%
+      background: radial-gradient($color_main, $color_main_dark)
+      filter: blur(1.9rem)
+      opacity: .1
+      z-index: -1
+
+  main
+    z-index: 1
+    display: flex
+    padding: 4rem 0
+    box-sizing: border-box
+    flex-direction: column
+    overflow-x: hidden
+
+    .main_jumbotron,
+    .main_content
+      max-width: 1000px
+      width: 100%
+      margin: 0 auto
+      padding: 1rem
+
+  footer
+    z-index: 2
+    display: flex
+
+    .block_footer
+      max-width: 1000px
+      width: 100%
+      margin: 0 auto
+
+@media screen and (min-width:1200px)
+  body
+
+@media screen and (max-width:1199px)
+  body
+    font-size: 14px
+    line-height: 18px
