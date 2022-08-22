@@ -8,7 +8,7 @@
 // header("X-Webkit-CSP: default-src *; connect-src *; script-src 'unsafe-inline' 'unsafe-eval' *; object-src *;");
 
 session_start();
-$_SESSION['version'] = '5.4.11';
+$_SESSION['version'] = '5.4.2';
 
 include_once 'core/core.php'; # Основные настройки
 
