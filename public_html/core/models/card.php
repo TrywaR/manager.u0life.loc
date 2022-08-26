@@ -25,6 +25,7 @@ class card extends model
   public static $min_payment = ''; # Минимальный платёж
   public static $min_payment_percent = ''; # Процент минимального платежа
   public static $min_payment_date = ''; # Дата минимального платежа
+  public static $not_edit = 0; # Возможность редактировать
 
   // Вывод карты
   function get_card( $arrCard = [] ){
@@ -46,6 +47,14 @@ class card extends model
     $arrCard['commission'] = substr($arrCard['commission'], 0, -2);
     if ( (float)$arrCard['commission'] > 0 ) $arrCard['commission_show'] = 'true';
     if ( (int)$arrCard['user_id'] > 0 ) $arrCard['edit_show'] = 'true';
+    if ( (int)$arrCard['not_edit'] > 0 ) {
+      $arrCard['edit_show'] = 'false';
+      $oLang = new lang();
+      if ( $arrCard['title'] == 'Cash' ) $arrCard['title'] = $oLang->get( $arrCard['title'] );
+    }
+
+    if ( (int)$arrCard['active'] ) $arrCard['active_show'] = 'true';
+    else $arrCard['active_show'] = 'false';
 
     return $arrCard;
   }
@@ -144,8 +153,13 @@ class card extends model
     $oLang = new lang();
 
     $arrFields = [];
-    $arrFields['id'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
+    $arrFields['id_show'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
     $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
+
+    // Возможность редактировать
+    if ( (int)$this->not_edit )
+      $arrFields['not_edit'] = ['title'=>'NotEdit','type'=>'hidden','value'=>$this->not_edit]; # Возможность редактировать
+
     $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
 
     $arrFields['type'] = ['class'=>'switch','title'=>$oLang->get('Type'),'type'=>'select','options'=>$this->arrTypes,'value'=>$this->type];
@@ -158,22 +172,23 @@ class card extends model
     $iSort = $this->sort ? $this->sort : 100;
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$iSort];
 
-    $arrFields['limit'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('Limit'),'type'=>'number','value'=>substr($this->limit, 0, -2),'step'=>'0.01'];
-    $arrFields['percent'] = ['class'=>'switch_values switch_type-1 switch_type-2','title'=>$oLang->get('Percent'),'type'=>'number','value'=>substr($this->percent, 0, -2),'step'=>'0.01'];
+    $arrFields['limit'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('Limit'),'type'=>'number','value'=>substr($this->limit, 0, -2),'step'=>'0.01'];
+    $arrFields['percent'] = ['section'=>2,'class'=>'switch_values switch_type-1 switch_type-2','title'=>$oLang->get('Percent'),'type'=>'number','value'=>substr($this->percent, 0, -2),'step'=>'0.01'];
     // $arrFields['price'] = ['title'=>$oLang->get('Price'),'type'=>'number','value'=>substr($this->price, 0, -2),'step'=>'0.01'];
 
-    $arrFields['service'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardService'),'type'=>'number','value'=>substr($this->service, 0, -2),'step'=>'0.01'];
-    $arrFields['date_service'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardServiceDate'),'type'=>'date','value'=>$this->date_service];
+    $arrFields['service'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardService'),'type'=>'number','value'=>substr($this->service, 0, -2),'step'=>'0.01'];
+    $arrFields['date_service'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardServiceDate'),'type'=>'date','value'=>$this->date_service];
 
-    $arrFields['free_days_limit'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardFreeDaysLimit'),'type'=>'number','value'=>$this->free_days_limit];
-    $arrFields['date_commission'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardDateCommissions'),'type'=>'date','value'=>$this->date_commission];
-    $arrFields['date_bill_percent'] = ['class'=>'switch_values switch_type-2','title'=>$oLang->get('CardDateBillPercent'),'type'=>'date','value'=>$this->date_bill_percent];
+    $arrFields['free_days_limit'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardFreeDaysLimit'),'type'=>'number','value'=>$this->free_days_limit];
+    $arrFields['date_commission'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardDateCommissions'),'type'=>'date','value'=>$this->date_commission];
+    $arrFields['date_bill_percent'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('CardDateBillPercent'),'type'=>'date','value'=>$this->date_bill_percent];
 
-    $arrFields['min_payment'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPayment'),'type'=>'number','value'=>$this->min_payment];
-    $arrFields['min_payment_percent'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentPercent'),'type'=>'number','value'=>$this->min_payment_percent];
-    $arrFields['min_payment_date'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentDate'),'type'=>'number','value'=>$this->min_payment_date];
+    $arrFields['min_payment'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPayment'),'type'=>'number','value'=>$this->min_payment];
+    $arrFields['min_payment_percent'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentPercent'),'type'=>'number','value'=>$this->min_payment_percent];
+    $arrFields['min_payment_date'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentDate'),'type'=>'number','value'=>$this->min_payment_date];
 
-    // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
+    if ( ! (int)$this->not_edit )
+      $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 
     return $arrFields;
   }
@@ -207,6 +222,7 @@ class card extends model
       $this->min_payment = $arrCard['min_payment'];
       $this->min_payment_percent = $arrCard['min_payment_percent'];
       $this->min_payment_date = $arrCard['min_payment_date'];
+      $this->not_edit = $arrCard['not_edit'];
     }
 
     $this->arrTypes = [

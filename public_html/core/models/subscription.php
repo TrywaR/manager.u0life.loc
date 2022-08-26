@@ -127,15 +127,27 @@ class subscription extends model
     $arrFields['type'] = ['class'=>'switch','title'=>$oLang->get('Type'),'type'=>'select','options'=>$this->arrTypes,'value'=>$this->type];
     $arrFields['day'] = ['title'=>$oLang->get('PaymentDay'),'type'=>'number','value'=>$this->day];
 
+    // $oCard = new card();
+    // $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    // $oCard->sortname = 'sort';
+    // $oCard->sortdir = 'ASC';
+    // $arrCards = $oCard->get();
+    // $arrCardsFilter = [];
+    // $arrCardsFilter[] = array('id'=>0,'name'=>'...');
+    // foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title'],'color'=>$arrCard['color']);
+    // $arrFields['card'] = ['class'=>'switch_values switch_type-0','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
+
     $oCard = new card();
     $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oCard->active = 1;
     $oCard->sortname = 'sort';
     $oCard->sortdir = 'ASC';
-    $arrCards = $oCard->get();
+    $arrCards = $oCard->get_cards();
     $arrCardsFilter = [];
     $arrCardsFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title']);
-    $arrFields['card'] = ['class'=>'switch_values switch_type-0','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
+    foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title'],'color'=>$arrCard['color']);
+    $arrFields['card'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
+    $arrFields['to_card'] = ['title'=>$oLang->get('ToCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
 
     $oCategory = new category();
     $oCategory->sortname = 'sort';
@@ -150,8 +162,8 @@ class subscription extends model
     // Вычищаем не активные
     $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
     $arrCategoriesFilter = [];
-    foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
-    $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$this->category];
+    foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title'],'color'=>$arrCategory['color']);
+    $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'search'=>true,'value'=>$this->category];
 
     $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title];
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];

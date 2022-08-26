@@ -174,8 +174,8 @@ class nav
         'onlyapp' => true,
         'subs' => [
           '/moneys/' => array(
-            'name' => $oLang->get('Moneys'),
-            'description' => $oLang->get('Moneys'),
+            'name' => $oLang->get('Thread'),
+            'description' => $oLang->get('Thread'),
             'url' => '/moneys/',
             'icon' => '<i class="fa-solid fa-bars"></i>',
             'access' => 0,
@@ -217,8 +217,8 @@ class nav
         'onlyapp' => true,
         'subs' => [
           '/times/' => array(
-            'name' => $oLang->get('Times'),
-            'description' => $oLang->get('Times'),
+            'name' => $oLang->get('Thread'),
+            'description' => $oLang->get('Thread'),
             'url' => '/times/',
             'icon' => '<i class="fa-solid fa-bars"></i>',
             'access' => 0,
@@ -303,7 +303,7 @@ class nav
             'name' => $oLang->get('Info'),
             'description' => $oLang->get('Info'),
             'url' => '/info/',
-            'icon' => '<i class="fa-solid fa-bars"></i>',
+            'icon' => '<i class="fa-solid fa-circle-info"></i>',
             'access' => 0,
             'onlyapp' => true,
           ),

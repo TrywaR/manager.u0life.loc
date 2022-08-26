@@ -97,12 +97,13 @@ class money extends model
 
     $oCard = new card();
     $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oCard->active = 1;
     $oCard->sortname = 'sort';
     $oCard->sortdir = 'ASC';
-    $arrCards = $oCard->get();
+    $arrCards = $oCard->get_cards();
     $arrCardsFilter = [];
     $arrCardsFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title']);
+    foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title'],'color'=>$arrCard['color']);
     $arrFields['card'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
     $arrFields['to_card'] = ['title'=>$oLang->get('ToCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
 
@@ -130,9 +131,9 @@ class money extends model
     $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
     $arrCategoriesFilter = [];
     // $arrCategoriesFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
+    foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title'],'color'=>$arrCategory['color']);
     $iSelectCategory = $this->category ? $this->category : 1;
-    $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$iSelectCategory];
+    $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'search'=>true,'value'=>$iSelectCategory];
 
     $oProject = new project();
     $oProject->sortname = 'sort';
@@ -141,7 +142,7 @@ class money extends model
     $arrProjects = $oProject->get();
     $arrProjectsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
-    $arrFields['project_id'] = ['section'=>2,'title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
+    $arrFields['project_id'] = ['section'=>2,'title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'search'=>true,'value'=>$this->project_id];
 
     $oTask = new task();
     $oTask->sortname = 'sort';
@@ -162,7 +163,7 @@ class money extends model
       if ( $arrTaskCurrent['id'] && $arrTaskCurrent['id'] == $arrTask['id'] ) continue;
       $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
     }
-    $arrFields['task_id'] = ['section'=>2,'title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'value'=>$this->task_id];
+    $arrFields['task_id'] = ['section'=>2,'title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'search'=>true,'value'=>$this->task_id];
 
     $arrFields['description'] = ['section'=>2,'title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description,'plaseholder'=>$oLang->get('Description')];
 

@@ -246,7 +246,7 @@ class model
           $mySqlSave .= "'" . base64_encode($arrAddFields[$arrField['Field']]) . "'";
           break;
         case 'tinyint':
-          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) ? 1 : 0;
+          $mySqlSave .= ! empty($arrAddFields[$arrField['Field']]) ? 1 : 0;
           break;
         case 'init':
           $mySqlSave .= "'" . $arrAddFields[$arrField['Field']] . "'";

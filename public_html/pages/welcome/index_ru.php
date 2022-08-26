@@ -9,6 +9,7 @@
         <p>
           Оставь свой точный след в истории человечества и взгляни на свою жизнь со стороны
         </p>
+        <h1 style="visibility:hidden; margin: 0; padding: 0; font-size: .1em;">u0life</h1>
         <div class="_start">
           <?include 'core/templates/elems/logining.php';?>
         </div>

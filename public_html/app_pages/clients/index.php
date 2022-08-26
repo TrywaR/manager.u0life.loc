@@ -36,7 +36,7 @@
     $(function(){
       $(document).find('#clients').content_loader( 'start' )
       $(document).find('#content_manager_buttons').content_manager()
-      $(document).find('#footer_actions').content_actions( {'action':'clients'} )
+      // $(document).find('#footer_actions').content_actions( {'action':'clients'} )
     })
   </script>
 </div>

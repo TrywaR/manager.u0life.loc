@@ -131,6 +131,7 @@ class form
           break;
 
         case 'select':
+          $arrTemplateParams['search'] = $oFields['search'];
           include 'core/templates/forms/select.php';
           break;
 

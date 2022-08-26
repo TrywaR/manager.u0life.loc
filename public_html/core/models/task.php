@@ -124,7 +124,7 @@ class task extends model
     $arrProjectsFilter = [];
     $arrProjectsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
-    $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
+    $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'search'=>true,'value'=>$this->project_id];
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
     $arrFields['time_planned'] = ['title'=>$oLang->get('TimesPlanned'),'type'=>'time','section'=>2,'value'=>$this->time_planned];

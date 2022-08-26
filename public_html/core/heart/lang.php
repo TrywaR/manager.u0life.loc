@@ -53,6 +53,7 @@ class lang
       'Copy' => 'Копировать',
       'StartIn' => 'начать в',
       'DownloadFrom' => 'скачать с',
+      'Thread' => 'Лента',
 
       'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Оцифровка твоей жизни. Система управления деньгами, временем и задачами.',
@@ -102,6 +103,7 @@ class lang
       'FromCard' => 'С карты',
       'Price' => 'Цена',
       'Status' => 'Статус',
+      'Cash' => 'Наличные',
 
       'NoStatus' => 'Без статуса',
       'Planned' => 'В планах',
@@ -274,6 +276,7 @@ class lang
       'Copy' => 'Copy',
       'StartIn' => 'start in',
       'DownloadFrom' => 'download from',
+      'Thread' => 'Thread',
 
       'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Digitization you life. Time, money, tasks manager system!',
@@ -323,6 +326,7 @@ class lang
       'FromCard' => 'From card',
       'Price' => 'Price',
       'Status' => 'Status',
+      'Cash' => 'Cash',
 
       'NoStatus' => 'No status',
       'Planned' => 'Planned',

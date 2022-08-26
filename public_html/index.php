@@ -8,7 +8,7 @@
 // header("X-Webkit-CSP: default-src *; connect-src *; script-src 'unsafe-inline' 'unsafe-eval' *; object-src *;");
 
 session_start();
-$_SESSION['version'] = '5.4.2';
+$_SESSION['version'] = '5.4.21';
 
 include_once 'core/core.php'; # Основные настройки
 
@@ -18,15 +18,15 @@ if ( $_REQUEST['referal'] ) {
   exit("<meta http-equiv='refresh' content='0; url= /'>");
 }
 
-$olang = new lang(); // Подтягиваем языки
-$oLock = new lock(); // Подтягиваем уровни доступов
-
 // Если запросы на обработку данных
 header('Access-Control-Allow-Origin: *'); # Для подключения из вне
 if ( isset($_REQUEST['app']) ) {
   include_once 'app/app.php';
   die();
 }
+
+$olang = new lang(); // Подтягиваем языки
+$oLock = new lock(); // Подтягиваем уровни доступов
 
 // Определяем что открыть
 switch ($_SERVER['REQUEST_URI']) {

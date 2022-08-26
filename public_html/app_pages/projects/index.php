@@ -73,7 +73,7 @@ $arrClients = $oClient->get();
       // $(document).find('#projects').content_loader( 'start' )
       $(document).find('#content_filter').content_filter()
       $(document).find('#content_manager_buttons').content_manager()
-      $(document).find('#footer_actions').content_actions( {'action':'projects'} )
+      // $(document).find('#footer_actions').content_actions( {'action':'projects'} )
     })
   </script>
 </div>

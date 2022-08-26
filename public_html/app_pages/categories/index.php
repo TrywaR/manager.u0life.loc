@@ -42,7 +42,7 @@
     $(function(){
       $(document).find('#categories').content_loader()
       $(document).find('#content_manager_buttons').content_manager()
-      $(document).find('#footer_actions').content_actions( {'action':'categories'} )
+      // $(document).find('#footer_actions').content_actions( {'action':'categories'} )
     })
   </script>
 </div>

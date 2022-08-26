@@ -17,6 +17,9 @@ switch ($oLang->sUserLang) {
       <a class="_item" href="https://www.tiktok.com/@u0life_ru" target="_blank">
         <i class="fa-brands fa-tiktok"></i>
       </a>
+      <a class="_item" href="https://www.youtube.com/channel/UCCckiAXYcuFOJ4u2YFGtyuA" target="_blank">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
       <a class="_item __donate" href="https://www.patreon.com/user?u=76441895" target="_blank">
         <i class="fa-brands fa-patreon"></i>
       </a>
@@ -37,6 +40,9 @@ switch ($oLang->sUserLang) {
       </a>
       <a class="_item" href="https://www.tiktok.com/@u0life" target="_blank">
         <i class="fa-brands fa-tiktok"></i>
+      </a>
+      <a class="_item" href="https://www.youtube.com/channel/UC3W0fM5ZGHsiT0wG9RRk0OQ" target="_blank">
+        <i class="fa-brands fa-youtube"></i>
       </a>
       <a class="_item __donate" href="https://www.patreon.com/user?u=76441895" target="_blank">
         <i class="fa-brands fa-patreon"></i>

@@ -43,7 +43,7 @@ class project extends model
     $arrClients = $oClient->get();
     $arrClientsFilter = [];
     foreach ($arrClients as $arrClient) $arrClientsFilter[] = array('id'=>$arrClient['id'],'name'=>$arrClient['title']);
-    $arrFields['client_id'] = ['title'=>$oLang->get('Client'),'type'=>'select','options'=>$arrClientsFilter,'value'=>$this->client_id];
+    $arrFields['client_id'] = ['title'=>$oLang->get('Client'),'type'=>'select','options'=>$arrClientsFilter,'search'=>true,'value'=>$this->client_id];
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
 

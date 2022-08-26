@@ -54,7 +54,7 @@ $arrCategories = $oCategory->get_categories();
     $(function(){
       $(document).find('#subscriptions').content_loader()
       $(document).find('#content_manager_buttons').content_manager()
-      $(document).find('#footer_actions').content_actions( {'action':'subscriptions'} )
+      // $(document).find('#footer_actions').content_actions( {'action':'subscriptions'} )
     })
   </script>
 </div>

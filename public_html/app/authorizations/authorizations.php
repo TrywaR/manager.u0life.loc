@@ -86,16 +86,32 @@ switch ($_REQUEST['form']) {
     $arrResults['location'] = '/authorizations/';
     $arrResults['location_time'] = 2000;
 
-    // Отправляем в телегу
-    $mailNew = new mail();
-    $telegram_messages = 'Логин: ' . $_REQUEST['login'] . ' %0A';
-    if ( $_SESSION['referal'] ) {
-      $telegram_messages .= '_По приглашению от_: *' . $oUserReferal->login . '* (' . $oUserReferal->id . ')' . '%0A';
-    }
-    $oResult = $mailNew->telegram('Зарегистрирован новый пользователь', $telegram_messages);
+    // Добавляем пользователя
+    $iUserId = $oUser->add();
+    if ( $iUserId ) {
+      // УВЕДОМЛЕНИЕ Отправляем в телегу
+      $mailNew = new mail();
+      $telegram_messages = 'Логин: ' . $_REQUEST['login'] . ' %0A';
+      if ( $_SESSION['referal'] ) {
+        $telegram_messages .= '_По приглашению от_: *' . $oUserReferal->login . '* (' . $oUserReferal->id . ')' . '%0A';
+      }
+      $oResult = $mailNew->telegram('Зарегистрирован новый пользователь', $telegram_messages);
 
-    if ( $oUser->add() ) notification::success($arrResults);
+      // ПОДГОТОВКА ПОЛЬЗОВАТЕЛЯ
+      // - Создание счёта для кэша
+      $oCard = new card();
+      $oCard->title = 'Cash';
+      $oCard->user_id = $iUserId;
+      $oCard->sort = 0;
+      $oCard->color = '#7661db';
+      $oCard->date_update = date('Y-m-d H:i:s');
+      $oCard->active = 1;
+      $oCard->add();
+
+      notification::success($arrResults);
+    }
     else notification::error($oLang->get('SomethingWentWrongOhCallTheSuperProgrammers'));
+
     break;
 
   case 'password_recovery': # Восстановление пароля

@@ -45,7 +45,7 @@
 
 <div class="block_template">
   <div class="card_item _elem progress_block" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
-    <div class="block_card _commission_show_{{commission_show}} _edit_show_{{edit_show}}">
+    <div class="block_card _commission_show_{{commission_show}} _active_show_{{active_show}} _edit_show_{{edit_show}}">
       <div class="_card_head">
         <div class="_title">
           {{title}}

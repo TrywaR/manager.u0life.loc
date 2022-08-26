@@ -97,9 +97,9 @@ class time extends model
     $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
     $arrCategoriesFilter = [];
     // $arrCategoriesFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
+    foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title'],'color'=>$arrCategory['color']);
     $iSelectCategory = $this->category ? $this->category : 1;
-    $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'value'=>$iSelectCategory];
+    $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'search'=>true,'value'=>$iSelectCategory];
 
     $oProject = new project();
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
@@ -108,7 +108,7 @@ class time extends model
     $arrProjectsFilter = [];
     $arrProjectsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
-    $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'value'=>$this->project_id];
+    $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'search'=>true,'value'=>$this->project_id];
 
     $oTask = new task();
     $oTask->sortname = 'sort';
@@ -129,7 +129,7 @@ class time extends model
       if ( $arrTaskCurrent['id'] && $arrTaskCurrent['id'] == $arrTask['id'] ) continue;
       $arrTasksFilter[] = array('id'=>$arrTask['id'],'name'=>$arrTask['title']);
     }
-    $arrFields['task_id'] = ['title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'value'=>$this->task_id];
+    $arrFields['task_id'] = ['title'=>$oLang->get('Task'),'type'=>'select','options'=>$arrTasksFilter,'search'=>true,'value'=>$this->task_id];
 
     $arrFields['date'] = ['title'=>$oLang->get('Date'),'type'=>'date','section'=>2,'value'=>$this->date];
     $arrFields['date_update'] = ['title'=>$oLang->get('LastUpdate'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_update];

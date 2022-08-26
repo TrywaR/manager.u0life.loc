@@ -130,7 +130,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$a
       // $(document).find('#times').content_loader()
       $(document).find('#content_filter').content_filter()
       $(document).find('#content_manager_buttons').content_manager()
-      $(document).find('#footer_actions').content_actions( {'action':'times'} )
+      // $(document).find('#footer_actions').content_actions( {'action':'times'} )
     })
   </script>
 

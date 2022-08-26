@@ -13,6 +13,9 @@ if ( $_REQUEST['action'] != 'sessions' ) {
   $oSession->install();
 }
 
+$olang = new lang(); // Подтягиваем языки
+$oLock = new lock(); // Подтягиваем уровни доступов
+
 // Если пользователь залогинен, выдаём инфу, которую запросили
 if ( isset($_SESSION['session']) && isset($_SESSION['user']) ) {
   switch ($_REQUEST['action']) {
