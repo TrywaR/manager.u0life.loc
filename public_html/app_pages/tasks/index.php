@@ -25,37 +25,43 @@ $arrProjects = $oProject->get();
   <div class="_block_content" id="shower">
     <!-- Фильтр -->
     <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#tasks" data-content_filter_status="#content_filter_show">
-      <div class="input-group">
-        <span class="input-group-text">
-          <i class="fa-solid fa-folder-tree"></i>
-        </span>
-        <select name="project_id" class="form-select">
-          <option value="0" selected><?=$oLang->get('Project')?></option>
-          <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-            <?php if ( $_REQUEST['project_id'] && $_REQUEST['project_id'] == $arrProject['id'] ): ?>
-              <option selected="selected" value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-            <?php else: ?>
-              <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-            <?php endif; ?>
-          <?php endforeach; ?>
-        </select>
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <i class="fa-solid fa-folder-tree"></i>
+          </span>
+          <select name="project_id" class="form-select">
+            <option value="0" selected><?=$oLang->get('Project')?></option>
+            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+              <?php if ( $_REQUEST['project_id'] && $_REQUEST['project_id'] == $arrProject['id'] ): ?>
+                <option selected="selected" value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+              <?php else: ?>
+                <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
-        <span class="input-group-text">
-          <i class="fas fa-spinner"></i>
-        </span>
-        <select name="status" class="form-select">
-          <?php foreach ($oTask->arrStatus as $arrStatus): ?>
-            <?php if ( $_REQUEST['status'] && $_REQUEST['status'] == $arrStatus['id'] ): ?>
-              <option selected="selected" value="<?=$arrStatus['id']?>"><?=$arrStatus['name']?></option>
-            <?php else: ?>
-              <option value="<?=$arrStatus['id']?>"><?=$arrStatus['name']?></option>
-            <?php endif; ?>
-          <?php endforeach; ?>
-        </select>
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <i class="fas fa-spinner"></i>
+          </span>
+          <select name="status" class="form-select">
+            <?php foreach ($oTask->arrStatus as $arrStatus): ?>
+              <?php if ( $_REQUEST['status'] && $_REQUEST['status'] == $arrStatus['id'] ): ?>
+                <option data-color="<?=$arrStatus['color']?>" selected="selected" value="<?=$arrStatus['id']?>"><?=$arrStatus['name']?></option>
+              <?php else: ?>
+                <option data-color="<?=$arrStatus['color']?>" value="<?=$arrStatus['id']?>"><?=$arrStatus['name']?></option>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
-        <button class="btn btn-dark" type="submit">
-          Go
-        </button>
+        <div class="block_buttons __end">
+          <button class="btn btn-dark" type="submit">
+            Go
+          </button>
+        </div>
       </div>
     </form>
   </div>

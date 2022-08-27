@@ -11,7 +11,9 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_4_1">5.4.1 Mobile friendly 2</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_4_3">5.4.3 Filtres</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_4_2">5.4.2 Fixer</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_4_1">5.4.1 Mobile friendly 2</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_0">5.4.0 Mobile friendly start</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_9">5.3.9 u0life 4</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_3_83">5.3.83 u0life 3</a>
@@ -64,6 +66,32 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_4_3">5.4.3 Fixer</h2>
+            <ol>
+              <li>
+                Обновлена работа фильтров на страницах "Деньги" и "Время"
+              </li>
+            </ol>
+
+            <h2 id="list-item-5_4_2">5.4.21 Fixer</h2>
+            <ol>
+              <li>
+                Исправлена ошибка с появлением кнопок добавления данных
+              </li>
+              <li>
+                Исправлена работа карты "Наличные"
+              </li>
+              <li>
+                У карт добавлена "Активность", тоесть возможность их временно отключать
+              </li>
+              <li>
+                Исправлена доступность к премиум функционалу
+              </li>
+              <li>
+                Изменены выпадающие списки, теперь в них есть поиск, и отображение цвета
+              </li>
+            </ol>
+
             <h2 id="list-item-5_4_1">5.4.12 Mobile friendly 2</h2>
             <ol>
               <li>

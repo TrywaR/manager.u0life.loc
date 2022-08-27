@@ -26,7 +26,7 @@ $arrCategories = $oCategoryConf->update_categories($arrCategories);
 $arrCategories = $oCategoryConf->update_categories_active($arrCategories);
 $arrCategoriesFilter = [];
 // $arrCategoriesFilter[] = array('id'=>0,'name'=>'...');
-foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title']);
+foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title'],'color'=>$arrCategory['color']);
 
 $oProject = new project();
 $oProject->sort = 'sort';
@@ -63,78 +63,92 @@ $arrTypes = [
   <div class="_block_content" id="shower">
     <!-- Фильтр -->
     <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#moneys" data-content_filter_status="#content_filter_show">
-      <div class="input-group mb-2">
-        <span class="input-group-text">
-          <span class="_icon">
-            <i class="fas fa-wallet"></i>
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="fas fa-wallet"></i>
+            </span>
           </span>
-        </span>
-        <select name="type" class="form-select">
-          <option value=""><?=$oLang->get('Type')?></option>
-          <?php foreach ($arrTypes as $iIndex => $arrType): ?>
-            <option value="<?=$arrType['id']?>"><?=$arrType['title']?></option>
-          <?php endforeach; ?>
-        </select>
+          <select name="type" class="form-select">
+            <option value=""><?=$oLang->get('Type')?></option>
+            <?php foreach ($arrTypes as $iIndex => $arrType): ?>
+              <option value="<?=$arrType['id']?>"><?=$arrType['title']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
-        <span class="input-group-text">
-          <span class="_icon">
-            <i class="far fa-credit-card"></i>
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="far fa-credit-card"></i>
+            </span>
           </span>
-        </span>
-        <select name="card" class="form-select">
-          <option value=""><?=$oLang->get('Card')?></option>
-          <?php foreach ($arrCards as $iIndex => $arrCard): ?>
-            <option value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
-          <?php endforeach; ?>
-        </select>
+          <select name="card" class="form-select">
+            <option value=""><?=$oLang->get('Card')?></option>
+            <?php foreach ($arrCards as $iIndex => $arrCard): ?>
+              <option data-color="<?=$arrCard['color']?>" value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
-        <span class="input-group-text">
-          <span class="_icon">
-            <i class="fas fa-list-ul"></i>
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="fas fa-list-ul"></i>
+            </span>
           </span>
-        </span>
-        <select name="category" class="form-select">
-          <option value=""><?=$oLang->get('Category')?></option>
-          <?php foreach ($arrCategoriesFilter as $iIndex => $arrCategory): ?>
-            <option value="<?=$arrCategory['id']?>"><?=$arrCategory['name']?></option>
-          <?php endforeach; ?>
-        </select>
+          <select name="category" class="form-select">
+            <option value=""><?=$oLang->get('Category')?></option>
+            <?php foreach ($arrCategoriesFilter as $iIndex => $arrCategory): ?>
+              <option data-color="<?=$arrCategory['color']?>" value="<?=$arrCategory['id']?>"><?=$arrCategory['name']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
       </div>
 
-      <div class="input-group">
-        <span class="input-group-text">
-          <span class="_icon">
-            <i class="far fa-folder"></i>
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="far fa-folder"></i>
+            </span>
           </span>
-        </span>
-        <select name="project_id" class="form-select">
-          <option value=""><?=$oLang->get('Project')?></option>
-          <option value="0"><?=$olang->get('NoProject')?></option>
-          <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
-            <option value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
-          <?php endforeach; ?>
-        </select>
+          <select name="project_id" class="form-select">
+            <option value=""><?=$oLang->get('Project')?></option>
+            <option value="0"><?=$olang->get('NoProject')?></option>
+            <?php foreach ($arrProjects as $iIndex => $arrProject): ?>
+              <option data-color="<?=$arrProject['color']?>" value="<?=$arrProject['id']?>"><?=$arrProject['title']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
-        <span class="input-group-text">
-          <i class="fas fa-wrench"></i>
-        </span>
-        <select name="task_id" class="form-select">
-          <option value=""><?=$oLang->get('Task')?></option>
-          <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
-            <option value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
-          <?php endforeach; ?>
-        </select>
-
-        <span class="input-group-text">
-          <span class="_icon">
-            <i class="far fa-calendar-alt"></i>
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <i class="fas fa-wrench"></i>
           </span>
-        </span>
-        <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
+          <select name="task_id" class="form-select">
+            <option value=""><?=$oLang->get('Task')?></option>
+            <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
+              <option data-color="<?=$arrTask['color']?>" value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
-        <button class="btn btn-dark" type="submit">
-          Go
-        </button>
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="far fa-calendar-alt"></i>
+            </span>
+          </span>
+          <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
+        </div>
+
+        <div class="block_buttons __end">
+          <button class="btn btn-dark" type="submit">
+            Go
+          </button>
+        </div>
       </div>
     </form>
   </div>

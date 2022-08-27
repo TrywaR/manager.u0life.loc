@@ -47,7 +47,8 @@
 
   <script>
     $(function(){
-      $(document).find('[name="<?=$arrTemplateParams['name']?>"]').select2({
+      $(document).find('#form_input_<?=$arrTemplateParams['name']?>').select2({
+        selectionCssClass: ':all:',
         dropdownParent: $("#fttm_modal"),
         templateSelection: function( data ){
           if (!data.id) {
