@@ -1256,7 +1256,13 @@ body .block_date {
       flex-direction: column;
       min-height: 10rem;
       max-width: 50%;
-      justify-content: center; } }
+      justify-content: center; }
+
+  .block_logining .btn-group {
+    display: flex;
+    flex-direction: column; }
+    .block_logining .btn-group .btn {
+      margin: 0 0.5rem 0; } }
 .slick-slider .slick-list {
   overflow: visible; }
 
