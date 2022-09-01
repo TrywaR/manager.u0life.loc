@@ -26,6 +26,7 @@ switch ($_REQUEST['form']) {
 
     // Подписки
     $oSubscription = new subscription();
+    $oSubscription->active = true;
     $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oSubscription->sDateQuery = $dMonth;
     // $oSubscription->show_query = true;
@@ -51,6 +52,11 @@ switch ($_REQUEST['form']) {
     $oSubscription->sortname = 'sort';
     $oSubscription->sortdir = 'ASC';
     $oSubscription->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+
+    // Показ не активных
+    $oFilter = new filter();
+    // $oCategory->query .= $oFilter->get();
+    if ( ! $oFilter->get_val('no_active_show') ) $oSubscription->active = true;
 
     $arrSubscriptions = $oSubscription->get_subscriptions();
 

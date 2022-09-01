@@ -6,6 +6,7 @@
 // $arrTemplateParams['required'] = '';
 // $arrTemplateParams['class'] = '';
 ?>
+<?$sTimerHash = date('His')?>
 <div class="input-group mb-2 <?=$arrTemplateParams['class']?> input_timer">
   <!-- <label
   for="form_input_<?=$arrTemplateParams['name']?>"
@@ -27,7 +28,7 @@
   <input
     type="time"
     class="input form-control _input"
-    id="form_input_<?=$arrTemplateParams['name']?>"
+    id="form_input_<?=$arrTemplateParams['name']?><?=$sTimerHash?>"
     name="<?=$arrTemplateParams['name']?>"
     <?php if ( $arrTemplateParams['value'] ): ?>
       value="<?=$arrTemplateParams['value']?>"
@@ -40,7 +41,7 @@
 
   <input type="text" disabled name="seconds" value="" class="form-control _seconds">
 
-  <button class="btn btn-dark _button" type="button" name="button" id="timer_<?=$arrTemplateParams['name']?>">
+  <button class="btn btn-dark _button" type="button" name="button" id="timer_<?=$arrTemplateParams['name']?><?=$sTimerHash?>">
     <div class="_icon">
       <div class="_on">
         <i class="fas fa-play-circle"></i>
@@ -54,14 +55,14 @@
 
 <script>
   $(function(){
-    var oTimerInterval<?=$arrTemplateParams['name']?> = {}
+    var oTimerInterval<?=$arrTemplateParams['name']?><?=$sTimerHash?> = {}
 
-    $(document).find('#timer_<?=$arrTemplateParams['name']?>_stop').on ('click', function(){
-      clearInterval(oTimerInterval<?=$arrTemplateParams['name']?>)
+    $(document).find('#timer_<?=$arrTemplateParams['name']?><?=$sTimerHash?>_stop').on ('click', function(){
+      clearInterval(oTimerInterval<?=$arrTemplateParams['name']?><?=$sTimerHash?>)
     })
 
-    $(document).find('#timer_<?=$arrTemplateParams['name']?>').on ('click', function(){
-      clearInterval(oTimerInterval<?=$arrTemplateParams['name']?>)
+    $(document).find('#timer_<?=$arrTemplateParams['name']?><?=$sTimerHash?>').on ('click', function(){
+      clearInterval(oTimerInterval<?=$arrTemplateParams['name']?><?=$sTimerHash?>)
 
       if ( $(this).hasClass('_stop_') ) {
         $(this).removeClass('_stop_').removeClass('__on')
@@ -70,7 +71,7 @@
       else $(this).addClass('_stop_').addClass('__on')
 
       var
-        oTimerInput = $(document).find('#form_input_<?=$arrTemplateParams['name']?>'),
+        oTimerInput = $(document).find('#form_input_<?=$arrTemplateParams['name']?><?=$sTimerHash?>'),
         arrTime = oTimerInput.val().split(':'),
         dTimeHours = parseInt(arrTime[0]),
         dTimeMinutes = parseInt(arrTime[1]),
@@ -79,19 +80,19 @@
         sTimeMinutes = '',
         sTimeSeconds = ''
 
-      oTimerInterval<?=$arrTemplateParams['name']?> = setInterval(function () {
+      oTimerInterval<?=$arrTemplateParams['name']?><?=$sTimerHash?> = setInterval(function () {
         dTimeSeconds++
         sTimeSeconds = String(dTimeSeconds)
         sTimeSeconds = sTimeSeconds.padStart(2,'0')
 
-        if ( dTimeSeconds >= 59 ) {
+        if ( dTimeSeconds == 60 ) {
           dTimeMinutes++
           dTimeSeconds = 0
         }
         sTimeMinutes = String(dTimeMinutes)
         sTimeMinutes = sTimeMinutes.padStart(2,'0')
 
-        if ( dTimeMinutes >= 59 ) {
+        if ( dTimeMinutes == 60 ) {
           dTimeHours++
           dTimeMinutes = 0
         }
@@ -102,7 +103,7 @@
         if ( dTimeMinutes || dTimeHours ) oTimerInput.val( sTimeHours + ':' + sTimeMinutes )
         if ( oTimerInput.next('._seconds').length ) oTimerInput.next('._seconds').val( sTimeSeconds )
 
-        if ( ! $(document).find('#form_input_<?=$arrTemplateParams['name']?>').length ) clearInterval(oTimerInterval<?=$arrTemplateParams['name']?>)
+        if ( ! $(document).find('#form_input_<?=$arrTemplateParams['name']?><?=$sTimerHash?>').length ) clearInterval(oTimerInterval<?=$arrTemplateParams['name']?><?=$sTimerHash?>)
       }, 1000)
     })
   })

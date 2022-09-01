@@ -5,7 +5,8 @@ $oProject = new project();
 $oProject->sort = 'sort';
 $oProject->sortDir = 'ASC';
 $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-$arrProjects = $oProject->get();
+$oProject->active = true;
+$arrProjects = $oProject->get_projects();
 ?>
 
 <div class="main_jumbotron">
@@ -56,6 +57,22 @@ $arrProjects = $oProject->get();
             <?php endforeach; ?>
           </select>
         </div>
+      </div>
+
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
+          <div class="input_checkbox form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              name="no_active_show"
+              id="checkbox_noactiveshow"
+            >
+            <label class="form-check-label" for="checkbox_noactiveshow">
+              <?=$oLang->get('ShowNoActive')?>
+            </label>
+          </div>
+        </div>
 
         <div class="block_buttons __end">
           <button class="btn btn-dark" type="submit">
@@ -104,7 +121,7 @@ $arrProjects = $oProject->get();
 </section>
 
 <section class="block_template">
-  <div class="task _elem progress_block _time_show_{{time_show}} _description_show_{{description_show}}  _money_show_{{money_show}} _status_show_{{status_show}} _project_show_{{project_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+  <div class="task _elem progress_block _time_show_{{time_show}} _description_show_{{description_show}}  _money_show_{{money_show}} _status_show_{{status_show}} _project_show_{{project_show}} _active_show_{{active_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
     <div class="card w-100">
       <div class="card-header position-relative">
         <div class="row">

@@ -8,9 +8,18 @@
 // header("X-Webkit-CSP: default-src *; connect-src *; script-src 'unsafe-inline' 'unsafe-eval' *; object-src *;");
 
 session_start();
-$_SESSION['version'] = '5.4.3';
+$_SESSION['version'] = '5.4.4';
 
 include_once 'core/core.php'; # Основные настройки
+
+// Проверка сессии и пользователя. если запрос из приложения
+// if ( $_REQUEST['action'] != 'sessions' ) {
+  $oSession = new session();
+  $oSession->install();
+// }
+
+$olang = new lang(); // Подтягиваем языки
+$oLock = new lock(); // Подтягиваем уровни доступов
 
 // Referal system
 if ( $_REQUEST['referal'] ) {
@@ -24,9 +33,6 @@ if ( isset($_REQUEST['app']) ) {
   include_once 'app/app.php';
   die();
 }
-
-$olang = new lang(); // Подтягиваем языки
-$oLock = new lock(); // Подтягиваем уровни доступов
 
 // Определяем что открыть
 switch ($_SERVER['REQUEST_URI']) {

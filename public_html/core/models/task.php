@@ -23,6 +23,9 @@ class task extends model
   function get_task( $arrTask = [] ) {
     if ( ! $arrTask['id'] ) $arrTask = $this->get();
 
+    if ( (int)$arrTask['active'] ) $arrTask['active_show'] = 'true';
+    else $arrTask['active_show'] = 'false';
+
     // Status
     if ( (int)$arrTask['status'] ) {
       $arrTask['status_show'] = 'true';
@@ -120,10 +123,19 @@ class task extends model
 
     $oProject = new project();
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrProjects = $oProject->get();
+    $oProject->active = true;
+    $arrProjects = $oProject->get_projects();
     $arrProjectsFilter = [];
     $arrProjectsFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
+    $bProject = false;
+    foreach ($arrProjects as $arrProject) {
+      $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title'],'color'=>$arrProject['color']);
+      if ( $arrProject['id'] == $this->project_id ) $bProject = true;
+    }
+    if ( ! $bProject ) {
+      $oProject = new project( $this->project_id );
+      $arrProjectsFilter[] = array('id'=>$oProject->id,'name'=>$oProject->title,'color'=>$oProject->color);
+    }
     $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'search'=>true,'value'=>$this->project_id];
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
@@ -135,7 +147,7 @@ class task extends model
 
     $arrFields['status'] = ['title'=>$oLang->get('Status'),'type'=>'time','type'=>'select','options'=>$this->arrStatus,'value'=>$this->status];
 
-    // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
+    $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 
     return $arrFields;
   }

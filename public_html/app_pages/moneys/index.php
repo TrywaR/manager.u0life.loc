@@ -1,14 +1,16 @@
 <?
 $oCard = new card();
 $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-$arrCards = $oCard->get();
+$oCard->active = true;
+$arrCards = $oCard->get_cards();
 
 $oTask = new task();
 $oTask->sort = 'sort';
 $oTask->sortDir = 'ASC';
 $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 $oTask->query .= ' AND `status` = 2';
-$arrTasks = $oTask->get();
+$oTask->active = true;
+$arrTasks = $oTask->get_tasks();
 $arrTaskId = [];
 foreach ($arrTasks as $arrTask) $arrTaskId[$arrTask['id']] = $arrTask;
 
@@ -32,13 +34,16 @@ $oProject = new project();
 $oProject->sort = 'sort';
 $oProject->sortDir = 'ASC';
 $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-$arrProjects = $oProject->get();
+$oProject->active = true;
+$arrProjects = $oProject->get_projects();
 
 $oSubscriptions = new subscription();
 $oSubscriptions->sort = 'sort';
 $oSubscriptions->sortDir = 'ASC';
 $oSubscriptions->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$oSubscriptions->active = true;
 $arrSubscriptions = $oSubscriptions->get_subscriptions();
+foreach ($arrSubscriptions as $arrSubscription) $arrSubscriptionsFilter[] = array('id'=>$arrSubscription['id'],'name'=>$arrSubscription['title']);
 
 $arrTypes = [
   array('id'=>1,'title'=>$oLang->get('Spend')),
@@ -95,13 +100,13 @@ $arrTypes = [
         <div class="_filter_input">
           <span class="input-group-text">
             <span class="_icon">
-              <i class="fas fa-list-ul"></i>
+              <i class="far fa-credit-card"></i>
             </span>
           </span>
-          <select name="category" class="form-select">
-            <option value=""><?=$oLang->get('Category')?></option>
-            <?php foreach ($arrCategoriesFilter as $iIndex => $arrCategory): ?>
-              <option data-color="<?=$arrCategory['color']?>" value="<?=$arrCategory['id']?>"><?=$arrCategory['name']?></option>
+          <select name="to_card" class="form-select">
+            <option value=""><?=$oLang->get('ToCard')?></option>
+            <?php foreach ($arrCards as $iIndex => $arrCard): ?>
+              <option data-color="<?=$arrCard['color']?>" value="<?=$arrCard['id']?>"><?=$arrCard['title']?></option>
             <?php endforeach; ?>
           </select>
         </div>
@@ -131,6 +136,36 @@ $arrTypes = [
             <option value=""><?=$oLang->get('Task')?></option>
             <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
               <option data-color="<?=$arrTask['color']?>" value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="fas fa-list-ul"></i>
+            </span>
+          </span>
+          <select name="category" class="form-select">
+            <option value=""><?=$oLang->get('Category')?></option>
+            <?php foreach ($arrCategoriesFilter as $iIndex => $arrCategory): ?>
+              <option data-color="<?=$arrCategory['color']?>" value="<?=$arrCategory['id']?>"><?=$arrCategory['name']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="fa-solid fa-calendar-check"></i>
+            </span>
+          </span>
+          <select name="subscription" class="form-select">
+            <option value=""><?=$oLang->get('Subscriptions')?></option>
+            <?php foreach ($arrSubscriptionsFilter as $iIndex => $arrSubscription): ?>
+              <option value="<?=$arrSubscription['id']?>"><?=$arrSubscription['name']?></option>
             <?php endforeach; ?>
           </select>
         </div>

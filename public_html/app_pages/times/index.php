@@ -3,7 +3,8 @@ $oProject = new project();
 $oProject->sort = 'sort';
 $oProject->sortDir = 'ASC';
 $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-$arrProjects = $oProject->get();
+$oProject->active = true;
+$arrProjects = $oProject->get_projects();
 $arrProjectsIds = [];
 foreach ($arrProjects as $arrProject) $arrProjectsIds[$arrProject['id']] = $arrProject;
 
@@ -12,7 +13,8 @@ $oTask->sort = 'sort';
 $oTask->sortDir = 'ASC';
 $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 $oTask->query .= ' AND `status` = 2';
-$arrTasks = $oTask->get();
+$oTask->active = true;
+$arrTasks = $oTask->get_tasks();
 $arrTaskId = [];
 foreach ($arrTasks as $arrTask) $arrTaskId[$arrTask['id']] = $arrTask;
 
@@ -69,9 +71,14 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$a
 
         <div class="_filter_input">
           <span class="input-group-text">
-            <i class="far fa-calendar-alt"></i>
+            <i class="fas fa-list-ul"></i>
           </span>
-          <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
+          <select name="task_id" class="form-select">
+            <option value="" selected><?=$oLang->get('Task')?></option>
+            <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
+              <option data-color="<?=$arrTask['color']?>" value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
+            <?php endforeach; ?>
+          </select>
         </div>
       </div>
 
@@ -90,14 +97,9 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$a
 
         <div class="_filter_input">
           <span class="input-group-text">
-            <i class="fas fa-list-ul"></i>
+            <i class="far fa-calendar-alt"></i>
           </span>
-          <select name="task_id" class="form-select">
-            <option value="" selected><?=$oLang->get('Task')?></option>
-            <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
-              <option data-color="<?=$arrTask['color']?>" value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
-            <?php endforeach; ?>
-          </select>
+          <input type="date" name="date" class="form-control" placeholder="<?=$olang->get('Date')?>" value="">
         </div>
 
         <div class="block_buttons __end">

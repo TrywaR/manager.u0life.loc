@@ -213,7 +213,7 @@ class model
 
     // Проверяем наличие парамтеров
     if ( ! count($arrAddFields) ) {
-      if ( $this->name || $this->title ) foreach ($this as $key => $value) $arrAddFields[$key] = $value;
+      if ( $this->name || $this->title || $this->user_id ) foreach ($this as $key => $value) $arrAddFields[$key] = $value;
       else notification::error( 'There is no data to fill, add the name parameter or the arrAddFields array with parameters!' );
     }
     else {
@@ -246,7 +246,9 @@ class model
           $mySqlSave .= "'" . base64_encode($arrAddFields[$arrField['Field']]) . "'";
           break;
         case 'tinyint':
-          $mySqlSave .= ! empty($arrAddFields[$arrField['Field']]) ? 1 : 0;
+          $mySqlSave .= "'";
+          $mySqlSave .= isset($this->arrAddFields[$arrField['Field']]) ? 1 : 0;
+          $mySqlSave .= "'";
           break;
         case 'init':
           $mySqlSave .= "'" . $arrAddFields[$arrField['Field']] . "'";

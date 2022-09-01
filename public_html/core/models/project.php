@@ -16,6 +16,9 @@ class project extends model
   function get_project( $arrProject = [] ) {
     if ( ! $arrProject['id'] ) $arrProject = $this->get();
 
+    if ( (int)$arrProject['active'] ) $arrProject['active_show'] = 'true';
+    else $arrProject['active_show'] = 'false';
+
     return $arrProject;
   }
 
@@ -47,7 +50,7 @@ class project extends model
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
 
-    // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
+    $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 
     return $arrFields;
   }

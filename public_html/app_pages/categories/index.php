@@ -8,7 +8,35 @@
       <a class="btn" target="_blank" href="/info/docs/categories/">
         <i class="fa-solid fa-circle-info"></i>
       </a>
+      <?include 'core/templates/elems/filter_button.php'; # Кнопка фильтрации?>
     </div>
+  </div>
+
+  <div class="_block_content" id="shower">
+    <!-- Фильтр -->
+    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#categories" data-content_filter_status="#content_filter_show">
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
+          <div class="input_checkbox form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              name="no_active_show"
+              id="checkbox_noactiveshow"
+            >
+            <label class="form-check-label" for="checkbox_noactiveshow">
+              <?=$oLang->get('ShowNoActive')?>
+            </label>
+          </div>
+        </div>
+
+        <div class="block_buttons __end">
+          <button class="btn btn-dark" type="submit">
+            Go
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -40,7 +68,8 @@
   </ul>
   <script>
     $(function(){
-      $(document).find('#categories').content_loader()
+      // $(document).find('#categories').content_loader()
+      $(document).find('#content_filter').content_filter()
       $(document).find('#content_manager_buttons').content_manager()
       // $(document).find('#footer_actions').content_actions( {'action':'categories'} )
     })

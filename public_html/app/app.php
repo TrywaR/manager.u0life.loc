@@ -8,16 +8,16 @@ header("X-Content-Security-Policy: default-src *; connect-src *; script-src *; o
 header("X-Webkit-CSP: default-src *; connect-src *; script-src 'unsafe-inline' 'unsafe-eval' *; object-src *;");
 
 // Проверка сессии и пользователя. если запрос из приложения
-if ( $_REQUEST['action'] != 'sessions' ) {
+// if ( $_REQUEST['action'] != 'sessions' ) {
   $oSession = new session();
   $oSession->install();
-}
+// }
 
 $olang = new lang(); // Подтягиваем языки
 $oLock = new lock(); // Подтягиваем уровни доступов
 
 // Если пользователь залогинен, выдаём инфу, которую запросили
-if ( isset($_SESSION['session']) && isset($_SESSION['user']) ) {
+if ( isset($_SESSION['user']) ) {
   switch ($_REQUEST['action']) {
     case 'authorizations': # Вход и регистрации
       include_once 'authorizations/authorizations.php';

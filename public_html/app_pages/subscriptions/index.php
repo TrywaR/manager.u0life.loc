@@ -1,11 +1,13 @@
 <?
 $oCard = new card();
 $oCard->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-$arrCards = $oCard->get();
+$oCard->active = 1;
+$arrCards = $oCard->get_cards();
 
 $oCategory = new category();
 $oCategory->sort = 'sort';
 $oCategory->sortDir = 'ASC';
+$oCategory->active = 1;
 $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
 $arrCategories = $oCategory->get_categories();
 ?>
@@ -20,7 +22,35 @@ $arrCategories = $oCategory->get_categories();
       <a class="btn" target="_blank" href="/info/docs/subscriptions/">
         <i class="fa-solid fa-circle-info"></i>
       </a>
+      <?include 'core/templates/elems/filter_button.php'; # Кнопка фильтрации?>
     </div>
+  </div>
+
+  <div class="_block_content" id="shower">
+    <!-- Фильтр -->
+    <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#subscriptions" data-content_filter_status="#content_filter_show">
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
+          <div class="input_checkbox form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              name="no_active_show"
+              id="checkbox_noactiveshow"
+            >
+            <label class="form-check-label" for="checkbox_noactiveshow">
+              <?=$oLang->get('ShowNoActive')?>
+            </label>
+          </div>
+        </div>
+
+        <div class="block_buttons __end">
+          <button class="btn btn-dark" type="submit">
+            Go
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -52,7 +82,8 @@ $arrCategories = $oCategory->get_categories();
   </ol>
   <script>
     $(function(){
-      $(document).find('#subscriptions').content_loader()
+      // $(document).find('#subscriptions').content_loader()
+      $(document).find('#content_filter').content_filter()
       $(document).find('#content_manager_buttons').content_manager()
       // $(document).find('#footer_actions').content_actions( {'action':'subscriptions'} )
     })
@@ -60,7 +91,7 @@ $arrCategories = $oCategory->get_categories();
 </div>
 
 <div class="block_template">
-    <li class="list-group-item _elem d-flex subscription progress_block _card_show_{{card_show}} _paid_show_{{paid_show}} _paid_need_show_{{paid_need_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <li class="list-group-item _elem d-flex subscription progress_block _card_show_{{card_show}} _paid_show_{{paid_show}} _paid_need_show_{{paid_need_show}} _active_show_{{active_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <span class="d-flex w-100 row">
         <span class="col-12 col-md-6 mb-2">
           <span class="d-flex flex-column">

@@ -58,7 +58,7 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oClient->get();
+    $arrResults['data'] = $oClient->get_client();
 
     $arrResults['action'] = 'clients';
     notification::send($arrResults);
@@ -71,18 +71,24 @@ switch ($_REQUEST['form']) {
     $oClient->sortname = 'sort';
     $oClient->sortdir = 'DESC';
     $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrClients = $oClient->get();
+
+    // Показ не активных
+    $oFilter = new filter();
+    $oClient->query .= $oFilter->get();
+    if ( ! $oFilter->get_val('no_active_show') ) $oClient->active = true;
+
+    $arrClients = $oClient->get_clients();
     notification::send($arrClients);
     break;
 
   case 'save': # Сохранение изменений
     $arrResult = [];
-    $oClient = $_REQUEST['id'] ? new client( $_REQUEST['id'] ) : new client();
+    $oClient = new client( $_REQUEST['id'] );
     $oClient->arrAddFields = $_REQUEST;
     if ( $_REQUEST['id'] ) $oClient->save();
     else $oClient->add();
 
-    $arrResult['data'] = $oClient->get();
+    $arrResult['data'] = $oClient->get_client();
 
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
     else $arrResult['event'] = 'add';

@@ -104,24 +104,24 @@
 
       ._start
         padding: 2rem 0
-        
+
       ._bg
-        position: absolute
-        top: 0
-        left: 0
-        right: 0
-        bottom: 0
-        overflow: hidden
-        z-index: -1
-        background: url(../imgs/welcome_bg.jpg) no-repeat center center
-        background-size: contain
+        // position: absolute
+        // top: 0
+        // left: 0
+        // right: 0
+        // bottom: 0
+        // overflow: hidden
+        // z-index: -1
+        // background: url(../imgs/welcome_bg.jpg) no-repeat center center
+        // background-size: contain
         // opacity: .4
 
-        video
-          object-fit: cover
-          min-width: 100%
-          width: 100%
-          min-height: 100%
+        // video
+        //   object-fit: cover
+        //   min-width: 100%
+        //   width: 100%
+        //   min-height: 100%
 
     &._times
       background: $color_main_time_dark
@@ -143,17 +143,6 @@
       padding-top: 4rem
       padding-bottom: 4rem
 
-      &:after
-        content: ''
-        position: absolute
-        top: 0
-        left: 0
-        width: 100%
-        height: .15rem
-        background: linear-gradient(to right, $color_main 35%, rgba(255,255,255,0) 100%)
-        opacity: .5
-        z-index: -1
-
       ._icon
         top: 6rem
         right: 1rem
@@ -166,18 +155,7 @@
     &._start
       position: relative
       z-index: 1
-
-      &:after
-        content: ''
-        position: absolute
-        top: -10%
-        left: -10%
-        right: -10%
-        height: 110%
-        width: 120%
-        background: $color_main_dark_ultra
-        border-radius: 50% 50% 0 0
-        z-index: -1
+      text-align: center
 
 @media screen and (max-width:1200px)
   body
@@ -193,6 +171,7 @@
 
               ._content
                 max-width: 100%
+                align-items: center
 
                 .block_logo
                   & > ._value

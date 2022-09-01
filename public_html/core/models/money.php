@@ -111,10 +111,18 @@ class money extends model
     $oSubscription->sortname = 'sort';
     $oSubscription->sortdir = 'ASC';
     $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oSubscription->active = true;
     $arrSubscriptions = $oSubscription->get_subscriptions();
     $arrSubscriptionsFilter = [];
     $arrSubscriptionsFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrSubscriptions as $arrSubscription) $arrSubscriptionsFilter[] = array('id'=>$arrSubscription['id'],'name'=>$arrSubscription['title']);
+    if ( $this->subscription_id ) {
+      $oSubscription = new subscription( $this->subscription_id );
+      $arrSubscriptionsFilter[] = array('id'=>$oSubscription->id,'name'=>$oSubscription->title);
+    }
+    foreach ($arrSubscriptions as $arrSubscription) {
+      if ( $this->subscription_id && $arrSubscription['id'] == $this->subscription_id ) continue;
+      $arrSubscriptionsFilter[] = array('id'=>$arrSubscription['id'],'name'=>$arrSubscription['title']);
+    }
     $arrFields['subscription'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('Subscription'),'type'=>'select','options'=>$arrSubscriptionsFilter,'value'=>$this->subscription];
 
     $oCategory = new category();
@@ -141,7 +149,15 @@ class money extends model
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrProjects = $oProject->get();
     $arrProjectsFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
+    $bProject = false;
+    foreach ($arrProjects as $arrProject) {
+      $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title'],'color'=>$arrProject['color']);
+      if ( $arrProject['id'] == $this->project_id ) $bProject = true;
+    }
+    if ( ! $bProject ) {
+      $oProject = new project( $this->project_id );
+      $arrProjectsFilter[] = array('id'=>$oProject->id,'name'=>$oProject->title,'color'=>$oProject->color);
+    }
     $arrFields['project_id'] = ['section'=>2,'title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'search'=>true,'value'=>$this->project_id];
 
     $oTask = new task();
@@ -149,6 +165,7 @@ class money extends model
     $oTask->sortdir = 'ASC';
     $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oTask->query .= ' AND `status` = 2';
+    $oTask->active = true;
     $arrTasks = $oTask->get_tasks();
 
     $arrTaskId = [];

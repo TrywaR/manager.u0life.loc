@@ -95,6 +95,11 @@ switch ($_REQUEST['form']) {
     $oCard->sortdir = 'ASC';
     $oCard->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
 
+    // Показ не активных
+    $oFilter = new filter();
+    // $oCategory->query .= $oFilter->get();
+    if ( ! $oFilter->get_val('no_active_show') ) $oCard->active = true;
+
     $arrCard = $oCard->get_cards();
 
     notification::send($arrCard);

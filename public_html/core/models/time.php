@@ -18,7 +18,6 @@ class time extends model
   public $date_update = '';
   public static $category_id = '';
   public static $status = '';
-  public static $category = '';
 
   function get_sum( $arrTimes = [] ){
     $i = 0;
@@ -98,16 +97,24 @@ class time extends model
     $arrCategoriesFilter = [];
     // $arrCategoriesFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title'],'color'=>$arrCategory['color']);
-    $iSelectCategory = $this->category ? $this->category : 1;
+    $iSelectCategory = $this->category_id ? $this->category_id : 1;
     $arrFields['category_id'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'search'=>true,'value'=>$iSelectCategory];
 
     $oProject = new project();
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-
-    $arrProjects = $oProject->get();
+    $oProject->active = true;
+    $arrProjects = $oProject->get_projects();
     $arrProjectsFilter = [];
     $arrProjectsFilter[] = array('id'=>0,'name'=>'...');
-    foreach ($arrProjects as $arrProject) $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title']);
+    $bProject = false;
+    foreach ($arrProjects as $arrProject) {
+      $arrProjectsFilter[] = array('id'=>$arrProject['id'],'name'=>$arrProject['title'],'color'=>$arrProject['color']);
+      if ( $arrProject['id'] == $this->project_id ) $bProject = true;
+    }
+    if ( ! $bProject ) {
+      $oProject = new project( $this->project_id );
+      $arrProjectsFilter[] = array('id'=>$oProject->id,'name'=>$oProject->title,'color'=>$oProject->color);
+    }
     $arrFields['project_id'] = ['title'=>$oLang->get('Project'),'type'=>'select','options'=>$arrProjectsFilter,'search'=>true,'value'=>$this->project_id];
 
     $oTask = new task();
@@ -115,6 +122,7 @@ class time extends model
     $oTask->sortdir = 'ASC';
     $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oTask->query .= ' AND `status` = 2';
+    $oTask->active = true;
     $arrTasks = $oTask->get_tasks();
 
     $arrTasksFilter = [];

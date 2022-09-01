@@ -3,7 +3,8 @@ $oClient = new client();
 $oClient->sort = 'sort';
 $oClient->sortDir = 'ASC';
 $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-$arrClients = $oClient->get();
+$oClient->active = 1;
+$arrClients = $oClient->get_clients();
 ?>
 
 <div class="main_jumbotron">
@@ -23,20 +24,38 @@ $arrClients = $oClient->get();
   <div class="_block_content" id="shower">
     <!-- Фильтр -->
     <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#projects" data-content_filter_status="#content_filter_show">
-      <div class="input-group">
-        <span class="input-group-text">
-          <i class="far fa-folder"></i>
-        </span>
-        <select name="client_id" class="form-select">
-          <option value="0" selected><?=$oLang->get('Client')?></option>
-          <?php foreach ($arrClients as $iIndex => $arrClient): ?>
-            <option value="<?=$arrClient['id']?>"><?=$arrClient['title']?></option>
-          <?php endforeach; ?>
-        </select>
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <i class="far fa-folder"></i>
+          </span>
+          <select name="client_id" class="form-select">
+            <option value="0" selected><?=$oLang->get('Client')?></option>
+            <?php foreach ($arrClients as $iIndex => $arrClient): ?>
+              <option value="<?=$arrClient['id']?>"><?=$arrClient['title']?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
 
-        <button class="btn btn-dark" type="submit">
-          Go
-        </button>
+        <div class="_filter_input">
+          <div class="input_checkbox form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              name="no_active_show"
+              id="checkbox_noactiveshow"
+            >
+            <label class="form-check-label" for="checkbox_noactiveshow">
+              <?=$oLang->get('ShowNoActive')?>
+            </label>
+          </div>
+        </div>
+
+        <div class="block_buttons __end">
+          <button class="btn btn-dark" type="submit">
+            Go
+          </button>
+        </div>
       </div>
     </form>
   </div>
@@ -79,7 +98,7 @@ $arrClients = $oClient->get();
 </div>
 
 <div class="block_template">
-    <div class="project _elem progress_block" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <div class="project _elem progress_block _active_show_{{active_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="card">
         <div class="card-body">
           <div class="row">

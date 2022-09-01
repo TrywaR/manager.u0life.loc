@@ -22,7 +22,10 @@ class subscription extends model
   public static $sDateQuery = '';
 
   public function get_subscription( $arrSubscription = [] ){
-    if ( ! $arrCategory['id'] ) $arrCategory = $this->get();
+    if ( ! $arrSubscription['id'] ) $arrSubscription = $this->get();
+
+    if ( (int)$arrSubscription['active'] ) $arrSubscription['active_show'] = 'true';
+    else $arrSubscription['active_show'] = 'false';
 
     if ( (int)$arrSubscription['user_id'] ) $arrSubscription['edit_show'] = 'true';
 
@@ -177,7 +180,7 @@ class subscription extends model
     // $sColor = $this->color ? $this->color : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) );
     // $arrFields['color'] = ['title'=>$oLang->get('Color'),'type'=>'color','value'=>$sColor];
 
-    // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
+    $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 
     return $arrFields;
   }
@@ -190,21 +193,21 @@ class subscription extends model
     if ( $iSubscriptionsId ) {
       $mySql = "SELECT * FROM `" . $this->table . "`";
       $mySql .= " WHERE `id` = '" . $iSubscriptionsId . "'";
-      $arrCard = db::query($mySql);
+      $arrSubscription = db::query($mySql);
 
-      $this->id = $arrCard['id'];
-      $this->title = $arrCard['title'];
-      $this->sort = $arrCard['sort'];
-      $this->price = $arrCard['price'];
-      $this->time = $arrCard['time'];
-      $this->sum = $arrCard['sum'];
-      $this->type = $arrCard['type'];
-      $this->day = $arrCard['day'];
-      $this->category = $arrCard['category'];
-      $this->card = $arrCard['card'];
-      $this->active = $arrCard['active'];
-      $this->description = base64_decode($arrCard['description']);
-      $this->user_id = $arrCard['user_id'];
+      $this->id = $arrSubscription['id'];
+      $this->title = $arrSubscription['title'];
+      $this->sort = $arrSubscription['sort'];
+      $this->price = $arrSubscription['price'];
+      $this->time = $arrSubscription['time'];
+      $this->sum = $arrSubscription['sum'];
+      $this->type = $arrSubscription['type'];
+      $this->day = $arrSubscription['day'];
+      $this->category = $arrSubscription['category'];
+      $this->card = $arrSubscription['card'];
+      $this->active = $arrSubscription['active'];
+      $this->description = base64_decode($arrSubscription['description']);
+      $this->user_id = $arrSubscription['user_id'];
     }
 
     $this->arrTypes = [

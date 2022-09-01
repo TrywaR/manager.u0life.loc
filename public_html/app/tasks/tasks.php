@@ -26,6 +26,7 @@ switch ($_REQUEST['form']) {
     $oTask->sortMulti = ' `sort` DESC, `date_update` DESC ';
     $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oTask->query .= ' AND `status` = 2';
+    $oTask->active = true;
 
     $oFilter = new filter();
     $oTask->query .= $oFilter->get();
@@ -46,7 +47,9 @@ switch ($_REQUEST['form']) {
     $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 
     $oFilter = new filter();
+    $oFilter->arrParamsIngores['no_active_show'] = true;
     $oTask->query .= $oFilter->get();
+    if ( ! $oFilter->get_val('no_active_show') ) $oTask->active = true;
 
     $arrTasks = $oTask->get_tasks();
     notification::send($arrTasks);

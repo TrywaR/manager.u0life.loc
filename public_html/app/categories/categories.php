@@ -29,9 +29,15 @@ switch ($_REQUEST['form']) {
     $oCategory->sortdir = 'ASC';
     $oCategory->limit = 30;
     $oCategory->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    if ( $_REQUEST['only_active'] ) $oCategory->query .= ' AND `active` > 0';
+    // if ( $_REQUEST['only_active'] ) $oCategory->query .= ' AND `active` > 0';
     // Конфиги пользователей
     // SELECT * FROM `categories` LEFT JOIN  `categories_configs` ON `categories_configs`.`category_id` = `categories`.`id`
+
+    // Показ не активных
+    $oFilter = new filter();
+    // $oCategory->query .= $oFilter->get();
+    if ( ! $oFilter->get_val('no_active_show') ) $oCategory->active = true;
+
     $arrCategories = $oCategory->get_categories();
 
     // Берём конфики костомных категорий пользователя

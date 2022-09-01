@@ -24,6 +24,7 @@ class lang
         $this->en();
         break;
     }
+    // return $this->sUserLang;
     if ( $this->arrLang[$this->sUserLang] && isset($this->arrLang[$this->sUserLang][$sText]) ) return $this->arrLang[$this->sUserLang][$sText];
     else return $sText;
   }
@@ -140,6 +141,7 @@ class lang
       'Title' => 'Название',
       'Type' => 'Тип',
       'Active' => 'Активность',
+      'ShowNoActive' => 'Показывать не активные',
       'Clear' => 'Отчистить',
       'Client' => 'Клиент',
       'Clients' => 'Клиенты',
@@ -363,6 +365,7 @@ class lang
       'Title' => 'Title',
       'Type' => 'Type',
       'Active' => 'Active',
+      'ShowNoActive' => 'Show no active',
       'Clear' => 'Clear',
       'Client' => 'Client',
       'Clients' => 'Clients',
@@ -476,15 +479,15 @@ class lang
 
   function __construct()
   {
-    // Указанные в сессии
-    if ( $_SESSION['lang'] ) {
-      $this->sUserLang = $_SESSION['lang'];
+    // Берём язык пользователя
+    if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) {
+      $this->sUserLang = $_SESSION['lang'] = $_SESSION['user']['lang'];
     }
     // Другое
     else {
-      // Берём язык пользователя
-      if ( $_SESSION['user'] && $_SESSION['user']['lang'] ) {
-        // $this->sUserLang = $_SESSION['lang'] = $_SESSION['user']['lang'];
+      // Указанные в сессии
+      if ( $_SESSION['lang'] ) {
+        $this->sUserLang = $_SESSION['lang'];
       }
       else {
         // Автоопределения от браузера

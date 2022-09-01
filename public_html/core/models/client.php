@@ -12,16 +12,19 @@ class client extends model
   public static $active = '';
   public static $user_id = '';
 
-  function get_project( $arrClient = [] ) {
+  function get_client( $arrClient = [] ) {
     if ( ! $arrClient['id'] ) $arrClient = $this->get();
+
+    if ( (int)$arrClient['active'] ) $arrClient['active_show'] = 'true';
+    else $arrClient['active_show'] = 'false';
 
     return $arrClient;
   }
 
   function get_clients(){
     $arrClients = $this->get();
-    if ( $arrClients['id'] ) $arrClients = $this->get_project( $arrClients );
-    else foreach ($arrClients as &$arrClient) $arrClient = $this->get_project($arrClient);
+    if ( $arrClients['id'] ) $arrClients = $this->get_client( $arrClients );
+    else foreach ($arrClients as &$arrClient) $arrClient = $this->get_client($arrClient);
     return $arrClients;
   }
 
@@ -39,7 +42,7 @@ class client extends model
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
 
-    // $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'hidden','value'=>$this->active];
+    $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 
     return $arrFields;
   }

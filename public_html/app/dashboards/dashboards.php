@@ -106,6 +106,7 @@ switch ($_REQUEST['form']) {
     $oCard = new card();
     $oCard->sortname = 'sort';
     $oCard->sortdir = 'ASC';
+    $oCard->active = true;
     $oCard->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrResults['cards'] = $oCard->get_cards();
 
@@ -184,6 +185,7 @@ switch ($_REQUEST['form']) {
 
     // Balance
     $oCard = new card();
+    $oCard->active = true;
     $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $arrCards = $oCard->get();
     $iBalance = 0;

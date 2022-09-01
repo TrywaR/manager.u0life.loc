@@ -27,7 +27,9 @@ switch ($_REQUEST['form']) {
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 
     $oFilter = new filter();
+    $oFilter->arrParamsIngores['no_active_show'] = true;
     $oProject->query .= $oFilter->get();
+    if ( ! $oFilter->get_val('no_active_show') ) $oProject->active = true;
 
     $arrProjects = $oProject->get_projects();
     notification::send($arrProjects);
