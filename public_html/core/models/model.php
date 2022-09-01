@@ -177,6 +177,11 @@ class model
         case 'init':
           $mySqlAdd .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
+        case 'tinyint':
+          $mySqlAdd .= "'";
+          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) && (int)$arrAddFields[$arrField['Field']] ? 1 : 0;
+          $mySqlAdd .= "'";
+          break;
         case 'datetime':
           if ( $arrAddFields[$arrField['Field'] . '_date'] )
           $mySqlSave .= "'" . $arrAddFields[$arrField['Field'] . '_date'] . ' ' . $arrAddFields[$arrField['Field'] . '_time'] . "'";
@@ -247,7 +252,7 @@ class model
           break;
         case 'tinyint':
           $mySqlSave .= "'";
-          $mySqlSave .= isset($this->arrAddFields[$arrField['Field']]) ? 1 : 0;
+          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) && (int)$arrAddFields[$arrField['Field']] ? 1 : 0;
           $mySqlSave .= "'";
           break;
         case 'init':

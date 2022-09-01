@@ -179,9 +179,8 @@ switch ($_REQUEST['form']) {
     $arrResult = [];
     $oCard = new card( $_REQUEST['id'] );
     $oCard->balance_reload();
-    $arrResult['data'] = $oCard->get();
+    $arrResult['data'] = $oCard->get_card();
     $arrResult['event'] = 'save';
-    $arrResult['location_reload'] = true;
     $arrResult['text'] = $olang->get('CardUpdate');
     notification::success($arrResult);
     break;

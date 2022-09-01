@@ -39,7 +39,7 @@ class card extends model
     $arrMoneys = $oMoney->get_money();
     $iLastMoney = strtotime($arrMoneys[0]['date']);
     $iLastUpdateCard = strtotime($arrCard['date_update']);
-    if ( $iLastMoney > $iLastUpdateCard ) $arrCard['balance'] = $this->balance_reload();
+    // if ( $iLastMoney > $iLastUpdateCard ) $arrCard['balance'] = $this->balance_reload();
 
     // Обработка данных
     $arrCard['balance'] = substr($arrCard['balance'], 0, -2);
@@ -95,7 +95,7 @@ class card extends model
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'] . '';
     $oMoney->query .= ' AND `card` = ' . $this->id;
     $oMoney->query .= ' AND `type` = 1';
-    $arrMoneys = $oMoney->get_money();
+    $arrMoneys = $oMoney->get_moneys();
     foreach ($arrMoneys as $arrMoney) $this->balance = (float)$this->balance - (float)$arrMoney['price'];
 
     // Анализируем поступления
@@ -103,7 +103,7 @@ class card extends model
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'] . '';
     $oMoney->query .= ' AND `card` = ' . $this->id;
     $oMoney->query .= ' AND `type` = 2';
-    $arrMoneys = $oMoney->get_money();
+    $arrMoneys = $oMoney->get_moneys();
     foreach ($arrMoneys as $arrMoney) $this->balance = (float)$this->balance + (float)$arrMoney['price'];
 
     // Анализируем поступления с других карт
@@ -111,7 +111,7 @@ class card extends model
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'] . '';
     $oMoney->query .= ' AND `to_card` = ' . $this->id;
     $oMoney->query .= ' AND `type` = 1';
-    $arrMoneys = $oMoney->get_money();
+    $arrMoneys = $oMoney->get_moneys();
     foreach ($arrMoneys as $arrMoney) $this->balance = (float)$this->balance + (float)$arrMoney['price'];
 
     $this->date_update = date("Y-m-d H:i:s");
@@ -187,8 +187,8 @@ class card extends model
     $arrFields['min_payment_percent'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentPercent'),'type'=>'number','value'=>$this->min_payment_percent];
     $arrFields['min_payment_date'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentDate'),'type'=>'number','value'=>$this->min_payment_date];
 
-    if ( ! (int)$this->not_edit )
-      $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
+    // if ( ! (int)$this->not_edit )
+    $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 
     return $arrFields;
   }
