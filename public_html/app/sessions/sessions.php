@@ -25,6 +25,7 @@ switch ($_REQUEST['form']) {
     $oSession = new session();
     $iSessionId = $oSession->add();
     $arrResult['session'] = $_SESSION['session'] = $oSession->session;
+    $arrResult['location'] = '/';
     notification::success($arrResult);
     break;
 
@@ -54,7 +55,8 @@ switch ($_REQUEST['form']) {
       // Сохраняем новую сессию в сессии 0_о
       $arrResult['session'] = $_SESSION['session'] = $oSession->session;
       // Если нужно перезагрузить страницу
-      if ( $bReload ) $arrResult['location'] = '/';
+      // if ( $bReload ) $arrResult['location'] = '/';
+      $arrResult['location'] = '/';
       notification::success($arrResult);
     }
     else notification::error("Man, can't you see we're having lunch.");

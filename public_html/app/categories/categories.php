@@ -98,7 +98,7 @@ switch ($_REQUEST['form']) {
 
   case 'save': # Сохранение изменений
     $arrResult = [];
-    $oCategory = $_REQUEST['id'] ? new category( $_REQUEST['id'] ) : new category();
+    $oCategory = new category( $_REQUEST['id'] );
     $oCategory->arrAddFields = $_REQUEST;
 
     if ( $_REQUEST['id'] ) {
@@ -111,7 +111,7 @@ switch ($_REQUEST['form']) {
     }
 
     $oCategory = new category( $oCategory->id );
-    $arrResult['data'] = $oCategory->get_categories();
+    $arrResult['data'] = $oCategory->get_category();
     $arrResult['text'] = $olang->get('ChangesSaved');
 
     notification::success($arrResult);

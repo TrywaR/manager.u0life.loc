@@ -215,6 +215,7 @@ class lang
 
       'Transport' => 'Транспорт',
       'Sleeping' => 'Сон',
+      'Smoking' => 'Курение',
       'Sleep' => 'Сон',
       'Working' => 'Работа',
       'Work' => 'Работа',
@@ -439,6 +440,7 @@ class lang
 
       'Transport' => 'Transport',
       'Sleeping' => 'Sleeping',
+      'Smoking' => 'Smoking',
       'Sleep' => 'Sleep',
       'Working' => 'Working',
       'Work' => 'Work',

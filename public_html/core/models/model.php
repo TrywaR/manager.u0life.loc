@@ -252,7 +252,7 @@ class model
           break;
         case 'tinyint':
           $mySqlSave .= "'";
-          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) && (int)$arrAddFields[$arrField['Field']] ? 1 : 0;
+          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) ? 1 : 0;
           $mySqlSave .= "'";
           break;
         case 'init':
