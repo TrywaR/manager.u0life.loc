@@ -167,7 +167,7 @@ class model
     $mySqlAddSeporator = '';
     foreach ($arrFields as $arrField){
       $mySqlAdd .= $mySqlAddSeporator;
-      switch ( $arrField['Type'] ) {
+      switch ( trim(preg_replace('/\s*\([^)]*\)/', '', $arrField['Type'])) ) {
         case 'mediumtext':
           $mySqlAdd .= "'" . $arrAddFields[$arrField['Field']] . "'";
           break;
@@ -179,7 +179,7 @@ class model
           break;
         case 'tinyint':
           $mySqlAdd .= "'";
-          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) && (int)$arrAddFields[$arrField['Field']] ? 1 : 0;
+          $mySqlAdd .= isset($arrAddFields[$arrField['Field']]) ? 1 : 0;
           $mySqlAdd .= "'";
           break;
         case 'datetime':
@@ -252,7 +252,7 @@ class model
           break;
         case 'tinyint':
           $mySqlSave .= "'";
-          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) && (int)$arrAddFields[$arrField['Field']] ? 1 : 0;
+          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) ? 1 : 0;
           $mySqlSave .= "'";
           break;
         case 'init':
