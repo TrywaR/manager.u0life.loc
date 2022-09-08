@@ -105,7 +105,7 @@ switch ($_REQUEST['form']) {
 
     // Если копирование
     if ( isset($_REQUEST['content_loader_copy']) ) {
-      unset($oMoney->arrAddFields['id']);
+      unset($oTime->arrAddFields['id']);
     }
 
     if ( $_REQUEST['id'] && ! isset($_REQUEST['content_loader_copy']) ) {

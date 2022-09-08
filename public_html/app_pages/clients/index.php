@@ -38,11 +38,11 @@
 </div>
 
 <div class="main_content">
-  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="clients" data-content_manager_block="#clients" data-content_manager_item=".client" data-content_manager_button=".content_manager_switch">
-    <button type="button" name="button" class="btn btn-danger del">
-      <i class="fas fa-folder-minus"></i>
-    </button>
-  </div>
+  <?
+  $arrTemplateParams = [];
+  $arrTemplateParams['item'] = '.client';
+  include 'core/templates/elems/content_manager_block.php';
+  ?>
 
   <div
     id="clients"
@@ -67,7 +67,7 @@
     $(function(){
       // $(document).find('#clients').content_loader( 'start' )
       $(document).find('#content_filter').content_filter()
-      $(document).find('#content_manager_buttons').content_manager()
+      // $(document).find('#content_manager_buttons').content_manager()
       // $(document).find('#footer_actions').content_actions( {'action':'clients'} )
     })
   </script>
@@ -99,9 +99,9 @@
                 <i class="fas fa-pen-square"></i>
               </a>
 
-              <a href="#" class="btn content_download" data-id="{{id}}" data-elem=".client" data-action="clients" data-form="del" data-animate_class="animate__fadeOutRightBig">
+              <!-- <a href="#" class="btn content_download" data-id="{{id}}" data-elem=".client" data-action="clients" data-form="del" data-animate_class="animate__fadeOutRightBig">
                 <i class="fas fa-minus-square"></i>
-              </a>
+              </a> -->
             </div>
           </div>
         </div>

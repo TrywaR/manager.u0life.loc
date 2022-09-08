@@ -78,7 +78,7 @@ class time extends model
     $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
     $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
 
-    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title,'plaseholder'=>$oLang->get('Title')];
+    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','value'=>$this->title,'plaseholder'=>$oLang->get('Title')];
     $arrFields['description'] = ['title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description,'plaseholder'=>$oLang->get('Description')];
 
     // $arrFields['sort'] = ['title'=>'Сортировка','type'=>'number','value'=>$this->sort];

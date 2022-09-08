@@ -38,13 +38,9 @@
 </div>
 
 <div class="main_content">
-  <!-- Карты -->
-  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="cards" data-content_manager_block="#cards" data-content_manager_item=".card_item" data-content_manager_button=".content_manager_switch">
-    <button type="button" name="button" class="btn btn-danger del">
-      <i class="fas fa-folder-minus"></i>
-    </button>
-  </div>
+  <?include 'core/templates/elems/content_manager_block.php'?>
 
+  <!-- Карты -->
   <div
     id="cards"
     class="block_cards block_elems block_content_loader"
@@ -69,8 +65,8 @@
     $(function(){
       // $(document).find('#cards').content_loader()
       $(document).find('#content_filter').content_filter()
-      $(document).find('#content_manager_buttons').content_manager()
-      $(document).find('#footer_actions').content_actions( {'action':'cards'} )
+      // $(document).find('#content_manager_buttons').content_manager()
+      // $(document).find('#footer_actions').content_actions( {'action':'cards'} )
     })
   </script>
 </div>
@@ -120,9 +116,9 @@
             <i class="fas fa-pen-square"></i>
           </a>
 
-          <a href="#" class="btn btn-dark content_download _del" data-id="{{id}}" data-action="cards" data-form="del" data-elem=".card_item">
+          <!-- <a href="#" class="btn btn-dark content_download _del" data-id="{{id}}" data-action="cards" data-form="del" data-elem=".card_item">
             <i class="fas fa-minus-square"></i>
-          </a>
+          </a> -->
         </div>
       </div>
 

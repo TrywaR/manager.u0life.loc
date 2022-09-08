@@ -85,11 +85,11 @@ $arrProjects = $oProject->get_projects();
 </div>
 
 <section class="main_content">
-  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="tasks" data-content_manager_block="#tasks" data-content_manager_item=".task" data-content_manager_button=".content_manager_switch">
-    <button type="button" name="button" class="btn btn-danger del">
-      <i class="fas fa-folder-minus"></i>
-    </button>
-  </div>
+  <?
+  $arrTemplateParams = [];
+  $arrTemplateParams['item'] = '.task';
+  include 'core/templates/elems/content_manager_block.php';
+  ?>
 
   <div
     id="tasks"
@@ -149,7 +149,7 @@ $arrProjects = $oProject->get_projects();
                 <i class="fas fa-pen-square"></i>
               </a>
 
-              <a href="#" class="btn content_download" data-id="{{id}}" data-action="tasks" data-form="del" data-elem=".task" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+              <!-- <a href="#" class="btn content_download" data-id="{{id}}" data-action="tasks" data-form="del" data-elem=".task" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a> -->
             </div>
           </div>
         </div>

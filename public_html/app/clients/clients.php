@@ -69,7 +69,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oClient->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oClient->limit = $_REQUEST['limit'];
     $oClient->sortname = 'sort';
-    $oClient->sortdir = 'DESC';
+    $oClient->sortdir = 'ASC';
     $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
 
     // Показ не активных

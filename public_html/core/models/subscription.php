@@ -149,7 +149,7 @@ class subscription extends model
     $arrCardsFilter = [];
     $arrCardsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrCards as $arrCard) $arrCardsFilter[] = array('id'=>$arrCard['id'],'name'=>$arrCard['title'],'color'=>$arrCard['color']);
-    $arrFields['card'] = ['class'=>'switch_values switch_type-1','title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
+    $arrFields['card'] = ['title'=>$oLang->get('FromCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->card];
     $arrFields['to_card'] = ['title'=>$oLang->get('ToCard'),'type'=>'select','options'=>$arrCardsFilter,'value'=>$this->to_card];
 
     $oCategory = new category();

@@ -190,16 +190,15 @@ $arrTypes = [
 </div>
 
 <div class="main_content">
-  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="moneys" data-content_manager_block="#moneys" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch"  data-content_manager_sum="._price">
-    <div class="content_manager_sum"></div>
-    <button type="button" name="button" class="btn btn-danger del">
-      <i class="fas fa-folder-minus"></i>
-    </button>
-  </div>
+  <?
+  $arrTemplateParams = [];
+  $arrTemplateParams['sum'] = '._price';
+  include 'core/templates/elems/content_manager_block.php';
+  ?>
 
-  <ol
+  <div
     id="moneys"
-    class="block_moneys block_elems list-group list-group-numbered block_content_loader"
+    class="block_moneys block_elems list-group block_content_loader"
     data-content_loader_table="moneys"
     data-content_loader_form="show"
     data-content_loader_limit="15"
@@ -214,19 +213,19 @@ $arrTypes = [
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#moneys"
     data-content_loader_show_class="_show_"
-  ></ol>
+  ></div>
   <script>
     $(function(){
       // $(document).find('#moneys').content_loader()
       $(document).find('#content_filter').content_filter()
-      $(document).find('#content_manager_buttons').content_manager()
+      // $(document).find('#content_manager_buttons').content_manager()
       // $(document).find('#footer_actions').content_actions( {'action':'moneys'} )
     })
   </script>
 </div>
 
 <div class="block_template">
-  <li class="list-group-item money _elem progress_block _type_{{type}}_ _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}} _card_show_{{card_show}} _cardto_show_{{cardto_show}} _subscription_show_{{subscription_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+  <div class="list-group-item money _elem progress_block _type_{{type}}_ _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}} _card_show_{{card_show}} _cardto_show_{{cardto_show}} _subscription_show_{{subscription_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
     <div class="ms-2 me-auto">
       <div class="fw-bold mb-1 d-flex">
         <span class="_date">
@@ -271,11 +270,11 @@ $arrTypes = [
         <i class="fas fa-pen-square"></i>
       </a>
 
-      <a href="#" class="btn btn-dark content_download" data-id="{{id}}" data-action="moneys" data-form="del" data-elem=".money" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+      <!-- <a href="#" class="btn btn-dark content_download" data-id="{{id}}" data-action="moneys" data-form="del" data-elem=".money" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a> -->
     </div>
 
     <div class="progress">
       <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
     </div>
-  </li>
+  </div>
 </div>

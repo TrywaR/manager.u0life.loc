@@ -113,15 +113,11 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$a
 </div>
 
 <div class="main_content">
-  <div id="content_manager_buttons" class="content_manager_buttons _hide_" data-content_manager_action="times" data-content_manager_block="#times" data-content_manager_item=".list-group-item" data-content_manager_button=".content_manager_switch">
-    <button type="button" name="button" class="btn btn-danger del">
-      <i class="fas fa-folder-minus"></i>
-    </button>
-  </div>
+  <?include 'core/templates/elems/content_manager_block.php'?>
 
   <ol
     id="times"
-    class="block_times block_elems list-group list-group-numbered block_content_loader"
+    class="block_times block_elems list-group block_content_loader"
     data-content_loader_table="times"
     data-content_loader_form="show"
     data-content_loader_limit="15"
@@ -141,7 +137,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$a
     $(function(){
       // $(document).find('#times').content_loader()
       $(document).find('#content_filter').content_filter()
-      $(document).find('#content_manager_buttons').content_manager()
+      // $(document).find('#content_manager_buttons').content_manager()
       // $(document).find('#footer_actions').content_actions( {'action':'times'} )
     })
   </script>
@@ -149,7 +145,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$a
 </div>
 
 <div class="block_template">
-    <li class="list-group-item _elem time progress_block _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+    <div class="list-group-item _elem time progress_block _category_show_{{category_show}} _project_show_{{project_show}} _task_show_{{task_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <div class="ms-2 me-auto">
         <div class="fw-bold">
           <small class="_date">{{date}}</small>
@@ -183,11 +179,11 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$a
           <i class="fas fa-pen-square"></i>
         </a>
 
-        <a href="#" class="btn btn-dark content_download" data-id="{{id}}" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a>
+        <!-- <a href="#" class="btn btn-dark content_download" data-id="{{id}}" data-action="times" data-form="del" data-elem=".list-group-item" data-animate_class="animate__fadeOutRightBig"><i class="fas fa-minus-square"></i></a> -->
       </span>
 
       <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
       </div>
-    </li>
+    </div>
   </div>
