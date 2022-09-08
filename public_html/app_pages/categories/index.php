@@ -49,7 +49,7 @@
 
   <ul
     id="categories"
-    class="block_moneys_categories block_elems block_content_loader list-group list-group-numbered"
+    class="block_moneys_categories block_elems block_content_loader list-group"
     data-content_loader_table="categories"
     data-content_loader_form="show"
     data-content_loader_limit="15"
@@ -77,8 +77,8 @@
 </div>
 
 <div class="block_template">
-    <li class="list-group-item d-flex _elem category progress_block _active_show_{{active_show}} _custom_edit_show_{{custom_edit_show}} _edit_show_{{edit_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
-      <span class="row d-flex w-100 justify-content-between align-items-start">
+    <div class="list-group-item d-flex _elem category progress_block _active_show_{{active_show}} _custom_edit_show_{{custom_edit_show}} _edit_show_{{edit_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+      <span class="d-flex w-100 justify-content-between align-items-start">
         <span class="col-12 col-xl-6 mb-2">
           <span class="d-flex">
             {{title}}
@@ -108,9 +108,9 @@
               <i class="fas fa-pen-square"></i>
             </a>
 
-            <a href="#" class="btn btn-dark content_download _del" data-id="{{id}}" data-action="categories" data-form="del" data-elem=".category">
+            <!-- <a href="#" class="btn btn-dark content_download _del" data-id="{{id}}" data-action="categories" data-form="del" data-elem=".category">
               <i class="fas fa-minus-square"></i>
-            </a>
+            </a> -->
           </span>
         </span>
       </span>
@@ -122,5 +122,5 @@
       <span class="progress">
         <span class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></span>
       </span>
-    </li>
+    </div>
   </div>
