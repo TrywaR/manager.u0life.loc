@@ -291,6 +291,41 @@ class nav
         'onlyapp' => true,
       ),
 
+      '/admin/' => array(
+        'name' => $oLang->get('AdminPanel'),
+        'description' => $oLang->get('AdminPanel'),
+        'url' => '/admin/',
+        'icon' => '<i class="fa-solid fa-screwdriver-wrench"></i>',
+        'access' => 500,
+        'onlyapp' => true,
+        'subs' => [
+          '/admin/rewards/' => array(
+            'name' => $oLang->get('Rewards') . 's',
+            'description' => $oLang->get('Rewards'),
+            'url' => '/admin/rewards/',
+            'icon' => '<i class="fa-solid fa-award"></i>',
+            'access' => 500,
+            'onlyapp' => true,
+          ),
+          '/admin/users/' => array(
+            'name' => $oLang->get('Users'),
+            'description' => $oLang->get('Users'),
+            'url' => '/admin/users/',
+            'icon' => '<i class="fa-solid fa-users"></i>',
+            'access' => 500,
+            'onlyapp' => true,
+          ),
+          '/admin/accesses/' => array(
+            'name' => $oLang->get('Accesses'),
+            'description' => $oLang->get('Accesses'),
+            'url' => '/admin/accesses/',
+            'icon' => '<i class="fa-solid fa-user-clock"></i>',
+            'access' => 500,
+            'onlyapp' => true,
+          ),
+        ]
+      ),
+
       '/info/' => array(
         'name' => $oLang->get('Info'),
         'description' => $oLang->get('Info'),

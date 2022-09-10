@@ -1,19 +1,23 @@
 <?
 switch ($_REQUEST['form']) {
   case 'show': # Вывод элементов
-    // $oUser = new user( $_REQUEST['id'] );
-    //
-    // if ( $_REQUEST['from'] ) $oUser->from = $_REQUEST['from'];
-    // if ( $_REQUEST['limit'] ) $oUser->limit = $_REQUEST['limit'];
-    //
-    // $oUser->sort = 'sort';
-    // $oUser->sortDir = 'DESC';
-    // $oUser->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-    //
-    // if ( $_REQUEST['id'] ) $arrCard = $oUser->get_user();
-    // else $arrCard = $oUser->get_cards();
-    //
-    // notification::send($arrCard);
+    if ( ! $oLock->check('UsersShow') ) notification::error($oLang->get('AccessesDenied'));
+
+    // $iUserId = $_SESSION['user']['id'];
+    if ( (int)$_SESSION['user']['role'] > 500 ) {
+      if ( $_REQUEST['id'] ) $iUserId = $_REQUEST['id'];
+    }
+    $oUser = new user( $iUserId );
+
+    $oUser->show_role_val = true;
+    $oUser->show_rewards = true;
+
+    if ( $_REQUEST['from'] ) $oUser->from = $_REQUEST['from'];
+    if ( $_REQUEST['limit'] ) $oUser->limit = $_REQUEST['limit'];
+
+    $arrUsers = $oUser->get_users();
+
+    notification::send($arrUsers);
     break;
 
   case 'form_new_password': # Сохранение изменений
@@ -22,7 +26,11 @@ switch ($_REQUEST['form']) {
     $oForm = new form();
     $oLang = new lang();
 
-    $oUser = new user( $_SESSION['user']['id'] );
+    $iUserId = $_SESSION['user']['id'];
+    if ( (int)$_SESSION['user']['role'] > 500 ) {
+      if ( $_REQUEST['id'] ) $iUserId = $_REQUEST['id'];
+    }
+    $oUser = new user( $iUserId );
 
     // Поля для добавления
     // $oForm->arrFields = $oUser->fields();
@@ -57,7 +65,11 @@ switch ($_REQUEST['form']) {
     $oForm = new form();
     $oLang = new lang();
 
-    $oUser = new user( $_SESSION['user']['id'] );
+    $iUserId = $_SESSION['user']['id'];
+    if ( (int)$_SESSION['user']['role'] > 500 ) {
+      if ( $_REQUEST['id'] ) $iUserId = $_REQUEST['id'];
+    }
+    $oUser = new user( $iUserId );
 
     // Поля для добавления
     $oForm->arrFields = $oUser->fields();
@@ -84,7 +96,11 @@ switch ($_REQUEST['form']) {
   case 'save': # Сохранение изменений
     $arrResult = [];
     $arrResult['text'] = '';
-    $oUser = $_REQUEST['id'] ? new user( $_REQUEST['id'] ) : new user();
+    $iUserId = $_SESSION['user']['id'];
+    if ( (int)$_SESSION['user']['role'] > 500 ) {
+      if ( $_REQUEST['id'] ) $iUserId = $_REQUEST['id'];
+    }
+    $oUser = new user( $iUserId );
     $oUser->arrAddFields = $_REQUEST;
 
     // Обработка данных
@@ -110,14 +126,16 @@ switch ($_REQUEST['form']) {
           }
           break;
         case 'login':
-          // Если поменялся логин
+          // Если поменялся логин, и меняет не админ
+          if ( (int)$_SESSION['user']['role'] < 500 )
           if ( $_REQUEST['login'] != $_SESSION['user']['login'] ) {
             $arrUser = db::query("SELECT * FROM `users` WHERE `login` = '". $_REQUEST['login'] ."'");
             if ( is_array($arrUser) ) notification::error('This login is already taken.');
           }
           break;
         case 'email':
-          // Если поменялась почта
+          // Если поменялась почта, и меняет не админ
+          if ( (int)$_SESSION['user']['role'] < 500 )
           if ( $_REQUEST['email'] != $_SESSION['user']['email'] ) {
             if ( $_REQUEST['email'] === '' ) continue;
             $arrUser = db::query("SELECT * FROM `users` WHERE `email` = '". $_REQUEST['email'] ."'");
@@ -140,7 +158,11 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['id'] ) $oUser->save();
     else $oUser->add();
 
-    $arrResult['data'] = $_SESSION['user'] = $oUser->get();
+    $_SESSION['user'] = $oUser->get_user();
+    $oUser->show_role_val = true;
+    $arrResult['data'] = $oUser->get_user();
+
+    if ( (int)$_SESSION['user']['role'] < 500 )
     $arrResult['location_reload'] = true;
 
     if ( $_REQUEST['id'] ) $arrResult['event'] = 'save';
@@ -151,7 +173,11 @@ switch ($_REQUEST['form']) {
     break;
 
   case 'del': # Удаление
-    $oUser = new user( $_REQUEST['id'] );
+    $iUserId = $_SESSION['user']['id'];
+    if ( (int)$_SESSION['user']['role'] > 500 ) {
+      if ( $_REQUEST['id'] ) $iUserId = $_REQUEST['id'];
+    }
+    $oUser = new user( $iUserId );
     $oUser->del();
     break;
 }

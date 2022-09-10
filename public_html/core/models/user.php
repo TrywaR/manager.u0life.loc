@@ -19,11 +19,42 @@ class user extends model
   public static $protect = '';
   public static $arrProtectTypes = '';
 
-  public function get_user() {
-    $arrUser = db::query("SELECT * FROM `users` WHERE `id` = '". $this->id . "'");
+  public function get_user( $arrUser = [] ) {
+    if ( ! $arrUser['id'] ) $arrUser = $this->get();
+
+    // Показ ролей
+    if ( $this->show_role_val ) {
+      $arrUser['role_val'] = '<i class="fas fa-user-circle"></i> User';
+      if ( (int)$arrUser['role'] > 0 ) $arrUser['role_val'] = '<i class="fas fa-check"></i> Valid user';
+      if ( (int)$arrUser['role'] >= 500 ) $arrUser['role_val'] = '<i class="fas fa-crown"></i> Admin';
+    }
+
+    // Показ наград
+    if ( $this->show_rewards ) {
+      $oRewardUser = new reward_user();
+      $oRewardUser->query .= ' AND `user_id` = ' . $arrUser['id'];
+      $arrRewardsUsers = $oRewardUser->get_rewards_users();
+
+      if ( count($arrRewardsUsers) ) {
+        $oLang = new lang();
+        $arrUser['rewards'] = '<small class="pe-2">' . $oLang->get('Rewards') . ': </small>';
+      }
+      foreach ($arrRewardsUsers as $arrRewardsUser) {
+        $oReward = new reward( $arrRewardsUser['reward_id'] );
+        $arrReward = $oReward->get_reward();
+        $arrUser['rewards'] .= '<div class="pe-2" title="' . $oReward->title . '">' . $oReward->icon . '</div>';
+      }
+    }
+
     return $arrUser;
   }
 
+  function get_users(){
+    $arrUsers = $this->get();
+    if ( $arrUsers['id'] ) $arrUsers = $this->get_user( $arrUsers );
+    else foreach ($arrUsers as &$arrUser) $arrUser = $this->get_user($arrUser);
+    return $arrUsers;
+  }
 
   public function fields() # Поля для редактирования
   {
@@ -49,10 +80,15 @@ class user extends model
     $arrFields['login'] = ['title'=>$oLang->get('Login'),'type'=>'text','value'=>$this->login];
     $arrFields['phone'] = ['title'=>$oLang->get('Phone'),'type'=>'text','value'=>$this->phone];
     $arrFields['email'] = ['title'=>$oLang->get('Email'),'type'=>'text','value'=>$this->email];
-    $arrFields['date_registration'] = ['title'=>$oLang->get('DateRegistration'),'type'=>'datetime','disabled'=>'disabled','value'=>$this->date_registration];
+    $arrFields['date_registration'] = ['title'=>$oLang->get('DateRegistration'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_registration];
 
-    if ( (int)$this->role ) {
-      $arrFields['protect'] = ['title'=>$oLang->get('ProtectType'),'type'=>'time','type'=>'select','options'=>$this->arrProtectTypes,'value'=>$this->protect];
+    $oLock = new lock();
+    if ( $oLock->check('UsersAll') || (int)$this->role > 100 ) {
+      $arrFields['protect'] = ['title'=>$oLang->get('ProtectType'),'type'=>'select','options'=>$this->arrProtectTypes,'value'=>$this->protect];
+    }
+
+    if ( $oLock->check('UsersAll') && (int)$_SESSION['user']['role'] > (int)$this->role ) {
+      $arrFields['role'] = ['title'=>$oLang->get('Role'),'type'=>'number','value'=>$this->role];
     }
 
     // $arrFields['price'] = ['title'=>$oLang->get('Price'),'type'=>'number','value'=>substr($this->price, 0, -2)];
@@ -61,15 +97,15 @@ class user extends model
     return $arrFields;
   }
 
-  function __construct( $user_id = 0 )
+  function __construct( $iUserId = 0 )
   {
     $oLang = new lang();
 
     $this->table = 'users';
 
-    if ( $user_id ) {
+    if ( $iUserId ) {
       $mySql = "SELECT * FROM `" . $this->table . "`";
-      $mySql .= " WHERE `id` = '" . $user_id . "'";
+      $mySql .= " WHERE `id` = '" . $iUserId . "'";
       $arrUser = db::query($mySql);
 
       $this->id = $arrUser['id'];

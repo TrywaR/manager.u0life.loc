@@ -90,12 +90,12 @@ switch ($_REQUEST['form']) {
     $iUserId = $oUser->add();
     if ( $iUserId ) {
       // УВЕДОМЛЕНИЕ Отправляем в телегу
-      $mailNew = new mail();
-      $telegram_messages = 'Логин: ' . $_REQUEST['login'] . ' %0A';
-      if ( $_SESSION['referal'] ) {
-        $telegram_messages .= '_По приглашению от_: *' . $oUserReferal->login . '* (' . $oUserReferal->id . ')' . '%0A';
-      }
-      $oResult = $mailNew->telegram('Зарегистрирован новый пользователь', $telegram_messages);
+      // $mailNew = new mail();
+      // $telegram_messages = 'Логин: ' . $_REQUEST['login'] . ' %0A';
+      // if ( $_SESSION['referal'] ) {
+      //   $telegram_messages .= '_По приглашению от_: *' . $oUserReferal->login . '* (' . $oUserReferal->id . ')' . '%0A';
+      // }
+      // $oResult = $mailNew->telegram('Зарегистрирован новый пользователь', $telegram_messages);
 
       // ПОДГОТОВКА ПОЛЬЗОВАТЕЛЯ
       // - Создание счёта для кэша
@@ -107,6 +107,27 @@ switch ($_REQUEST['form']) {
       $oCard->date_update = date('Y-m-d H:i:s');
       $oCard->active = 1;
       $oCard->add();
+
+      // НАГРАДЫ
+      // - Смотрим награды за регистрацию
+      $oReward = new reward();
+      $oReward->query = ' AND `condition` = 1';
+      $arrRewards = $oReward->get_rewards();
+      foreach ($arrRewards as $arrReward) {
+        $oReward = new reward( $arrReward['id'] );
+        $oReward->set_reward( $iUserId );
+      }
+      // - Смотрим награды за регистрацию по рефералке
+      if ( $_SESSION['referal'] ) {
+        $oReward = new reward();
+        $oReward->query = ' AND `condition` = 2';
+        $oReward->query = ' AND `condition_val` = ' . $_SESSION['referal'];
+        $arrRewards = $oReward->get_rewards();
+        foreach ($arrRewards as $arrReward) {
+          $oReward = new reward( $arrReward['id'] );
+          $oReward->set_reward( $iUserId );
+        }
+      }
 
       notification::success($arrResults);
     }

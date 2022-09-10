@@ -33,9 +33,13 @@ if ( ! $arrTemplateParams['button'] )
     data-content_manager_block="<?=$arrTemplateParams['block']?>"
     data-content_manager_item="<?=$arrTemplateParams['item']?>"
     data-content_manager_button="<?=$arrTemplateParams['button']?>"
-    data-content_manager_sum="<?=$arrTemplateParams['sum']?>"
+    <?if($arrTemplateParams['sum']){?>
+      data-content_manager_sum="<?=$arrTemplateParams['sum']?>"
+    <?}?>
   >
-  <div class="content_manager_sum">0</div>
+  <?if($arrTemplateParams['sum']){?>
+    <div class="content_manager_sum">0</div>
+  <?}?>
   <button type="button" name="button" class="btn btn-danger del">
     <i class="fa-solid fa-circle-minus"></i>
   </button>

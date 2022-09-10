@@ -28,3 +28,6 @@ include_once 'models/category_config.php'; # Категории
 include_once 'models/subscription.php'; # Подписки
 include_once 'models/time.php'; # Время
 include_once 'models/chart.php'; # Графики
+include_once 'models/access.php'; # Доступы
+include_once 'models/reward.php'; # Награды
+include_once 'models/reward_user.php'; # Награды пользователей

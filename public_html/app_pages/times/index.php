@@ -115,7 +115,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$a
 <div class="main_content">
   <?include 'core/templates/elems/content_manager_block.php'?>
 
-  <ol
+  <ul
     id="times"
     class="block_times block_elems list-group block_content_loader"
     data-content_loader_table="times"
@@ -132,7 +132,7 @@ foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$a
     data-content_loader_template_selector=".block_template"
     data-content_loader_scroll_block="#times"
     data-content_loader_show_class="_show_"
-  ></ol>
+  ></ul>
   <script>
     $(function(){
       // $(document).find('#times').content_loader()

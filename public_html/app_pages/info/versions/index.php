@@ -11,7 +11,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_4_5">5.4.5 Manager</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_4_6">5.4.6 Access</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_4_5">5.4.5 Manager</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_4">5.4.4 Fixxx</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_3">5.4.3 Filtres</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_2">5.4.2 Fixer</a>
@@ -68,6 +69,22 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_4_6">5.4.6 Access</h2>
+            <ol>
+              <li>
+                Добавлена система добавления доступов при донатах и за достижения
+              </li>
+              <li>
+                Добавлена система наград, при регистрации и в зависимости откуда пользователь пришёл на регистрацию
+              </li>
+              <li>
+                Исправлена ошибка в безопасности
+              </li>
+              <li>
+                Исправление небольших ошибок
+              </li>
+            </ol>
+
             <h2 id="list-item-5_4_5">5.4.5 Manager</h2>
             <ol>
               <li>

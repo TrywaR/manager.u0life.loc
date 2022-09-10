@@ -113,6 +113,18 @@ if ( isset($_SESSION['user']) ) {
       include_once 'templates/templates.php';
       break;
 
+    case 'accesses': # Доступы
+      include_once 'accesses/accesses.php';
+      break;
+
+    case 'rewards': # Награды
+      include_once 'rewards/rewards.php';
+      break;
+
+    case 'rewards_users': # Награды пользователей
+      include_once 'rewards/users/users.php';
+      break;
+
     case 'contents': # Содержание
       include_once 'contents/contents.php';
       break;

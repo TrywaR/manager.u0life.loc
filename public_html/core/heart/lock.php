@@ -39,6 +39,24 @@ class lock
       'MoneysCostsAnalyticYear' => 1,
       'MoneysWagesAnalyticYear' => 1,
       'TimesCostsAnalyticYear' => 1,
+
+      'RewardsAll' => 500,
+      'RewardsShow' => 0,
+      'RewardsForm' => 500,
+      'RewardsSave' => 500,
+      'RewardsDel' => 500,
+
+      'UsersAll' => 500,
+      'UsersShow' => 500,
+      'UsersForm' => 500,
+      'UsersSave' => 500,
+      'UsersDel' => 500,
+
+      'AccessAll' => 500,
+      'AccessShow' => 500,
+      'AccessForm' => 500,
+      'AccessSave' => 500,
+      'AccessDel' => 500,
     ];
   }
 
