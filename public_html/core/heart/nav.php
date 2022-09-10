@@ -300,7 +300,7 @@ class nav
         'onlyapp' => true,
         'subs' => [
           '/admin/rewards/' => array(
-            'name' => $oLang->get('Rewards') . 's',
+            'name' => $oLang->get('Rewards'),
             'description' => $oLang->get('Rewards'),
             'url' => '/admin/rewards/',
             'icon' => '<i class="fa-solid fa-award"></i>',
