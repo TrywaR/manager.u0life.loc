@@ -43,7 +43,9 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oTask->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oTask->limit = $_REQUEST['limit'];
 
-    $oTask->sortMulti = ' `sort` DESC, `date_update` DESC ';
+    $oTask->sortname = 'date_update';
+    $oTask->sortdir = 'DESC';
+    // $oTask->sortMulti = '`sort` DESC, `date_update` DESC';
     $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 
     $oFilter = new filter();
