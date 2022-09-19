@@ -12,7 +12,7 @@
       Full version
     </h2>
     <p>
-      The full version is provided upon registration for 30 days, it does not have a lot of additional functionality, you can read more about it <a href="/info/buy/">here</a>
+      The full version is provided upon registration for 60 days, it does not have a lot of additional functionality, you can read more about it <a href="/info/buy/">here</a>
     </p>
   </div>
 
