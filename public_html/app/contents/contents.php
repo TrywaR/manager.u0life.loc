@@ -13,7 +13,14 @@ switch ($_REQUEST['form']) {
         $oNav = new nav();
         $arrNavCurrent = end($oNav->arrNavsPath);
         if ( $_SESSION['user'] ) {
-          $sIncludePathContent = $_REQUEST['path'] != '/' ? 'app_pages'.$_REQUEST['path'].'index' : 'app_pages/dashboard/index';
+          // НЕ первый вход
+          if ( $_SESSION['user']['section'] ) $sIncludePathContent = $_REQUEST['path'] != '/' ? 'app_pages'.$_REQUEST['path'].'index' : 'app_pages/dashboard/index';
+          // Первый вход
+          else {
+            $sIncludePathContent = $_REQUEST['path'] != '/' ? 'app_pages'.$_REQUEST['path'].'index' : 'app_pages/info/start/index';
+            // Сохраняем что показали
+            db::query("UPDATE `users` SET `section` = '1' WHERE `users`.`id` = " . $_SESSION['user']['id'] . ";");
+          }
         }
         else {
           $sIncludePathContent = $_REQUEST['path'] != '/' ? 'app_pages'.$_REQUEST['path'].'index' : 'app_pages/authorizations/index';

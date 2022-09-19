@@ -16,6 +16,10 @@
         <p>
           Категории будут отображаться во временных и денежных графиках.
         </p>
+        <p>
+          <?$oCategory = new category();?>
+          Лимит по категориям <strong><?=$oCategory->get_categories_limit()?></strong>, для увеличения используйте <a href="/info/buy/">полную версию</a>
+        </p>
       </div>
       <div class="_link">
         <a href="/categories/">

@@ -16,6 +16,10 @@
         <p>
           Categories will be displayed in Time and Money charts.
         </p>
+        <p>
+          <?$oCategory = new category();?>
+          Category limit <strong><?=$oCategory->get_categories_limit()?></strong>, use the <a href="/info/buy/">full version</a> to enlarge</a>
+        </p>
       </div>
       <div class="_link">
         <a href="/categories/">

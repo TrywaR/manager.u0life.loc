@@ -70,11 +70,11 @@ switch ($_REQUEST['form']) {
       $oUserReferal = new user( $_SESSION['referal'] );
       if ( (int)$oUserReferal->id ) {
         $arrData['referal'] = $_SESSION['referal'];
-        if ( (int)$oUserReferal->role == 0 ) {
-          $oUserReferal->role = 1;
-          $oUserReferal->name = 'update';
-          $oUserReferal->save();
-        }
+        // if ( (int)$oUserReferal->role == 0 ) {
+        //   $oUserReferal->role = 1;
+        //   $oUserReferal->name = 'update';
+        //   $oUserReferal->save();
+        // }
       }
     };
 
@@ -121,7 +121,7 @@ switch ($_REQUEST['form']) {
       if ( $_SESSION['referal'] ) {
         $oReward = new reward();
         $oReward->query = ' AND `condition` = 2';
-        $oReward->query = ' AND `condition_val` = ' . $_SESSION['referal'];
+        $oReward->query = ' AND `condition_val` = ' . $_SESSION['referal'] . ' OR `condition_val` = 0';
         $arrRewards = $oReward->get_rewards();
         foreach ($arrRewards as $arrReward) {
           $oReward = new reward( $arrReward['id'] );

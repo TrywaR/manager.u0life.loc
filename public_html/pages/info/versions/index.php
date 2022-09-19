@@ -11,7 +11,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_4_6">5.4.6 Access</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_4_7">5.4.7 Hello world</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_4_6">5.4.6 Access</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_5">5.4.5 Manager</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_4">5.4.4 Fixxx</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_3">5.4.3 Filtres</a>
@@ -69,6 +70,25 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_4_7">5.4.7 Hello world</h2>
+            <ol>
+              <li>
+                Улучшена система доступов и достижений
+              </li>
+              <li>
+                Добавлена приветсвенная страница, в кратце объясняющая функционал
+              </li>
+              <li>
+                Добавлена страница с описаниями возможностей при получении полного функционала
+              </li>
+              <li>
+                Небольшие стилевые изменения
+              </li>
+              <li>
+                Обновлена страница пользователя
+              </li>
+            </ol>
+
             <h2 id="list-item-5_4_6">5.4.6 Access</h2>
             <ol>
               <li>

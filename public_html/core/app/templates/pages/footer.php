@@ -12,10 +12,10 @@
           <div class="_item _theme">
             <div class="block_swich" id="theme_switch">
               <div class="_vals">
-                <div class="_val <?=$_SESSION['theme'] == 1 ? '_select_' : ''?>" data-val="1">
+                <div class="_val <?=$_SESSION['user']['theme'] == 1 ? '_select_' : ''?>" data-val="1">
                   <i class="fa-solid fa-moon"></i>
                 </div>
-                <div class="_val  <?=$_SESSION['theme'] == 2 ? '_select_' : ''?>" data-val="2">
+                <div class="_val  <?=$_SESSION['user']['theme'] == 2 ? '_select_' : ''?>" data-val="2">
                   <i class="fa-solid fa-sun"></i>
                 </div>
               </div>
@@ -25,8 +25,8 @@
           <div class="_item _lang">
             <div class="block_swich" id="lang_switch">
               <select class="select _vals" name="lang">
-                <option <?=$_SESSION['lang'] == 'en' ? 'selected="selected"' : ''?> value="en">en</option>
-                <option <?=$_SESSION['lang'] == 'ru' ? 'selected="selected"' : ''?> value="ru">ru</option>
+                <option <?=$_SESSION['user']['lang'] == 'en' ? 'selected="selected"' : ''?> value="en">en</option>
+                <option <?=$_SESSION['user']['lang'] == 'ru' ? 'selected="selected"' : ''?> value="ru">ru</option>
               </select>
             </div>
           </div>

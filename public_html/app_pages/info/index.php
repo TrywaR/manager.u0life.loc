@@ -9,6 +9,15 @@
 <div class="main_content info_container">
   <div class="_block">
     <h2 class="sub_title">
+      Full version
+    </h2>
+    <p>
+      The full version is provided upon registration for 30 days, it does not have a lot of additional functionality, you can read more about it <a href="/info/buy/">here</a>
+    </p>
+  </div>
+
+  <div class="_block">
+    <h2 class="sub_title">
       Updates
     </h2>
     <p>
@@ -38,7 +47,7 @@
       Motivation
     </h2>
     <p>
-      In order to speed up the development of the project and improve its quality use the section for donations <a href="/info/buy/"><?=$oLang->get('Donate')?></a>
+      In order to speed up the development of the project and improve its quality use the section for donations <a href="/info/donates/"><?=$oLang->get('Donate')?></a>
     </p>
   </div>
 

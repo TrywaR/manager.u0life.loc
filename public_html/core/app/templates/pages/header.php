@@ -17,7 +17,7 @@ $oLang = new lang();
       </div>
 
       <div class="block_user_prev">
-        <a href="/profile/" class="home_link user_prev">
+        <a href="/profile/" class="_btn home_link user_prev">
           <div class="_img">
             <i class="fa-solid fa-address-book"></i>
           </div>
@@ -25,40 +25,30 @@ $oLang = new lang();
             <?=$_SESSION['user']['login']?>
           </span>
           <small class="_role">
-            <?
-            switch ((int)$_SESSION['user']['role']) {
-              case 0:
-                 ?>
-                 <span class="_icon">
-                   <i class="fas fa-user-circle"></i>
-                 </span>
-                 <span class="_value">
-                   User
-                 </span>
-                 <?
-                break;
-              case 1:
-                 ?>
-                 <span class="_icon">
-                   <i class="fas fa-check"></i>
-                 </span>
-                 <span class="_value">
-                   Valid user
-                 </span>
-                 <?
-                break;
-              case 666:
-                 ?>
-                 <span class="_icon">
-                   <i class="fas fa-crown"></i>
-                 </span>
-                 <span class="_value">
-                   Admin
-                 </span>
-                 <?
-                break;
-            }
-            ?>
+            <?php if ($oLock->iUserRole == 0): ?>
+              <span class="_icon">
+                <i class="fas fa-user-circle"></i>
+              </span>
+              <span class="_value">
+                User
+              </span>
+            <?php endif; ?>
+            <?php if ($oLock->iUserRole > 0 && $oLock->iUserRole < 500): ?>
+              <span class="_icon">
+                <i class="fas fa-check"></i>
+              </span>
+              <span class="_value">
+                PRO user
+              </span>
+            <?php endif; ?>
+            <?php if ($oLock->iUserRole >= 500): ?>
+              <span class="_icon">
+                <i class="fas fa-crown"></i>
+              </span>
+              <span class="_value">
+                Admin
+              </span>
+            <?php endif; ?>
           </small>
         </a>
       </div>

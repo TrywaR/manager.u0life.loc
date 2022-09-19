@@ -36,6 +36,7 @@ class lock
   function arrAccessInit(){
     $this->arrAccess = [
       'CategoryAnalyticYear' => 1,
+      'CategoryLimit' => 1,
       'MoneysCostsAnalyticYear' => 1,
       'MoneysWagesAnalyticYear' => 1,
       'TimesCostsAnalyticYear' => 1,
@@ -62,7 +63,16 @@ class lock
 
   function __construct(){
     $this->iUserRole = 0;
-    if ( $_SESSION['user'] && (int)$_SESSION['user']['role'] ) $this->iUserRole = $_SESSION['user']['role'];
+
+    if ( $_SESSION['user'] ) {
+      if ( (int)$_SESSION['user']['role'] ) $this->iUserRole = $_SESSION['user']['role'];
+
+      // Проверка оплаты
+      $oAccess = new access();
+      $arrUserAccessesLast = $oAccess->last_date_access();
+      $this->iUserRole = (int)$this->iUserRole + (int)$arrUserAccessesLast['level'];
+    }
+
     $this->arrAccessInit();
   }
 }

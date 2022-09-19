@@ -4,14 +4,26 @@ $oLang = new lang();
 switch ($_REQUEST['form']) {
   case 'actions': # Элементы управления
     $sResultHtml = '';
-    $sResultHtml .= '
-      <div class="btn-group">
-        <a data-action="accesses" data-animate_class="animate__flipInY" data-elem=".access" data-form="form" data-filter="true" href="javascript:;" class="btn btn-dark content_loader_show">
-          <span class="_icon"><i class="fas fa-plus-circle"></i></span>
-          <span class="_text">' . $oLang->get("Add") . '</span>
-        </a>
-      </div>
-      ';
+    if ( $oLock->check('AccessAll') ) {
+      $sResultHtml .= '
+        <div class="btn-group">
+          <a data-action="accesses" data-animate_class="animate__flipInY" data-elem=".access" data-form="form" data-filter="true" href="javascript:;" class="btn btn-dark content_loader_show">
+            <span class="_icon"><i class="fas fa-plus-circle"></i></span>
+            <span class="_text">' . $oLang->get("Add") . '</span>
+          </a>
+        </div>
+        ';
+    }
+    else {
+      $sResultHtml .= '
+        <div class="btn-group">
+          <a href="/info/buy/" class="btn btn-dark">
+            <span class="_icon"><i class="fas fa-plus-circle"></i></span>
+            <span class="_text">' . $oLang->get("Access") . '</span>
+          </a>
+        </div>
+        ';
+    }
 
     notification::send( $sResultHtml );
     break;

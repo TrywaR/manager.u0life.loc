@@ -27,7 +27,6 @@ switch ($_REQUEST['form']) {
 
     $oCategory->sortname = 'sort';
     $oCategory->sortdir = 'ASC';
-    $oCategory->limit = 30;
     $oCategory->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     // if ( $_REQUEST['only_active'] ) $oCategory->query .= ' AND `active` > 0';
     // Конфиги пользователей
@@ -61,6 +60,11 @@ switch ($_REQUEST['form']) {
     else {
       $arrResults['event'] = 'add';
       $oCategory = new category();
+
+      // Проверка количества категорий
+      if ( ! $oCategory->ckeck_categories_limit() )
+        notification::error($oLang->get('CategoryLimitError') . $oCategory->get_categories_limit());
+
       // Случайное имя для корректной работы
       $arrDefaultsNames = array(
         'Money for reflection',
@@ -107,6 +111,9 @@ switch ($_REQUEST['form']) {
     }
     else {
       $arrResult['event'] = 'add';
+      // Проверка количества категорий
+      if ( ! $oCategory->ckeck_categories_limit() )
+        notification::error($oLang->get('CategoryLimitError') . $oCategory->get_categories_limit());
       $oCategory->add();
     }
 

@@ -12,6 +12,9 @@ class access extends model
   public static $date_stop = '';
   public static $data = '';
   public static $days = '';
+  public static $payment_id = '';
+  public static $status = '';
+  public static $price = '';
 
   // Даём доступ
   function set_access() {
@@ -52,8 +55,9 @@ class access extends model
   function last_date_access() {
     // Получаем доступы пользователя
     $oAccess = new access();
-    $oAccess->query = ' AND `user_id` = ' . $this->user_id;
-    $oAccess->query = ' AND `date_stop` != "0000-00-00"';
+    if ( $this->user_id ) $oAccess->query .= ' AND `user_id` = ' . $this->user_id;
+    else if ( $_SESSION['user'] ) $oAccess->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oAccess->query .= ' AND `date_stop` != "0000-00-00"';
     $oAccess->sortname = 'date_stop';
     $oAccess->sortdir = 'DESC';
     $arrUserAccesses = $oAccess->get_accesses();
@@ -63,7 +67,7 @@ class access extends model
       $arrUserAccessesLast = end($arrUserAccesses);
 
       // Доступ актуальный
-      if ( isset($arrUserAccessesLast['date_stop']) && strtotime($arrUserAccessesLast['date_stop']) > date("Y-m-d") ) return $arrUserAccessesLast['date_stop'];
+      if ( isset($arrUserAccessesLast['date_stop']) && strtotime($arrUserAccessesLast['date_stop']) > strtotime(date("Y-m-d")) ) return $arrUserAccessesLast;
       // Доступ не актуальный
       else return false;
     }
@@ -73,6 +77,10 @@ class access extends model
 
   function get_access( $arrAccess = [] ) {
     if ( ! $arrAccess['id'] ) $arrAccess = $this->get();
+
+    // Перевод
+    $oLang = new lang();
+    $arrAccess['data'] = $oLang->get($arrAccess['data']);
 
     if ( $this->show_user )
     if ( $arrAccess['user_id'] ) {
@@ -104,6 +112,9 @@ class access extends model
     $arrFields['date_stop'] = ['title'=>'Дана окончания','type'=>'date','value'=>$this->date_stop];
     $arrFields['data'] = ['title'=>'Данные','type'=>'text','value'=>$this->data];
     $arrFields['days'] = ['title'=>'Количество дней','type'=>'number','value'=>$this->days];
+    $arrFields['payment_id'] = ['title'=>'payment_id','type'=>'number','value'=>$this->payment_id];
+    $arrFields['status'] = ['title'=>'Status','type'=>'text','value'=>$this->status];
+    $arrFields['price'] = ['title'=>'Price','type'=>'number','value'=>$this->price];
 
     return $arrFields;
   }
@@ -124,6 +135,9 @@ class access extends model
       $this->date_stop = $arrAccess['date_stop'];
       $this->data = $arrAccess['data'];
       $this->days = $arrAccess['days'];
+      $this->payment_id = $arrAccess['payment_id'];
+      $this->status = $arrAccess['status'];
+      $this->price = $arrAccess['price'];
     }
     else {
       $this->date_start = date("Y-m-d");

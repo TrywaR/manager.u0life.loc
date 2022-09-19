@@ -18,9 +18,18 @@ class user extends model
   public static $referal = '';
   public static $protect = '';
   public static $arrProtectTypes = '';
+  public static $section = '';
 
   public function get_user( $arrUser = [] ) {
     if ( ! $arrUser['id'] ) $arrUser = $this->get();
+
+    // Показ доступа
+    if ( $this->show_access ) {
+      $oAccess = new access();
+      $oAccess->user_id = $arrUser['id'];
+      $arrUser['access'] = $oAccess->last_date_access();
+      $arrUser['role'] = (int)$arrUser['role'] + (int)$arrUser['access']['level'];
+    }
 
     // Показ ролей
     if ( $this->show_role_val ) {
@@ -37,12 +46,12 @@ class user extends model
 
       if ( count($arrRewardsUsers) ) {
         $oLang = new lang();
-        $arrUser['rewards'] = '<small class="pe-2">' . $oLang->get('Rewards') . ': </small>';
+        $arrUser['rewards'] = '<small class="pe-2 _reward_title">' . $oLang->get('Rewards') . ': </small>';
       }
       foreach ($arrRewardsUsers as $arrRewardsUser) {
         $oReward = new reward( $arrRewardsUser['reward_id'] );
         $arrReward = $oReward->get_reward();
-        $arrUser['rewards'] .= '<div class="pe-2" title="' . $oReward->title . '">' . $oReward->icon . '</div>';
+        $arrUser['rewards'] .= '<div class="pe-2 _reward" title="' . $oLang->get($oReward->title) . '">' . $oReward->icon . '</div>';
       }
     }
 
@@ -80,6 +89,7 @@ class user extends model
     $arrFields['login'] = ['title'=>$oLang->get('Login'),'type'=>'text','value'=>$this->login];
     $arrFields['phone'] = ['title'=>$oLang->get('Phone'),'type'=>'text','value'=>$this->phone];
     $arrFields['email'] = ['title'=>$oLang->get('Email'),'type'=>'text','value'=>$this->email];
+    $arrFields['section'] = ['title'=>$oLang->get('Section'),'type'=>'number','value'=>$this->section];
     $arrFields['date_registration'] = ['title'=>$oLang->get('DateRegistration'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_registration];
 
     $oLock = new lock();
@@ -119,6 +129,7 @@ class user extends model
       $this->role = $arrUser['role'];
       $this->referal = $arrUser['referal'];
       $this->protect = $arrUser['protect'];
+      $this->section = $arrUser['section'];
     }
     else {
       $this->lang = 'en';

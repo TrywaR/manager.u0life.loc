@@ -75,7 +75,7 @@ class reward extends model
     $arrFields['id'] = ['title'=>'ID','type'=>'number','disabled'=>'disabled','value'=>$this->id]; # Для отображения пользователю
     $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
 
-    $arrFields['title'] = ['title'=>'Пользователь','type'=>'text','value'=>$this->title];
+    $arrFields['title'] = ['title'=>'Заголовок','type'=>'text','value'=>$this->title];
     $arrFields['level'] = ['title'=>'Уровень доступа','type'=>'number','value'=>$this->level];
     $arrFields['icon'] = ['title'=>'Иконка','type'=>'textarea','value'=>$this->icon];
     $arrFields['days'] = ['title'=>'Количество дней','type'=>'number','value'=>$this->days];

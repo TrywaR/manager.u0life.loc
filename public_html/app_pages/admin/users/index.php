@@ -38,10 +38,12 @@
           <div class="pe-2">
             {{login}}
           </div>
-          <div class="">
+          <div class="pe-2">
             <small>{{role_val}}</small>
+            <small>({{role}})</small>
           </div>
         </div>
+
         <div class="col-12 col-md-6 d-flex align-items-start justify-content-end">
           <span class="btn-group">
             <a href="#" class="btn btn-dark content_manager_switch switch_icons">
@@ -58,7 +60,18 @@
             </a>
           </span>
         </div>
-        <div class="col-12 col-md-6 d-flex align-items-center">
+
+        <div class="col-12 d-flex align-items-center">
+          <small class="pe-2">
+            <?=$oLang->get('LastDateAccess')?>
+          </small>
+          <small class="pe-2">
+            <i class="fa-solid fa-clock"></i>
+          </small>
+          {{access.date_stop}}
+        </div>
+
+        <div class="col-12 d-flex align-items-center">
           {{rewards}}
         </div>
       </div>

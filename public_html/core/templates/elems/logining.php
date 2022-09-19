@@ -12,21 +12,21 @@
         <span><?=$oLang->get('WebVersion')?></span>
       </div>
     </a>
-    <a class="btn btn-primary disabled" disabled="disabled">
+    <a class="btn btn-primary" href="/info/android/">
       <div class="_icon">
         <i class="fa-brands fa-google"></i>
       </div>
       <div class="_text">
-        <small><?=$oLang->get('DownloadFrom')?></small>
+        <small><small><?=$oLang->get('DownloadFrom')?></small></small>
         <span>GooglePlay</span>
       </div>
     </a>
-    <a class="btn btn-primary disabled" disabled="disabled">
+    <a class="btn btn-primary" href="/info/apple/">
       <div class="_icon">
         <i class="fa-brands fa-apple"></i>
       </div>
       <div class="_text">
-        <small><?=$oLang->get('DownloadFrom')?></small>
+        <small><small><?=$oLang->get('DownloadFrom')?></small></small>
         <span>AppStore</span>
       </div>
     </a>

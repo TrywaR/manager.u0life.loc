@@ -11,6 +11,7 @@ switch ($_REQUEST['form']) {
 
     $oUser->show_role_val = true;
     $oUser->show_rewards = true;
+    $oUser->show_access = true;
 
     if ( $_REQUEST['from'] ) $oUser->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oUser->limit = $_REQUEST['limit'];

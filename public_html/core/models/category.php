@@ -12,6 +12,26 @@ class category extends model
   public static $active = '';
   public static $user_id = '';
 
+  // лимит
+  function get_categories_limit () {
+    $oLock = new lock();
+    $iCategoryLimit = 0;
+    if ( $oLock->check('CategoryLimit') ) $iCategoryLimit = 50;
+    else $iCategoryLimit = 30;
+    return $iCategoryLimit;
+  }
+
+  // Проверка лимита
+  function ckeck_categories_limit () {
+    $oLock = new lock();
+    $iCategoryLimit = $this->get_categories_limit();
+    $oCategory = new category();
+    $oCategory->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $arrCategories = $oCategory->get_categories();
+    if ( count($arrCategories) >= $iCategoryLimit ) return false;
+    return true;
+  }
+
   // Поиск в списке категорий нужной, если нет, добавляем
   function ckeck_categories ( $iCategoryId = 0, $arrCategories = [] ){
     foreach ( $arrCategories as $arrCategory )
@@ -55,6 +75,8 @@ class category extends model
   }
 
   function get_categories(){
+    $this->limit = $this->get_categories_limit();
+
     $arrCategories = $this->get();
     if ( $arrCategories['id'] ) $arrCategories = $this->get_category( $arrCategories );
     else foreach ($arrCategories as &$arrCategory) $arrCategory = $this->get_category($arrCategory);
