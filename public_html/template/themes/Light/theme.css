@@ -1770,56 +1770,93 @@ body .content_manager_buttons {
           margin: 0.5rem;
           border-radius: 0.5rem;
           box-shadow: 0 0 0.2rem 0rem rgba(200, 200, 200, 0.1), 0 0 0.6rem 0.6rem rgba(200, 200, 200, 0.1), inset 0 0 0.1rem 0 rgba(250, 250, 250, 0.1); }
-    .welcome_container ._section._title ._block {
-      color: white;
-      background: linear-gradient(rgba(24, 26, 32, 0.8), rgba(35, 36, 36, 0.9)); }
-      .welcome_container ._section._title ._block ._content {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-        max-width: 40rem;
-        margin: auto; }
-        .welcome_container ._section._title ._block ._content .block_logo > ._value {
-          width: 20rem;
-          max-width: 100%;
-          min-height: 7rem;
-          margin-bottom: 2rem; }
-          .welcome_container ._section._title ._block ._content .block_logo > ._value > ._version {
-            bottom: -0.5rem; }
-        .welcome_container ._section._title ._block ._content h1 {
-          position: relative;
+    .welcome_container ._section._title {
+      position: relative;
+      z-index: 2; }
+      .welcome_container ._section._title ._block {
+        color: white;
+        background: linear-gradient(rgba(24, 26, 32, 0.8), rgba(35, 36, 36, 0.9)); }
+        .welcome_container ._section._title ._block ._content {
           display: flex;
           justify-content: center;
-          padding-bottom: 2rem;
-          font-size: 7em;
-          line-height: 1;
-          font-weight: 600;
-          z-index: 1;
-          text-shadow: 0.15rem 0.15rem 0 #7661db; }
-          .welcome_container ._section._title ._block ._content h1 span {
-            color: rgba(118, 97, 219, 0.7); }
-          .welcome_container ._section._title ._block ._content h1:after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 6rem;
-            height: 0.12rem;
-            background: white;
-            background: #7661db;
-            opacity: 0.3;
-            margin: auto;
-            border-radius: 0.5rem; }
-        .welcome_container ._section._title ._block ._content p {
-          display: flex;
-          padding: 0.3rem 1rem;
-          margin: 0;
-          opacity: 0.5; }
-    .welcome_container ._section._title ._start {
-      padding: 2rem 0; }
+          flex-direction: column;
+          text-align: center;
+          max-width: 40rem;
+          margin: auto; }
+          .welcome_container ._section._title ._block ._content .block_logo > ._value {
+            width: 20rem;
+            max-width: 100%;
+            min-height: 7rem;
+            margin-bottom: 2rem; }
+            .welcome_container ._section._title ._block ._content .block_logo > ._value > ._version {
+              bottom: -0.5rem; }
+          .welcome_container ._section._title ._block ._content h1 {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 2rem;
+            font-size: 7em;
+            line-height: 1;
+            font-weight: 600;
+            z-index: 1;
+            text-shadow: 0.15rem 0.15rem 0 #7661db; }
+            .welcome_container ._section._title ._block ._content h1 span {
+              color: rgba(118, 97, 219, 0.7); }
+            .welcome_container ._section._title ._block ._content h1:after {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              width: 6rem;
+              height: 0.12rem;
+              background: white;
+              background: #7661db;
+              opacity: 0.3;
+              margin: auto;
+              border-radius: 0.5rem; }
+          .welcome_container ._section._title ._block ._content p {
+            display: flex;
+            padding: 0.3rem 1rem;
+            margin: 0;
+            opacity: 0.5; }
+      .welcome_container ._section._title ._start {
+        padding: 2rem 0; }
+    .welcome_container ._section._line {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 1rem;
+      box-sizing: border-box;
+      font-size: 1em;
+      line-height: 1;
+      overflow: hidden;
+      z-index: 1; }
+      .welcome_container ._section._line:after {
+        content: "";
+        position: absolute;
+        top: 5rem;
+        right: 10rem;
+        width: 20rem;
+        height: 10rem;
+        border-radius: 50%;
+        background: radial-gradient(#7661db, #ecf2fd);
+        filter: blur(1.9rem);
+        opacity: 0.1;
+        z-index: -1; }
+      .welcome_container ._section._line ._tag {
+        font-style: italic;
+        padding: 0.5rem 0.5rem 0.5rem 0; }
+      .welcome_container ._section._line ._sep {
+        font-weight: 600;
+        color: #7661db;
+        margin: 0.2rem 0.5rem 0.2rem 0;
+        opacity: 0.5; }
     .welcome_container ._section._times {
+      position: relative;
+      z-index: 2;
       background: #232424; }
       .welcome_container ._section._times ._block_title,
       .welcome_container ._section._times ._icon {

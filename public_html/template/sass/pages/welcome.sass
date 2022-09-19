@@ -46,6 +46,9 @@
           @include shadow_default
 
     &._title
+      position: relative
+      z-index: 2
+
       ._block
         color: white
         background: linear-gradient(rgba(24, 26, 32, .8),rgba(35, 36, 36, .9))
@@ -123,7 +126,45 @@
         //   width: 100%
         //   min-height: 100%
 
+    &._line
+      position: relative
+      display: flex
+      flex-wrap: wrap
+      justify-content: center
+      align-items: center
+      padding: 3rem 1rem
+      box-sizing: border-box
+      font-size: 1em
+      line-height: 1
+      overflow: hidden
+      z-index: 1
+
+      &:after
+        content: ''
+        position: absolute
+        top: 5rem
+        right: 10rem
+        width: 20rem
+        height: 10rem
+        border-radius: 50%
+        background: radial-gradient($color_main, $color_main_dark)
+        filter: blur(1.9rem)
+        opacity: .1
+        z-index: -1
+
+      ._tag
+        font-style: italic
+        padding: .5rem .5rem .5rem 0
+
+      ._sep
+        font-weight: 600
+        color: $color_main
+        margin: .2rem .5rem .2rem 0
+        opacity: .5
+
     &._times
+      position: relative
+      z-index: 2
       background: $color_main_time_dark
 
       ._block_title,

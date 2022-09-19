@@ -18,6 +18,14 @@
     </div>
   </div>
 
+  <div class="_section _line">
+    <span class="_tag">Time tracking</span>
+    <span class="_sep">,</span>
+    <span class="_tag">Finance accounting system</span>
+    <span class="_sep">,</span>
+    <span class="_tag">Ticket system</span>
+  </div>
+
    <div class="_section _times">
      <div class="_block">
          <div class="_icon">
