@@ -90,7 +90,7 @@ class money extends model
     ];
     $arrFields['type'] = ['class'=>'switch','title'=>$oLang->get('Type'),'type'=>'select','options'=>$arrTypeFilter,'value'=>$this->type];
 
-    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title,'plaseholder'=>$oLang->get('Title')];
+    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','value'=>$this->title,'plaseholder'=>$oLang->get('Title')];
     $arrFields['price'] = ['title'=>$oLang->get('Price'),'type'=>'number','value'=>substr($this->price, 0, -2),'step'=>'0.01'];
 
     $arrFields['date'] = ['title'=>$oLang->get('Date'),'type'=>'date','value'=>$this->date];

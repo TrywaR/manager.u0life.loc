@@ -271,6 +271,24 @@ class nav
         'icon' => '<i class="fa-solid fa-calendar-check"></i>',
         'access' => 0,
         'onlyapp' => true,
+        'subs' => [
+          '/subscriptions/' => array(
+            'name' => $oLang->get('Thread'),
+            'description' => $oLang->get('Thread'),
+            'url' => '/subscriptions/',
+            'icon' => '<i class="fa-solid fa-bars"></i>',
+            'access' => 0,
+            'onlyapp' => true,
+          ),
+          '/subscriptions/analytics/' => array(
+            'name' => $oLang->get('Costs'),
+            'description' => $oLang->get('Costs'),
+            'url' => '/subscriptions/analytics/',
+            'icon' => '<i class="fa-solid fa-chart-bar"></i>',
+            'access' => 0,
+            'onlyapp' => true,
+          ),
+        ],
       ),
 
       '/clients/' => array(

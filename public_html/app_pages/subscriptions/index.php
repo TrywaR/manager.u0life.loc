@@ -80,41 +80,14 @@
     <div class="list-group-item _elem d-flex subscription progress_block _card_show_{{card_show}} _paid_show_{{paid_show}} _paid_need_show_{{paid_need_show}} _active_show_{{active_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
       <span class="d-flex w-100">
         <span class="col-12 col-md-6 mb-2">
-          <span class="d-flex flex-column">
-            <span class="_head">
-              <span class="_price">
-                {{price}}
-              </span>
-
-              <span class="_title">
-                {{title}}
-              </span>
+          <span class="_head">
+            <span class="_price">
+              {{price}}
             </span>
 
-            <div class="_subs">
-              <span class="_item _card">
-                <span class="_icon">
-                  <i class="fas fa-credit-card"></i>
-                </span>
-                <span class="_text">
-                  {{card_val.title}}
-                </span>
-              </span>
-
-              <span class="_item _paid">
-                <span class="_icon">
-                  <i class="fas fa-check"></i>
-                </span>
-                <span class="_text">
-                  <span class="_sum">
-                    {{paid_sum}}
-                  </span>
-                  <span class="_need">
-                    {{paid_need}}
-                  </span>
-                </span>
-              </span>
-            </div>
+            <span class="_title">
+              {{title}}
+            </span>
           </span>
         </span>
 

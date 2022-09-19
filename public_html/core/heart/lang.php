@@ -85,9 +85,19 @@ class lang
       'Replenish' => 'Получение',
       'NoProject' => 'Не проект',
       'Commissions' => 'Комиссия',
+
+      // Подписки
       'Subscription' => 'Подписка',
+      'SubscriptionPaid' => 'Подписка',
+      'SubscriptionSum' => 'Нужно заплатить',
+      'SubscriptionSumClear' => 'Тут будет отображаться платежи по подпискам, сколько и когда.<br/>
+      Добавьте свои ежемесячные платежи в <a href="/subscriptions/">подписки</a>, чтобы контролировать их (:',
+      'SubscriptionSumPaid' => 'Уже оплачено',
+      'SubscriptionSumNeedPaid' => 'Осталось оплатить',
+      'SubscriptionDayPaid' => 'Даты платежей',
       'NoSubscription' => 'Не подписка',
       'Subscriptions' => 'Подписки',
+
       'NoTask' => 'Не задача',
       'Tasks' => 'Задачи',
       'Task' => 'Задача',
@@ -328,9 +338,19 @@ class lang
       'Replenish' => 'Replenish',
       'NoProject' => 'No project',
       'Commissions' => 'Commissions',
+
+      // Подписки
       'Subscription' => 'Subscription',
+      'SubscriptionPaid' => 'SubscriptionPaid',
+      'SubscriptionSum' => 'Need to pay',
+      'SubscriptionSumClear' => 'Subscription payments will be displayed here, how much and when.<br/>
+               Add your monthly payments to <a href="/subscriptions/">subscriptions</a> to control them (:',
+      'SubscriptionSumPaid' => 'Already paid',
+      'SubscriptionSumNeedPaid' => 'It remains to pay',
+      'SubscriptionDayPaid' => 'Payment dates',
       'NoSubscription' => 'No subscription',
       'Subscriptions' => 'Subscriptions',
+
       'NoTask' => 'No Task',
       'Tasks' => 'Tasks',
       'Task' => 'Task',

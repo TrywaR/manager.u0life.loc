@@ -63,6 +63,188 @@ switch ($_REQUEST['form']) {
     notification::send($arrSubscriptions);
     break;
 
+  case 'analytics_month': # Статистика за месяц
+    $arrResults = [];
+
+    // Месяц
+    $iYear = (int)$_REQUEST['year'] ? $_REQUEST['year'] : date('Y');
+    $iMonth = (int)$_REQUEST['month'] ? $_REQUEST['month'] : date('m');
+    $dMonth = $iYear . '-' . sprintf("%02d", $iMonth);
+    $dDay = date('d');
+
+    // Подписки
+    $oSubscription = new subscription();
+    $oSubscription->active = true;
+    $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oSubscription->sDateQuery = $dMonth;
+    // $oSubscription->show_query = true;
+    $arrResults['subscriptions'] = $oSubscription->get_subscriptions();
+    $arrResults['subscriptions_dates'] = [];
+    $arrResults['subscriptions_sum'] = 0;
+    $arrResults['subscriptions_sum_need'] = 0;
+    $arrResults['subscriptions_sum_paid'] = 0;
+
+    if ( ! count($arrResults['subscriptions']) ) {
+      ob_start();
+      ?>
+        <div class="block_text_alert">
+          <div class="_icon">
+            <i class="fa-regular fa-face-smile"></i>
+          </div>
+          <div class="">
+            <p>
+              <?=$oLang->get('SubscriptionSumClear')?>
+            </p>
+          </div>
+        </div>
+      <?
+      $sResultHtml = ob_get_contents();
+      ob_end_clean();
+      return $sResultHtml;
+    }
+
+    foreach ( $arrResults['subscriptions'] as & $arrSubscription ) {
+      // Считаем сумму, которую нужно заплатить
+      $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrSubscription['price'];
+
+      // Сумма которая оплачена
+      $arrResults['subscriptions_sum_paid'] = (int)$arrResults['subscriptions_sum_paid'] + (int)$arrSubscription['paid_sum'];
+
+      // Сумма которая ещё нужна
+      if ( $arrSubscription['paid'] )
+        if ( $arrSubscription['paid_need'] )
+          $arrResults['subscriptions_sum_need'] = (int)$arrResults['subscriptions_sum_need'] + (int)$arrSubscription['paid_need'];
+      else
+        $arrResults['subscriptions_sum_need'] = (int)$arrResults['subscriptions_sum_need'] + (int)$arrSubscription['price'];
+
+      // По датам
+      switch ( (int)$arrSubscription['type'] ) {
+        case 0:
+          $arrResults['subscriptions_dates'][$arrSubscription['day']][] = $arrSubscription;
+          break;
+      }
+
+      // if ( ! $arrSubscription['paid'] ) {
+      //   if ( $arrSubscription['paid_sum'] ) $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrSubscription['paid_need'];
+      //   else $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrSubscription['price'];
+      // }
+    }
+
+    // Сортировка
+    ksort($arrResults['subscriptions_dates']);
+
+    // Округление
+    $arrResults['subscriptions_sum'] = floor($arrResults['subscriptions_sum']);
+    $arrResults['subscriptions_sum_need'] = floor($arrResults['subscriptions_sum_need']);
+    $arrResults['subscriptions_sum_paid'] = floor($arrResults['subscriptions_sum_paid']);
+
+    ob_start();
+    ?>
+    <div class="_analytics_date">
+      <div class="_year">
+        <?=$iYear?>
+      </div>
+      <div class="_sep">
+        .
+      </div>
+      <div class="_month">
+        <?=$iMonth?>
+      </div>
+      <?php if ( $iYear == date('Y') && $iMonth == date('m') ): ?>
+        <div class="_sep">
+          .
+        </div>
+        <div class="_day">
+          <?=$dDay?>
+        </div>
+      <?php endif; ?>
+    </div>
+
+    <div class="_analytics_sums">
+      <div class="_sum">
+        <strong><?=$arrResults['subscriptions_sum']?></strong>
+        <small><?=$oLang->get('SubscriptionSum')?></small>
+      </div>
+
+      <div class="_sum_paid">
+        <strong><?=$arrResults['subscriptions_sum_paid']?></strong>
+        <small><?=$oLang->get('SubscriptionSumPaid')?></small>
+      </div>
+
+      <div class="_sum_need">
+        <strong><?=$arrResults['subscriptions_sum_need']?></strong>
+        <small><?=$oLang->get('SubscriptionSumNeedPaid')?></small>
+      </div>
+    </div>
+
+    <div class="_analytics_sep">
+      <div class="_title">
+        <?=$oLang->get('SubscriptionDayPaid')?>
+      </div>
+    </div>
+
+    <?php foreach ( $arrResults['subscriptions_dates'] as $iDay => $arrSubscriptions ): ?>
+      <?
+      $sPassedClass = '';
+      if ( $iYear == date('Y') && $iMonth == date('m') )
+      if ( $dDay > $iDay ) $sPassedClass = '__passed';
+      ?>
+      <div class="_analytics_day <?=$sPassedClass?>">
+        <div class="_date">
+          <div class="_value">
+            <?=$iDay?>
+          </div>
+        </div>
+
+        <div class="_items">
+          <?php foreach ($arrSubscriptions as $arrSubscription): ?>
+            <?
+            $sClassPaid = '';
+            if ( (int)$arrSubscription['paid'] ) $sClassPaid = '__paid';
+            ?>
+            <div class="_item <?=$sClassPaid?>">
+              <div class="_title">
+                <?=$arrSubscription['title']?>
+
+                <?php if ( $sClassPaid ): ?>
+                  <div class="_icon">
+                    <i class="fa-regular fa-circle-check"></i>
+                  </div>
+                <?php endif; ?>
+              </div>
+
+              <div class="_info">
+                <div class="_price">
+                  <small><?=$oLang->get('SubscriptionSum')?></small>
+                  <?=$arrSubscription['price']?>
+                </div>
+
+                <?php if ( (int)$arrSubscription['paid_sum'] ): ?>
+                  <div class="_paid">
+                    <small><?=$oLang->get('SubscriptionSumPaid')?></small>
+                    <?=$arrSubscription['paid_sum']?>
+                  </div>
+                <?php endif; ?>
+
+                <?php if ( (int)$arrSubscription['paid_need'] ): ?>
+                  <div class="_need">
+                    <small><?=$oLang->get('SubscriptionSumNeedPaid')?></small>
+                    <?=$arrSubscription['paid_need']?>
+                  </div>
+                <?php endif; ?>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    <?php endforeach; ?>
+    <?
+    $sResultHtml = ob_get_contents();
+    ob_end_clean();
+    die($sResultHtml);
+    return $sResultHtml;
+    break;
+
   case 'form': # Форма добавления / редактирования
     // Параметры
     $arrResults = [];
