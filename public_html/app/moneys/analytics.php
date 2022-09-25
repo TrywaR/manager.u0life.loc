@@ -53,7 +53,6 @@ switch ($_REQUEST['form']) {
 
       if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
       if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
-      else $oMoney->query .= " AND `to_card` = 0";
 
       $arrData = $oMoney->get();
 
@@ -142,7 +141,6 @@ switch ($_REQUEST['form']) {
       $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $iMonth) . '-' . sprintf("%02d", $i) . "%'";
       if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
       if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
-      else $oMoney->query .= " AND `to_card` = 0";
       $arrMoneys = $oMoney->get();
 
       // Подготавливаем категории
@@ -228,7 +226,7 @@ switch ($_REQUEST['form']) {
       $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $i) . "%'";
       if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
       if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
-      else $oMoney->query .= " AND `to_card` = 0";
+
       $arrMoneys = $oMoney->get();
 
       // Подготавливаем категории
