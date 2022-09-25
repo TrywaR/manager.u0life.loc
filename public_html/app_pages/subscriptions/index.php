@@ -78,7 +78,7 @@
 
 <div class="block_template">
     <div class="list-group-item _elem d-flex subscription progress_block _card_show_{{card_show}} _paid_show_{{paid_show}} _paid_need_show_{{paid_need_show}} _active_show_{{active_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
-      <span class="d-flex w-100">
+      <span class="w-100">
         <span class="col-12 col-md-6 mb-2">
           <span class="_head">
             <span class="_price">
@@ -91,25 +91,27 @@
           </span>
         </span>
 
-        <span class="col-12 col-md-6 d-flex justify-content-end align-items-center">
-          <span class="btn-group">
-            <a href="#" class="btn btn-dark content_manager_switch switch_icons">
-              <span class="">
-                <i class="far fa-square"></i>
-              </span>
+        <span class="col-12 col-md-6">
+          <span class="d-flex justify-content-end align-items-center">
+            <span class="btn-group">
+              <a href="#" class="btn btn-dark content_manager_switch switch_icons">
+                <span class="">
+                  <i class="far fa-square"></i>
+                </span>
 
-              <span class="">
-                <i class="fas fa-square"></i>
-              </span>
-            </a>
+                <span class="">
+                  <i class="fas fa-square"></i>
+                </span>
+              </a>
 
-            <a data-action="subscriptions" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".money_subscription" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
-              <i class="fas fa-pen-square"></i>
-            </a>
+              <a data-action="subscriptions" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".money_subscription" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
+                <i class="fas fa-pen-square"></i>
+              </a>
 
-            <!-- <a href="#" class="btn btn-dark content_download" data-id="{{id}}" data-action="subscriptions" data-form="del" data-elem=".list-group-item">
-              <i class="fas fa-minus-square"></i>
-            </a> -->
+              <!-- <a href="#" class="btn btn-dark content_download" data-id="{{id}}" data-action="subscriptions" data-form="del" data-elem=".list-group-item">
+                <i class="fas fa-minus-square"></i>
+              </a> -->
+            </span>
           </span>
         </span>
       </span>

@@ -129,6 +129,20 @@ switch ($_REQUEST['form']) {
         }
       }
 
+      // Автоматическая авторизация
+      // if ( ! $_SESSION['user'] ) {
+      //   // Обновляем сессию
+      //   $oSession = new session( 0, $_SESSION['session'] );
+      //   if ( $_REQUEST['push'] ) $oSession->push = $_REQUEST['push'];
+      //   $oSession->user_id = $sUserId;
+      //   $oSession->update();
+      //   // Сохраняем данные в сессию
+      //   $arrResult['session'] = $_SESSION['session'] = $arrUser['session'] = $oSession->session;
+      //   $oUser = new user( $sUserId );
+      //   $oUser->show_rewards = true;
+      //   $arrResult['user'] = $_SESSION['user'] = $oUser->get();
+      // }
+
       notification::success($arrResults);
     }
     else notification::error($oLang->get('SomethingWentWrongOhCallTheSuperProgrammers'));

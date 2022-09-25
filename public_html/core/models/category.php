@@ -54,8 +54,14 @@ class category extends model
     // Кастомные
     else {
       $arrCategory['custom_edit_show'] = 'true';
-      $oCategoryConf = new category_config( $arrCategory['id'] );
-      $arrCategoryConf = $oCategoryConf->get_categories_configs();
+      $oCategoryConf = new category_config();
+      $oCategoryConf->query .= ' AND `category_id` = ' . $arrCategory['id'];
+
+      $iUserId = $_SESSION['user']['id'];
+      $iUserId = $this->user_id ? $this->user_id : $iUserId;
+      $oCategoryConf->query .= ' AND `user_id` = ' . $iUserId;
+      $arrCategoryConf = $oCategoryConf->get_category_config();
+
       if ( isset($arrCategoryConf['id']) ) {
         $arrCategory['sort'] = $arrCategoryConf['sort'];
         $arrCategory['title'] = $arrCategoryConf['title'];

@@ -78,39 +78,41 @@
 
 <div class="block_template">
     <div class="list-group-item d-flex _elem category progress_block _active_show_{{active_show}} _custom_edit_show_{{custom_edit_show}} _edit_show_{{edit_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
-      <span class="d-flex w-100 justify-content-between align-items-start">
+      <span class="w-100">
         <span class="col-12 col-xl-6 mb-2">
           <span class="d-flex">
             {{title}}
           </span>
         </span>
 
-        <span class="col-12 col-xl-6 d-flex justify-content-end">
-          <span class="btn-group">
-            <a href="#" class="btn btn-dark content_manager_switch switch_icons _select">
-              <div class="">
-                <i class="far fa-square"></i>
-              </div>
-              <div class="">
-                <i class="fas fa-square"></i>
-              </div>
-            </a>
+        <span class="col-12 col-xl-6">
+          <span class="d-flex justify-content-end">
+            <span class="btn-group">
+              <a href="#" class="btn btn-dark content_manager_switch switch_icons _select">
+                <div class="">
+                  <i class="far fa-square"></i>
+                </div>
+                <div class="">
+                  <i class="fas fa-square"></i>
+                </div>
+              </a>
 
-            <a href="/categories/analytics/?category_id={{id}}" class="btn btn-dark">
-              <i class="fas fa-chart-area"></i>
-            </a>
+              <a href="/categories/analytics/?category_id={{id}}" class="btn btn-dark">
+                <i class="fas fa-chart-area"></i>
+              </a>
 
-            <a data-action="categories" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".category" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
-              <i class="fas fa-pen-square"></i>
-            </a>
+              <a data-action="categories" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".category" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
+                <i class="fas fa-pen-square"></i>
+              </a>
 
-            <a data-action="categories_configs" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".category" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit_config">
-              <i class="fas fa-pen-square"></i>
-            </a>
+              <a data-action="categories_configs" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".category" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit_config">
+                <i class="fas fa-pen-square"></i>
+              </a>
 
-            <!-- <a href="#" class="btn btn-dark content_download _del" data-id="{{id}}" data-action="categories" data-form="del" data-elem=".category">
-              <i class="fas fa-minus-square"></i>
-            </a> -->
+              <!-- <a href="#" class="btn btn-dark content_download _del" data-id="{{id}}" data-action="categories" data-form="del" data-elem=".category">
+                <i class="fas fa-minus-square"></i>
+              </a> -->
+            </span>
           </span>
         </span>
       </span>

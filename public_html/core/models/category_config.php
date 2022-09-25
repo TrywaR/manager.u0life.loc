@@ -50,14 +50,15 @@ class category_config extends model
 
   function get_category_config( $arrCategoryConfg = [] ) {
     if ( ! $arrCategoryConfg['id'] ) $arrCategoryConfg = $this->get();
+    if ( ! $arrCategoryConfg['id'] ) $arrCategoryConfg = $arrCategoryConfg[0];
 
     // active
     if ( (int)$arrCategoryConfg['active'] ) $arrCategoryConfg['active_show'] = 'true';
     else $arrCategoryConfg['active_show'] = 'false';
 
     // translate
-    $oLang = new lang();
-    if ( $arrCategoryConfg['title'] ) $arrCategoryConfg['title'] = $oLang->get($arrCategoryConfg['title']);
+    // $oLang = new lang();
+    // if ( $arrCategoryConfg['title'] ) $arrCategoryConfg['title'] = $oLang->get($arrCategoryConfg['title']);
     return $arrCategoryConfg;
   }
 

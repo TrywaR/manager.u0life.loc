@@ -40,9 +40,9 @@ class money extends model
     }
 
     if ( (int)$arrMoney['category'] ) {
-      $arrMoney['category_show'] = 'true';
       $oCategory = new category( $arrMoney['category'] );
-      $arrMoney['categroy_val'] = (array)$oCategory;
+      $arrMoney['category_show'] = 'true';
+      $arrMoney['categroy_val'] = $oCategory->get_category();
       $oLang = new lang();
       $arrMoney['categroy_val']['title'] = $oLang->get($arrMoney['categroy_val']['title']);
     }
