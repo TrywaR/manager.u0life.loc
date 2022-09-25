@@ -38,7 +38,14 @@
 </div>
 
 <div class="main_content">
-  <?include 'core/templates/elems/content_manager_block.php'?>
+  <?
+  $arrTemplateParams = [];
+  $arrTemplateParams['sum'] = '._balance span';
+  $arrTemplateParams['action'] = 'cards';
+  $arrTemplateParams['block'] = '#cards';
+  $arrTemplateParams['item'] = '.card_item';
+  include 'core/templates/elems/content_manager_block.php';
+  ?>
 
   <!-- Карты -->
   <div
@@ -89,7 +96,7 @@
         </div>
 
         <div class="badge bg-primary _balance" title="Balance">
-          {{balance}} / <small>{{limit}}</small>
+          <span>{{balance}}</span> / <small>{{limit}}</small>
         </div>
 
         <div class="badge bg-warning text-dark _commission" title="Commission">

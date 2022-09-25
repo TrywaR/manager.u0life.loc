@@ -27,18 +27,21 @@ class money extends model
     $arrMoney['date'] = $arrDate[0];
     $arrMoney['price'] = substr($arrMoney['price'], 0, -2);
 
+    if ( $this->show_card )
     if ( (int)$arrMoney['card'] ) {
       $oCard = new card( $arrMoney['card'] );
       $arrMoney['card_val'] = (array)$oCard;
       $arrMoney['card_show'] = 'true';
     }
 
+    if ( $this->show_to_card )
     if ( (int)$arrMoney['to_card'] ) {
       $oCardTo = new card( $arrMoney['to_card'] );
       $arrMoney['cardto_val'] = (array)$oCardTo;
       $arrMoney['cardto_show'] = 'true';
     }
 
+    if ( $this->show_category )
     if ( (int)$arrMoney['category'] ) {
       $oCategory = new category( $arrMoney['category'] );
       $arrMoney['category_show'] = 'true';
@@ -47,18 +50,21 @@ class money extends model
       $arrMoney['categroy_val']['title'] = $oLang->get($arrMoney['categroy_val']['title']);
     }
 
+    if ( $this->show_project )
     if ( (int)$arrMoney['project_id'] ) {
       $arrMoney['project_show'] = 'true';
       $oProject = new project( $arrMoney['project_id'] );
       $arrMoney['project_val'] = (array)$oProject;
     }
 
+    if ( $this->show_task )
     if ( (int)$arrMoney['task_id'] ) {
       $arrMoney['task_show'] = 'true';
       $oTask = new task( $arrMoney['task_id'] );
       $arrMoney['task_val'] = (array)$oTask;
     }
 
+    if ( $this->show_subscription )
     if ( (int)$arrMoney['subscription'] ) {
       $oSubscription = new subscription( $arrMoney['subscription'] );
       $arrMoney['subscription_val'] = (array)$oSubscription;

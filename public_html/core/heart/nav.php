@@ -163,6 +163,16 @@ class nav
         'icon' => '<i class="fa-solid fa-grip"></i>',
         'access' => 0,
         'onlyapp' => true,
+        'subs' => [
+          '/dashboard/info/' => array(
+            'name' => $oLang->get('Info'),
+            'description' => $oLang->get('Info'),
+            'url' => '/dashboard/info/',
+            'icon' => '<i class="fa-solid fa-grip"></i>',
+            'access' => 1,
+            'onlyapp' => true,
+          ),
+        ]
       ),
 
       '/moneys/' => array(

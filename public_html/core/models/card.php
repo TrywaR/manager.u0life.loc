@@ -67,6 +67,21 @@ class card extends model
     return $arrCards;
   }
 
+  // Получение баланса
+  function get_balance( $iCardId = 0 ) {
+    $iBalance = 0;
+
+    $oCards = new card();
+    $oCards->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $arrCards = $oCards->get_cards();
+
+    foreach ($arrCards as $arrCard) {
+      $iBalance = (float)$iBalance + (float)$arrCard['balance'];
+    }
+
+    return $iBalance;
+  }
+
   // Пополнение баланса карты
   function balance_add( $floatSum ){
     $this->balance = (float)$this->balance + (float)$floatSum;
@@ -101,7 +116,7 @@ class card extends model
     // Анализируем поступления
     $oMoney = new money();
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'] . '';
-    $oMoney->query .= ' AND `card` = ' . $this->id;
+    $oMoney->query .= ' AND `to_card` = ' . $this->id;
     $oMoney->query .= ' AND `type` = 2';
     $arrMoneys = $oMoney->get_moneys();
     foreach ($arrMoneys as $arrMoney) $this->balance = (float)$this->balance + (float)$arrMoney['price'];

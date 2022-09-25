@@ -22,6 +22,13 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oMoney->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oMoney->limit = $_REQUEST['limit'];
 
+    $oMoney->show_card = true;
+    $oMoney->show_to_card = true;
+    $oMoney->show_category = true;
+    $oMoney->show_project = true;
+    $oMoney->show_task = true;
+    $oMoney->show_subscription = true;
+
     $oMoney->sortMulti = ' `date` DESC, `date_update` DESC ';
     $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 
@@ -88,9 +95,16 @@ switch ($_REQUEST['form']) {
     $oForm->arrTemplateParams['button_copy'] = true;
     $sFormHtml = $oForm->show();
 
+    $oMoney->show_card = true;
+    $oMoney->show_to_card = true;
+    $oMoney->show_category = true;
+    $oMoney->show_project = true;
+    $oMoney->show_task = true;
+    $oMoney->show_subscription = true;
+
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oMoney->get_moneys();
+    $arrResults['data'] = $oMoney->get_money();
     $arrResults['action'] = 'moneys';
 
     notification::send($arrResults);
@@ -146,6 +160,14 @@ switch ($_REQUEST['form']) {
     }
 
     $oMoney = new money( $oMoney->id );
+    
+    $oMoney->show_card = true;
+    $oMoney->show_to_card = true;
+    $oMoney->show_category = true;
+    $oMoney->show_project = true;
+    $oMoney->show_task = true;
+    $oMoney->show_subscription = true;
+
     $arrResult['data'] = $oMoney->get_moneys();
     $arrResult['text'] = $oLang->get("ChangesSaved");
 
