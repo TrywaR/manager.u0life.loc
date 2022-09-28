@@ -29,37 +29,44 @@ class subscription extends model
 
     if ( (int)$arrSubscription['user_id'] ) $arrSubscription['edit_show'] = 'true';
 
+    // Показ карты
+    if ( $this->show_card )
     if ( (int)$arrSubscription['card'] ) {
       $oCard = new card( $arrSubscription['card'] );
       $arrSubscription['card_val'] = (array)$oCard;
       $arrSubscription['card_show'] = 'true';
     }
 
+    // Показать карты
+    if ( $this->show_category )
     if ( (int)$arrSubscription['category'] ) {
-      $oCategory = new card( $arrSubscription['category'] );
+      $oCategory = new category( $arrSubscription['category'] );
       $arrSubscription['category_val'] = (array)$oCategory;
     }
 
     $arrSubscription['price'] = ceil(substr($arrSubscription['price'], 0, -2));
     $arrSubscription['sum'] = ceil(substr($arrSubscription['sum'], 0, -2));
 
-    $arrPaids = $this->get_month_paids( $arrSubscription['id'] );
+    // Показать оплаты
+    if ( $this->show_paid ) {
+      $arrPaids = $this->get_subscription_month_paids( $arrSubscription['id'] );
 
-    if ( count($arrPaids['data']) ) {
-      $arrSubscription['paid_sum'] = ceil($arrPaids['sum']);
-      $iSubscriptionNeed = ceil((int)$arrSubscription['price'] - (int)$arrPaids['sum']);
-      if ( $iSubscriptionNeed > 1 ) {
-        $arrSubscription['paid_need'] = $iSubscriptionNeed;
-        $arrSubscription['paid_need_show'] = 'true';
+      if ( count($arrPaids['data']) ) {
+        $arrSubscription['paid_sum'] = ceil($arrPaids['sum']);
+        $iSubscriptionNeed = ceil((int)$arrSubscription['price'] - (int)$arrPaids['sum']);
+        if ( (int)$iSubscriptionNeed > 1 ) {
+          $arrSubscription['paid_need'] = $iSubscriptionNeed;
+          $arrSubscription['paid_need_show'] = 'true';
+        }
+        if ( ! (int)$arrSubscription['paid_need'] ) $arrSubscription['paid'] = true;
+        $arrSubscription['paid_show'] = 'true';
       }
-      if ( ! (int)$arrSubscription['paid_need'] ) $arrSubscription['paid'] = true;
-      $arrSubscription['paid_show'] = 'true';
     }
 
     return $arrSubscription;
   }
 
-  function get_subscriptions(){
+  public function get_subscriptions(){
     $arrSubscriptions = $this->get();
     if ( $arrSubscriptions['id'] ) $arrSubscriptions = $this->get_subscription( $arrSubscriptions );
     else foreach ($arrSubscriptions as &$arrSubscription) $arrSubscription = $this->get_subscription($arrSubscription);
@@ -67,28 +74,55 @@ class subscription extends model
   }
 
   public function get_month(){
-    // $arrResult = [];
-    // $arrSubscription = $this->get();
+    $oSubscription = new subscription();
+    $oSubscription->show_paid = true;
+    $oSubscription->active = true;
+    $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oSubscription->sDateQuery = $dMonth;
+    // $oSubscription->show_query = true;
 
-    // За месяц
-    $oMoney = new money();
-    $dCurrentDate = $this->sDateQuery != '' ? $this->sDateQuery : date('Y-m');
-    // $dCurrentDate = $this->sDateQuery;
-    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $oMoney->query .= " AND `date` LIKE '" . $dCurrentDate . "%'";
-    $oMoney->query .= " AND `type` = '1'";
-    $oMoney->query .= " AND `subscription` = '" . $this->id . "'";
-    // return $oMoney->get_money();
-    $arrMoneys = $oMoney->get_moneys();
-    // return $arrMoney;
+    $arrResults['subscriptions'] = $oSubscription->get_subscriptions();
+    $arrResults['subscriptions_dates'] = [];
+    $arrResults['subscriptions_sum'] = 0;
+    $arrResults['subscriptions_sum_need'] = 0;
+    $arrResults['subscriptions_sum_paid'] = 0;
 
-    $iMonthSum = 0;
-    if ( $arrMoneys['id'] ) $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
-    else foreach ($arrMoneys as $arrMoney) $iMonthSum = (float)$arrMoney['price'] + (float)$iMonthSum;
-    return $iMonthSum;
+    foreach ( $arrResults['subscriptions'] as & $arrSubscription ) {
+      // Считаем сумму, которую нужно заплатить
+      $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrSubscription['price'];
+
+      // Сумма которая оплачена
+      $arrResults['subscriptions_sum_paid'] = (int)$arrResults['subscriptions_sum_paid'] + (int)$arrSubscription['paid_sum'];
+
+      // Сумма которая ещё нужна
+      if ( (int)$arrSubscription['paid_sum'] ) {
+        if ( $arrSubscription['paid_need'] )
+          $arrResults['subscriptions_sum_need'] = (int)$arrResults['subscriptions_sum_need'] + (int)$arrSubscription['paid_need'];
+      }
+      else
+        $arrResults['subscriptions_sum_need'] = (int)$arrResults['subscriptions_sum_need'] + (int)$arrSubscription['price'];
+
+      // По датам
+      switch ( (int)$arrSubscription['type'] ) {
+        case 0:
+          $arrResults['subscriptions_dates'][$arrSubscription['day']][] = $arrSubscription;
+          break;
+      }
+    }
+
+    // Сортировка
+    ksort($arrResults['subscriptions_dates']);
+
+    // Округление
+    $arrResults['subscriptions_sum'] = floor($arrResults['subscriptions_sum']);
+    $arrResults['subscriptions_sum_need'] = floor($arrResults['subscriptions_sum_need']);
+    $arrResults['subscriptions_sum_paid'] = floor($arrResults['subscriptions_sum_paid']);
+
+    return $arrResults;
   }
 
-  public function get_month_paids( $iSubscriptionId = 0 ){
+  // Оплаты за месяц по подписке
+  public function get_subscription_month_paids( $iSubscriptionId = 0 ){
     if ( ! $iSubscriptionId ) $iSubscriptionId = $this->id;
 
     $arrResult = [];
@@ -115,6 +149,7 @@ class subscription extends model
       }
     }
     $arrResult['sum'] = $iMonthSum;
+
     return $arrResult;
   }
 

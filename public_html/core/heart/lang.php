@@ -31,6 +31,9 @@ class lang
 
   function ru(){
     $this->arrLang['ru'] = [
+      'For' => 'За',
+      'Current' => 'Текущий',
+
       'ErrorLoginOrPassword' => 'Неправильный логин или пароль!',
       'SuccessfulLogin' => 'Успешный вход!',
       'SuccessfulExit' => 'Успешный выход!',
@@ -89,7 +92,7 @@ class lang
       // Подписки
       'Subscription' => 'Подписка',
       'SubscriptionPaid' => 'Подписка',
-      'SubscriptionSum' => 'Нужно заплатить',
+      'SubscriptionSum' => 'Нужно оплатить',
       'SubscriptionSumClear' => 'Тут будет отображаться платежи по подпискам, сколько и когда.<br/>
       Добавьте свои ежемесячные платежи в <a href="/subscriptions/">подписки</a>, чтобы контролировать их (:',
       'SubscriptionSumPaid' => 'Уже оплачено',
@@ -284,6 +287,9 @@ class lang
 
   function en(){
     $this->arrLang['en'] = [
+      'For' => 'For',
+      'Current' => 'Current',
+
       'ErrorLoginOrPassword' => 'Error entering login or password!',
       'SuccessfulLogin' => 'Successful login!',
       'SuccessfulExit' => 'Successful Exit!',

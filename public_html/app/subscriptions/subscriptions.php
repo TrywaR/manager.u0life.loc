@@ -26,6 +26,9 @@ switch ($_REQUEST['form']) {
 
     // Подписки
     $oSubscription = new subscription();
+    $oSubscription->show_card = true;
+    $oSubscription->show_category = true;
+    $oSubscription->show_paid = true;
     $oSubscription->active = true;
     $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oSubscription->sDateQuery = $dMonth;
@@ -44,7 +47,10 @@ switch ($_REQUEST['form']) {
     break;
 
   case 'show': # Вывод элементов
-    $oSubscription = $_REQUEST['id'] ? new subscription( $_REQUEST['id'] ) : new subscription();
+    $oSubscription = new subscription( $_REQUEST['id'] );
+    $oSubscription->show_card = true;
+    $oSubscription->show_category = true;
+    $oSubscription->show_paid = true;
 
     if ( $_REQUEST['from'] ) $oSubscription->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oSubscription->limit = $_REQUEST['limit'];
@@ -74,15 +80,7 @@ switch ($_REQUEST['form']) {
 
     // Подписки
     $oSubscription = new subscription();
-    $oSubscription->active = true;
-    $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $oSubscription->sDateQuery = $dMonth;
-    // $oSubscription->show_query = true;
-    $arrResults['subscriptions'] = $oSubscription->get_subscriptions();
-    $arrResults['subscriptions_dates'] = [];
-    $arrResults['subscriptions_sum'] = 0;
-    $arrResults['subscriptions_sum_need'] = 0;
-    $arrResults['subscriptions_sum_paid'] = 0;
+    $arrResults = $oSubscription->get_month();
 
     if ( ! count($arrResults['subscriptions']) ) {
       ob_start();
@@ -102,41 +100,6 @@ switch ($_REQUEST['form']) {
       ob_end_clean();
       return $sResultHtml;
     }
-
-    foreach ( $arrResults['subscriptions'] as & $arrSubscription ) {
-      // Считаем сумму, которую нужно заплатить
-      $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrSubscription['price'];
-
-      // Сумма которая оплачена
-      $arrResults['subscriptions_sum_paid'] = (int)$arrResults['subscriptions_sum_paid'] + (int)$arrSubscription['paid_sum'];
-
-      // Сумма которая ещё нужна
-      if ( $arrSubscription['paid'] )
-        if ( $arrSubscription['paid_need'] )
-          $arrResults['subscriptions_sum_need'] = (int)$arrResults['subscriptions_sum_need'] + (int)$arrSubscription['paid_need'];
-      else
-        $arrResults['subscriptions_sum_need'] = (int)$arrResults['subscriptions_sum_need'] + (int)$arrSubscription['price'];
-
-      // По датам
-      switch ( (int)$arrSubscription['type'] ) {
-        case 0:
-          $arrResults['subscriptions_dates'][$arrSubscription['day']][] = $arrSubscription;
-          break;
-      }
-
-      // if ( ! $arrSubscription['paid'] ) {
-      //   if ( $arrSubscription['paid_sum'] ) $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrSubscription['paid_need'];
-      //   else $arrResults['subscriptions_sum'] = (int)$arrResults['subscriptions_sum'] + (int)$arrSubscription['price'];
-      // }
-    }
-
-    // Сортировка
-    ksort($arrResults['subscriptions_dates']);
-
-    // Округление
-    $arrResults['subscriptions_sum'] = floor($arrResults['subscriptions_sum']);
-    $arrResults['subscriptions_sum_need'] = floor($arrResults['subscriptions_sum_need']);
-    $arrResults['subscriptions_sum_paid'] = floor($arrResults['subscriptions_sum_paid']);
 
     ob_start();
     ?>

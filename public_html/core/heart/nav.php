@@ -164,12 +164,20 @@ class nav
         'access' => 0,
         'onlyapp' => true,
         'subs' => [
-          '/dashboard/info/' => array(
+          '/dashboard/' => array(
             'name' => $oLang->get('Info'),
             'description' => $oLang->get('Info'),
-            'url' => '/dashboard/info/',
+            'url' => '/dashboard/',
             'icon' => '<i class="fa-solid fa-grip"></i>',
-            'access' => 1,
+            'access' => 0,
+            'onlyapp' => true,
+          ),
+          '/dashboard/days/' => array(
+            'name' => $oLang->get('Days'),
+            'description' => $oLang->get('Days'),
+            'url' => '/dashboard/days/',
+            'icon' => '<i class="fa-solid fa-calendar-day"></i>',
+            'access' => 0,
             'onlyapp' => true,
           ),
         ]
@@ -290,11 +298,11 @@ class nav
             'access' => 0,
             'onlyapp' => true,
           ),
-          '/subscriptions/analytics/' => array(
-            'name' => $oLang->get('Costs'),
-            'description' => $oLang->get('Costs'),
-            'url' => '/subscriptions/analytics/',
-            'icon' => '<i class="fa-solid fa-chart-bar"></i>',
+          '/subscriptions/month/' => array(
+            'name' => $oLang->get('Month'),
+            'description' => $oLang->get('Month'),
+            'url' => '/subscriptions/month/',
+            'icon' => '<i class="fa-solid fa-calendar-days"></i>',
             'access' => 0,
             'onlyapp' => true,
           ),
@@ -319,48 +327,12 @@ class nav
         'onlyapp' => true,
       ),
 
-      '/admin/' => array(
-        'name' => $oLang->get('AdminPanel'),
-        'description' => $oLang->get('AdminPanel'),
-        'url' => '/admin/',
-        'icon' => '<i class="fa-solid fa-screwdriver-wrench"></i>',
-        'access' => 500,
-        'onlyapp' => true,
-        'subs' => [
-          '/admin/rewards/' => array(
-            'name' => $oLang->get('Rewards'),
-            'description' => $oLang->get('Rewards'),
-            'url' => '/admin/rewards/',
-            'icon' => '<i class="fa-solid fa-award"></i>',
-            'access' => 500,
-            'onlyapp' => true,
-          ),
-          '/admin/users/' => array(
-            'name' => $oLang->get('Users'),
-            'description' => $oLang->get('Users'),
-            'url' => '/admin/users/',
-            'icon' => '<i class="fa-solid fa-users"></i>',
-            'access' => 500,
-            'onlyapp' => true,
-          ),
-          '/admin/accesses/' => array(
-            'name' => $oLang->get('Accesses'),
-            'description' => $oLang->get('Accesses'),
-            'url' => '/admin/accesses/',
-            'icon' => '<i class="fa-solid fa-user-clock"></i>',
-            'access' => 500,
-            'onlyapp' => true,
-          ),
-        ]
-      ),
-
       '/info/' => array(
         'name' => $oLang->get('Info'),
         'description' => $oLang->get('Info'),
         'url' => '/info/',
         'icon' => '<i class="fa-solid fa-circle-info"></i>',
         'menu_hide' => false,
-        'onlysite' => true,
         'subs' => [
           '/info/' => array(
             'name' => $oLang->get('Info'),
@@ -368,7 +340,7 @@ class nav
             'url' => '/info/',
             'icon' => '<i class="fa-solid fa-circle-info"></i>',
             'access' => 0,
-            'onlyapp' => true,
+            'menu_hide' => false,
           ),
           '/info/versions/' => array(
             'name' => $oLang->get('Versions'),
@@ -406,6 +378,41 @@ class nav
             'menu_hide' => false,
           ),
         ],
+      ),
+
+      '/admin/' => array(
+        'name' => $oLang->get('AdminPanel'),
+        'description' => $oLang->get('AdminPanel'),
+        'url' => '/admin/',
+        'icon' => '<i class="fa-solid fa-screwdriver-wrench"></i>',
+        'access' => 500,
+        'onlyapp' => true,
+        'subs' => [
+          '/admin/rewards/' => array(
+            'name' => $oLang->get('Rewards'),
+            'description' => $oLang->get('Rewards'),
+            'url' => '/admin/rewards/',
+            'icon' => '<i class="fa-solid fa-award"></i>',
+            'access' => 500,
+            'onlyapp' => true,
+          ),
+          '/admin/users/' => array(
+            'name' => $oLang->get('Users'),
+            'description' => $oLang->get('Users'),
+            'url' => '/admin/users/',
+            'icon' => '<i class="fa-solid fa-users"></i>',
+            'access' => 500,
+            'onlyapp' => true,
+          ),
+          '/admin/accesses/' => array(
+            'name' => $oLang->get('Accesses'),
+            'description' => $oLang->get('Accesses'),
+            'url' => '/admin/accesses/',
+            'icon' => '<i class="fa-solid fa-user-clock"></i>',
+            'access' => 500,
+            'onlyapp' => true,
+          ),
+        ]
       ),
     ];
 

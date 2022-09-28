@@ -2,6 +2,8 @@
   <div class="_block_title">
     <h1 class="sub_title _value">
       <?=$oLang->get('Subscriptions')?>
+      <?=$oLang->get('For')?>
+      <?=$oLang->get('Month')?>
     </h1>
   </div>
 </div>
@@ -65,7 +67,7 @@
           $(document).find('#subscription_analytics').html( resultData )
         })
       }
-      
+
       month_show()
     </script>
 
