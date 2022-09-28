@@ -215,7 +215,7 @@
         </div>
       </div>
       <div class="_href">
-        <a href="/cards/"></a>
+        <a href="/moneys/data/cards/"></a>
       </div>
       <div class="_hover"></div>
     </div>
