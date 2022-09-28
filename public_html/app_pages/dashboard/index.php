@@ -275,7 +275,7 @@
     <!-- Время -->
     <div class="_item __href">
       <div class="_icon">
-        <i class="fa-solid fa-wallet"></i>
+        <i class="fa-solid fa-clock"></i>
       </div>
       <div class="_title">
         <?=$oLang->get('Times')?>
@@ -289,7 +289,7 @@
     <!-- Деньги -->
     <div class="_item __href">
       <div class="_icon">
-        <i class="fa-solid fa-clock"></i>
+        <i class="fa-solid fa-wallet"></i>
       </div>
       <div class="_title">
         <?=$oLang->get('Moneys')?>
