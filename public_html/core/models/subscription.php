@@ -78,7 +78,7 @@ class subscription extends model
     $oSubscription->show_paid = true;
     $oSubscription->active = true;
     $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $oSubscription->sDateQuery = $dMonth;
+    $oSubscription->sDateQuery = $this->sDateQuery;
     // $oSubscription->show_query = true;
 
     $arrResults['subscriptions'] = $oSubscription->get_subscriptions();

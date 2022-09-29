@@ -27,6 +27,10 @@ if ( isset($_SESSION['user']) ) {
       include_once 'clients/clients.php';
       break;
 
+    case 'clients_analytics': # Обработка клиентов
+      include_once 'clients/analytics/analytics.php';
+      break;
+
     case 'dashboards': # Главная страница
       include_once 'dashboards/dashboards.php';
       break;

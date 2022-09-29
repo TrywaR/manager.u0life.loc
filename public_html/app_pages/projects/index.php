@@ -132,6 +132,10 @@ $arrClients = $oClient->get_clients();
                   <i class="fas fa-chart-area"></i>
                 </a>
 
+                <a href="/tasks/?project_id={{id}}" class="btn">
+                  <i class="fa-solid fa-person-digging"></i>
+                </a>
+
                 <a data-action="projects" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".project" data-form="form" href="javascript:;" class="btn content_loader_show">
                   <i class="fas fa-pen-square"></i>
                 </a>

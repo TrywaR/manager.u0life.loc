@@ -80,7 +80,9 @@ switch ($_REQUEST['form']) {
 
     // Подписки
     $oSubscription = new subscription();
+    $oSubscription->sDateQuery = $dMonth;
     $arrResults = $oSubscription->get_month();
+
 
     if ( ! count($arrResults['subscriptions']) ) {
       ob_start();

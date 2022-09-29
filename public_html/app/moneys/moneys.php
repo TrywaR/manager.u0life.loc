@@ -17,7 +17,7 @@ switch ($_REQUEST['form']) {
     break;
 
   case 'show': # Вывод элементов
-    $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
+    $oMoney = new money( $_REQUEST['id'] );
 
     if ( $_REQUEST['from'] ) $oMoney->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oMoney->limit = $_REQUEST['limit'];
@@ -112,15 +112,21 @@ switch ($_REQUEST['form']) {
 
   case 'save': # Сохранение изменений
     $arrResult = [];
-    $oMoney = $_REQUEST['id'] ? new money( $_REQUEST['id'] ) : new money();
+    $iPriceOld = 0;
+
+    $oMoney = new money( $_REQUEST['id'] );
     $oMoney->arrAddFields['date_update'] = date("Y-m-d H:i:s");
     $oMoney->arrAddFields = $_REQUEST;
+
+    // Если обновление цены
+    if ( $oMoney->price ) $iPriceOld = $oMoney->price;
 
     // Если копирование
     if ( isset($_REQUEST['content_loader_copy']) ) {
       unset($oMoney->arrAddFields['id']);
     }
 
+    // Определяем событие
     if ( $_REQUEST['id'] && ! isset($_REQUEST['content_loader_copy']) ) {
       $arrResult['event'] = 'save';
       $oMoney->save();
@@ -130,37 +136,8 @@ switch ($_REQUEST['form']) {
       $oMoney->add();
     }
 
-    // Обновление карты
-    if ( $_REQUEST['card'] ) {
-      $oCard = new card( $_REQUEST['card'] );
-
-      // Если обновление, удаляем старое значение
-      if ( $oMoney->id )
-      if ( (int)$oMoney->type == 2 ) $oCard->balance_remove( $oMoney->price );
-      else {
-        $oCard->balance_add( $oMoney->price );
-        // Если комиссиия
-        if ( (int)$oMoney->category == 2 ) $oCard->commission_remove( $oMoney->price );
-      }
-
-      // Если пополнение
-      if ( (int)$_REQUEST['type'] == 2 ) $oCard->balance_add( $_REQUEST['price'] );
-      // Если тарата
-      else {
-        $oCard->balance_remove( $_REQUEST['price'] );
-        // Если комиссиия
-        if ( (int)$_REQUEST['category'] == 2 ) $oCard->commission_add( $_REQUEST['price'] );
-      }
-    }
-
-    // Обновление карты на которую зачисление
-    if ( $_REQUEST['to_card'] ) {
-      $oCardTo = new card( $_REQUEST['to_card'] );
-      $oCardTo->balance_add( $_REQUEST['price'] );
-    }
-
+    // Получаем всю инфу об оплате
     $oMoney = new money( $oMoney->id );
-    
     $oMoney->show_card = true;
     $oMoney->show_to_card = true;
     $oMoney->show_category = true;
@@ -171,29 +148,58 @@ switch ($_REQUEST['form']) {
     $arrResult['data'] = $oMoney->get_moneys();
     $arrResult['text'] = $oLang->get("ChangesSaved");
 
+    // Обновление карты
+    switch ( (int)$oMoney->type ) {
+      case 1: # Расход
+        $oCard = new card( $this->card );
+        $oCard->balance_remove( $oMoney->price );
+        if ( (int)$oMoney->category == 2 ) $oCard->commission_add( $oMoney->price ); # Если комиссия
+        if ( $iPriceOld ) $oCard->balance_add( $iPriceOld ); # Возвращяем то что было, если обновление
+
+        if ( $this->to_card ) {
+          $oCardTo = new card( $this->to_card );
+          $oCardTo->balance_add( $oMoney->price );
+          if ( (int)$oMoney->category == 2 ) $oCardTo->commission_remove( $oMoney->price ); # Если комиссия
+          if ( $iPriceOld ) $oCardTo->balance_remove( $iPriceOld ); # Возвращяем то что было, если обновление
+        }
+        break;
+      case 2: # Зачисления
+        $oCardTo = new card( $this->to_card );
+        $oCardTo->balance_add( $oMoney->price );
+        if ( (int)$oMoney->category == 2 ) $oCardTo->commission_remove( $oMoney->price ); # Если комиссия
+        if ( $iPriceOld ) $oCardTo->balance_remove( $iPriceOld ); # Возвращяем то что было, если обновление
+        break;
+    }
+
+
     notification::success($arrResult);
     break;
 
   case 'del': # Удаление
     $oMoney = new money( $_REQUEST['id'] );
-    $oMoney->del();
     $arrResult = [];
 
     // Обновление карты
-    if ( $_REQUEST['card'] ) {
-      $oCard = new card( $_REQUEST['card'] );
-      // Если пополнение
-      if ( (int)$_REQUEST['type'] == 2 ) {
-        $oCard->balance_remove( $_REQUEST['price'] );
-      }
-      // Если тарата
-      else {
-        $oCard->balance_add( $_REQUEST['price'] );
-        // Если комиссиия
-        if ( (int)$_REQUEST['category'] == 1 ) $oCard->commission_remove( $_REQUEST['price'] );
-      }
+    switch ( (int)$oMoney->type ) {
+      case 1: # Расход
+        $oCard = new card( $oMoney->card );
+        $oCard->balance_add( $oMoney->price );
+        if ( (int)$oMoney->category == 2 ) $oCard->commission_remove( $oMoney->price ); # Если комиссия
+
+        if ( $oMoney->to_card ) {
+          $oCardTo = new card( $oMoney->to_card );
+          $oCardTo->balance_remove( $oMoney->price );
+          if ( (int)$oMoney->category == 2 ) $oCardTo->commission_add( $oMoney->price ); # Если комиссия
+        }
+        break;
+      case 1: # Доход
+        $oCardTo = new card( $oMoney->to_card );
+        $oCardTo->balance_remove( $oMoney->price );
+        if ( (int)$oMoney->category == 2 ) $oCardTo->commission_add( $oMoney->price ); # Если комиссия
+        break;
     }
 
+    $oMoney->del();
     $arrResult['event'] = 'del';
     $arrResult['text'] = $oLang->get("DeleteSuccess");
     notification::success($arrResult);

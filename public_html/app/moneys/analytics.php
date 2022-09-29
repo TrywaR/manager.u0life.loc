@@ -22,6 +22,7 @@ switch ($_REQUEST['form']) {
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oCategory->query .= ' AND `active` > 0';
+    $oCategory->query .= ' AND `id` != 55';
     $arrCategories = $oCategory->get_categories();
     // Берём конфики костомных категорий пользователя
     $oCategoryConf = new category_config();
@@ -50,6 +51,7 @@ switch ($_REQUEST['form']) {
       $oMoney = new money();
       $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oMoney->query .= " AND `date` = '" . $dDateCurrent . "'";
+      $oMoney->query .= ' AND `category` != 55';
 
       if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
       if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
@@ -119,6 +121,7 @@ switch ($_REQUEST['form']) {
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oCategory->query .= ' AND `active` > 0';
+    $oCategory->query .= ' AND `id` != 55';
     $arrCategories = $oCategory->get_categories();
     // Берём конфики костомных категорий пользователя
     $oCategoryConf = new category_config();
@@ -138,6 +141,7 @@ switch ($_REQUEST['form']) {
     for ($i=1; $i <= $iMonthDaysSum; $i++) {
       $oMoney = new money();
       $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oMoney->query .= ' AND `category` != 55';
       $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $iMonth) . '-' . sprintf("%02d", $i) . "%'";
       if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
       if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
@@ -204,6 +208,7 @@ switch ($_REQUEST['form']) {
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oCategory->query .= ' AND `active` > 0';
+    $oCategory->query .= ' AND `id` != 55';
     $arrCategories = $oCategory->get_categories();
     // Берём конфики костомных категорий пользователя
     $oCategoryConf = new category_config();
@@ -222,7 +227,8 @@ switch ($_REQUEST['form']) {
     // Суммы по месяцам
     for ($i=1; $i < 13; $i++) {
       $oMoney = new money();
-      $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oMoney->query = ' AND `category` != 55';
+      $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $i) . "%'";
       if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
       if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
@@ -284,6 +290,7 @@ switch ($_REQUEST['form']) {
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oCategory->query .= " AND `type` = 0";
     $oCategory->query .= ' AND `active` > 0';
+    $oCategory->query .= ' AND `id` != 55';
     $arrCategories = $oCategory->get_categories();
     // Берём конфики костомных категорий пользователя
     $oCategoryConf = new category_config();
@@ -299,7 +306,8 @@ switch ($_REQUEST['form']) {
     // Потрачено за день
     $oMoney = new money();
     $oMoney->sortname = 'date';
-    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query = ' AND `category` != 55';
+    $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dDay . "%' AND `type` = '1' ";
     $arrMoneys = $oMoney->get_money();
     $iDaySumm = 0;
@@ -309,7 +317,8 @@ switch ($_REQUEST['form']) {
     // Пришло за день
     $oMoney = new money();
     $oMoney->sortname = 'date';
-    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query = ' AND `category` != 55';
+    $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dDay . "%' AND `type` = '2' ";
     $arrMoneys = $oMoney->get_money();
     $iDaySummPlus = 0;
@@ -324,7 +333,8 @@ switch ($_REQUEST['form']) {
     // За месяц ушло
     $oMoney = new money();
     $oMoney->sortname = 'date';
-    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query = ' AND `category` != 55';
+    $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
     $oMoney->query .= " AND `to_card` = '0' ";
     $arrMoneys = $oMoney->get_money();
@@ -336,7 +346,8 @@ switch ($_REQUEST['form']) {
     $oMoney = new money();
     $oMoney->sortname = 'date';
     $dCurrentDate = date('Y-m');
-    $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oMoney->query = ' AND `category` != 55';
+    $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' ";
     $arrMoneys = $oMoney->get_money();
     $iMonthSumSalary = 0;

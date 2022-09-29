@@ -1,12 +1,12 @@
 <?
-$oProject = new project( $_REQUEST['project_id'] );
-$arrProject = $oProject->get_project();
+$oClient = new client( $_REQUEST['client_id'] );
+$arrClient = $oClient->get_client();
 ?>
 
 <div class="main_jumbotron">
   <div class="_block_title">
     <h1 class="sub_title _value">
-      <?=$arrProject['title']?>
+      <?=$arrClient['title']?>
     </h1>
   </div>
 </div>
@@ -14,7 +14,7 @@ $arrProject = $oProject->get_project();
 <div class="main_content">
   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-week" aria-selected="true"><?=$oLang->get('Week')?></button>
+      <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-wekk" aria-selected="true"><?=$oLang->get('Week')?></button>
     </li>
     <li class="nav-item" role="presentation">
       <button onclick="month_show()" class="nav-link" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="true"><?=$oLang->get('Month')?></button>
@@ -100,9 +100,9 @@ $arrProject = $oProject->get_project();
           if ( ! bWeekShow ) {
             $.when(
               content_download( {
-                'action': 'projects_analytics',
+                'action': 'clients_analytics',
                 'form': 'analytics_week',
-                'project_id': <?=$arrProject['id']?>,
+                'client_id': <?=$arrClient['id']?>,
                 'week': iWeek,
               }, 'text', false )
             ).then( function( resultData ){
@@ -215,9 +215,9 @@ $arrProject = $oProject->get_project();
           if ( ! bMonthShow ) {
             $.when(
               content_download( {
-                'action': 'projects_analytics',
+                'action': 'clients_analytics',
                 'form': 'analytics_month',
-                'project_id': <?=$arrProject['id']?>,
+                'client_id': <?=$arrClient['id']?>,
                 'year': iYear,
                 'month': iMonth,
               }, 'text', false )
@@ -321,9 +321,9 @@ $arrProject = $oProject->get_project();
           if ( ! bYearShow ) {
             $.when(
               content_download( {
-                'action': 'projects_analytics',
+                'action': 'clients_analytics',
                 'form': 'analytics_year',
-                'project_id': <?=$arrProject['id']?>,
+                'client_id': <?=$arrClient['id']?>,
                 'year': iYear,
               }, 'text', false )
             ).then( function( resultData ){

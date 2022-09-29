@@ -33,6 +33,10 @@ class lang
     $this->arrLang['ru'] = [
       'For' => 'За',
       'Current' => 'Текущий',
+      'Excluded' => 'Не учитывать',
+      'Spent' => 'Потрачено',
+      'Really' => 'Реально',
+      'Received' => 'Получено',
 
       'ErrorLoginOrPassword' => 'Неправильный логин или пароль!',
       'SuccessfulLogin' => 'Успешный вход!',
@@ -149,6 +153,7 @@ class lang
       'Time' => 'Время',
       'TimesPlanned' => 'Планируемое время',
       'TimesReally' => 'Реальное время',
+      'TimesSpent' => 'Потраченное время',
       'Effeciency' => 'Эффективность',
 
       'User' => 'Пользователь',
@@ -265,6 +270,7 @@ class lang
       'Alcohol' => 'Алкоголь',
       'House' => 'Дом',
       'Health' => 'Здоровье',
+      'Movies' => 'Фильмы',
       'Clothing' => 'Одежда',
 
       'Protect' => 'Защита',
@@ -289,6 +295,10 @@ class lang
     $this->arrLang['en'] = [
       'For' => 'For',
       'Current' => 'Current',
+      'Excluded' => 'Excluded',
+      'Spent' => 'Spent',
+      'Really' => 'Really',
+      'Received' => 'Received',
 
       'ErrorLoginOrPassword' => 'Error entering login or password!',
       'SuccessfulLogin' => 'Successful login!',
@@ -405,6 +415,7 @@ class lang
       'Time' => 'Time',
       'TimesPlanned' => 'Time planned',
       'TimesReally' => 'Time really',
+      'TimesSpent' => 'Spent time',
       'Effeciency' => 'Effeciency',
 
       'User' => 'User',
@@ -521,6 +532,7 @@ class lang
       'Alcohol' => 'Alcohol',
       'House' => 'Alcohol',
       'Health' => 'Health',
+      'Movies' => 'Movies',
       'Clothing' => 'Clothing',
 
       'Protect' => 'Protect',

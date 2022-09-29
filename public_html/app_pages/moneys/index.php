@@ -11,8 +11,15 @@ $oTask->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 $oTask->query .= ' AND `status` = 2';
 $oTask->active = true;
 $arrTasks = $oTask->get_tasks();
-$arrTaskId = [];
-foreach ($arrTasks as $arrTask) $arrTaskId[$arrTask['id']] = $arrTask;
+$arrTasksId = [];
+foreach ($arrTasks as $arrTask) $arrTasksId[$arrTask['id']] = $arrTask;
+if ( $_REQUEST['task_id'] ) {
+  if ( ! isset($arrTasksId[$_REQUEST['task_id']]) ) {
+    $oTask = new task( $_REQUEST['task_id'] );
+    $arrTask = $oTask->get_task();
+    $arrTasksId[$arrTask['id']] = $arrTask;
+  }
+}
 
 $oCategory = new category();
 $oCategory->sort = 'sort';
@@ -134,7 +141,7 @@ $arrTypes = [
           </span>
           <select name="task_id" class="form-select">
             <option value=""><?=$oLang->get('Task')?></option>
-            <?php foreach ($arrTasks as $iIndex => $arrTask): ?>
+            <?php foreach ($arrTasksId as $iIndex => $arrTask): ?>
               <option data-color="<?=$arrTask['color']?>" value="<?=$arrTask['id']?>"><?=$arrTask['title']?></option>
             <?php endforeach; ?>
           </select>

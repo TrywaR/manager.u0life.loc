@@ -113,7 +113,7 @@
         $oMoney = new money();
         $oMoney->sortname = 'date';
         $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-        $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
+        $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' AND `category` != 55";
         $oMoney->query .= " AND `to_card` = '0' ";
         $arrMoneys = $oMoney->get();
         $iMonthSumm = 0;
@@ -125,7 +125,7 @@
         $oMoney->sortname = 'date';
         $dCurrentDate = date('Y-m');
         $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-        $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' ";
+        $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' AND `category` != 55";
         $arrMoneys = $oMoney->get();
         $iMonthSummSalary = 0;
         $iMonthSummSalaryWork = 0;
@@ -210,7 +210,7 @@
         <div class="">
           <?
           $oCard = new card();
-          echo $oCard->get_balance();
+          echo number_format($oCard->get_balance(), 2, '.', ' ');
           ?>
         </div>
       </div>
@@ -238,17 +238,17 @@
           ?>
           <div class="_row">
             <small><?=$oLang->get('SubscriptionSum')?>:</small>
-            <span><?=$arrSubscriptionsMonth['subscriptions_sum']?></span>
+            <span><?=number_format($arrSubscriptionsMonth['subscriptions_sum'], 2, '.', ' ')?></span>
           </div>
 
           <div class="_row">
             <small><?=$oLang->get('SubscriptionSumPaid')?>:</small>
-            <span><?=$arrSubscriptionsMonth['subscriptions_sum_paid']?></span>
+            <span><?=number_format($arrSubscriptionsMonth['subscriptions_sum_paid'], 2, '.', ' ')?></span>
           </div>
 
           <div class="_row">
             <small><?=$oLang->get('SubscriptionSumNeedPaid')?>:</small>
-            <span><?=$arrSubscriptionsMonth['subscriptions_sum_need']?></span>
+            <span><?=number_format($arrSubscriptionsMonth['subscriptions_sum_need'], 2, '.', ' ')?></span>
           </div>
         </div>
       </div>

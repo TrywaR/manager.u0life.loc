@@ -13,6 +13,68 @@ class project extends model
   public static $client_id = '';
   public static $user_id = '';
 
+  public function get_times_really()
+  {
+    $iTimesSum = 0;
+    $oTime = new time();
+    $oTime->query .= ' AND `project_id` = ' . $this->id;
+    $oTime->active = true;
+    $arrTimes = $oTime->get_times();
+    $arrTimesReally = [];
+    foreach ($arrTimes as $arrTime) $arrTimesReally[] = $arrTime['time_really'];
+    $iTimesSum = $oTime->get_sum( $arrTimesReally );
+    return $iTimesSum;
+  }
+
+  public function get_times_planned()
+  {
+    $iTimesSum = 0;
+    $oTask = new task();
+    $oTask->query .= ' AND `project_id` = ' . $this->id;
+    $oTask->active = true;
+    $arrTasks = $oTask->get_tasks();
+    $arrTimesPlanned = [];
+    foreach ($arrTasks as $arrTask) $arrTimesPlanned[] = $arrTask['time_planned'];
+    $oTime = new time();
+    $iTimesSum = $oTime->get_sum( $arrTimesPlanned );
+    return $iTimesSum;
+  }
+
+  public function get_moneys_really()
+  {
+    $iMoneysSum = 0;
+    $oMoney = new money();
+    $oMoney->query .= ' AND `project_id` = ' . $this->id;
+    $oMoney->query .= ' AND `type` = 2';
+    // $oMoney->active = true;
+    $arrMoneys = $oMoney->get_moneys();
+    foreach ($arrMoneys as $arrMoney) $iMoneysSum = (float)$iMoneysSum + (float)$arrMoney['price'];
+    return $iMoneysSum;
+  }
+
+  public function get_moneys_spent()
+  {
+    $iMoneysSum = 0;
+    $oMoney = new money();
+    $oMoney->query .= ' AND `project_id` = ' . $this->id;
+    $oMoney->query .= ' AND `type` = 1';
+    // $oMoney->active = true;
+    $arrMoneys = $oMoney->get_moneys();
+    foreach ($arrMoneys as $arrMoney) $iMoneysSum = (float)$iMoneysSum + (float)$arrMoney['price'];
+    return $iMoneysSum;
+  }
+
+  public function get_moneys_planned()
+  {
+    $iMoneysSum = 0;
+    $oTask = new task();
+    $oTask->query .= ' AND `project_id` = ' . $this->id;
+    $oTask->active = true;
+    $arrTasks = $oTask->get_tasks();
+    foreach ($arrTasks as $arrTask) $iMoneysSum = (float)$iMoneysSum + (float)$arrTask['price_planned'];
+    return $iMoneysSum;
+  }
+
   function get_project( $arrProject = [] ) {
     if ( ! $arrProject['id'] ) $arrProject = $this->get();
 

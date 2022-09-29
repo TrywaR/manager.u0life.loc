@@ -95,6 +95,14 @@
                 </div>
               </a>
 
+              <a href="/clients/analytics/?client_id={{id}}" class="btn">
+                <i class="fas fa-chart-area"></i>
+              </a>
+
+              <a href="/projects/?client_id={{id}}" class="btn">
+                <i class="fa-solid fa-folder-tree"></i>
+              </a>
+
               <a data-action="clients" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".client" data-form="form" href="javascript:;" class="btn content_loader_show">
                 <i class="fas fa-pen-square"></i>
               </a>

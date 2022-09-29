@@ -114,7 +114,7 @@ $arrProjects = $oProject->get_projects();
     $(function(){
       // $(document).find('#tasks').content_loader()
       $(document).find('#content_filter').content_filter()
-      $(document).find('#content_manager_buttons').content_manager()
+      // $(document).find('#content_manager_buttons').content_manager()
       // $(document).find('#footer_actions').content_actions( {'action':'tasks'} )
     })
   </script>
@@ -166,17 +166,25 @@ $arrProjects = $oProject->get_projects();
           </div>
 
           <div class="_project">
-            {{project.title}}
+            <a href="/projects/analytics/?project_id={{project_id}}" class="btn">
+              {{project.title}}
+            </a>
           </div>
 
           <div class="_time">
-            <small><i class="fas fa-clock"></i></small>
+            <a href="/times/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}" class="btn">
+              <i class="fas fa-clock"></i>
+            </a>
+
             {{time_really}} <span>/</span>
             <small>{{time_planned}}</small>
           </div>
 
           <div class="_money">
-            <small><i class="fas fa-wallet"></i></small>
+            <a href="/moneys/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}" class="btn">
+              <i class="fas fa-wallet"></i>
+            </a>
+
             {{price_really}} <span>/</span>
             <small>{{price_planned}}</small>
           </div>

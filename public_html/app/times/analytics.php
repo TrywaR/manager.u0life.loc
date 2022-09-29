@@ -22,6 +22,7 @@ switch ($_REQUEST['form']) {
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oCategory->query .= ' AND `active` > 0';
+    $oCategory->query .= ' AND `id` != 55';
     $arrCategories = $oCategory->get_categories();
     // Берём конфики костомных категорий пользователя
     $oCategoryConf = new category_config();
@@ -50,6 +51,7 @@ switch ($_REQUEST['form']) {
       $oTime = new time();
       $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oTime->query .= " AND `date` = '" . $dDateCurrent . "'";
+      $oTime->query .= ' AND `category_id` != 55';
       $arrData = $oTime->get();
 
       // Сумма
@@ -129,6 +131,7 @@ switch ($_REQUEST['form']) {
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oCategory->query .= ' AND `active` > 0';
+    $oCategory->query .= ' AND `id` != 55';
     $arrCategories = $oCategory->get_categories();
     // Берём конфики костомных категорий пользователя
     $oCategoryConf = new category_config();
@@ -149,6 +152,7 @@ switch ($_REQUEST['form']) {
     for ($i=1; $i <= $iMonthDaysSum; $i++) {
       $oTime = new time();
       $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oTime->query .= ' AND `category_id` != 55';
       $oTime->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $iMonth) . '-' . sprintf("%02d", $i) . "%'";
       $arrTimes = $oTime->get();
 
@@ -228,6 +232,7 @@ switch ($_REQUEST['form']) {
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oCategory->query .= ' AND `active` > 0';
+    $oCategory->query .= ' AND `id` != 55';
     $arrCategories = $oCategory->get_categories();
     // Берём конфики костомных категорий пользователя
     $oCategoryConf = new category_config();
@@ -249,6 +254,7 @@ switch ($_REQUEST['form']) {
       $oTime = new time();
       $oTime->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oTime->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $i) . "%'";
+      $oTime->query .= ' AND `category_id` != 55';
       $arrTimes = $oTime->get();
 
       // Подготавливаем категории
