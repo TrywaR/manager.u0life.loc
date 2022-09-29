@@ -11,7 +11,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_4_9">5.4.9 Dashboard</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_5_0">5.5.0 Dashboard</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_4_9">5.4.9 Clients</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_8">5.4.8 Subscription analytics</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_7">5.4.7 Hello world</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_6">5.4.6 Access</a>
@@ -72,6 +73,22 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_5_0">5.5.0 Clients</h2>
+            <ol>
+              <li>
+                Улучшена навигация по приложению
+              </li>
+              <li>
+                Статистика по клиентам
+              </li>
+              <li>
+                Небольшие стиливые доработки
+              </li>
+              <li>
+                Улучшена система подсчёта баланса карт
+              </li>
+            </ol>
+
             <h2 id="list-item-5_4_9">5.4.9 Dashboard</h2>
             <ol>
               <li>
