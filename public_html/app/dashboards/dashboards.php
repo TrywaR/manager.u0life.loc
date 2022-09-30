@@ -7,6 +7,7 @@ function get_day ( $iDay = 0, $iMonth = 0, $iYear = 0 ) {
   $oCategory->limit = 0;
   $oCategory->sortname = 'sort';
   $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+  $oCategory->query .= ' AND `id` != 55';
   $arrCategories = $oCategory->get_categories();
   $arrCategoriesIds = [];
   foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
@@ -20,6 +21,7 @@ function get_day ( $iDay = 0, $iMonth = 0, $iYear = 0 ) {
   $oMoney->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
   $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $iMonth) . '-' . sprintf("%02d", $iDay) . "%'";
   $oMoney->query .= " AND `to_card` = '0'";
+  $oMoney->query .= " AND `category` != 55";
   $arrMoneys = $oMoney->get();
   $arrMoneysCategoriesIds = [];
   $iMoneysCategoriesSum = 0;
@@ -131,6 +133,7 @@ switch ($_REQUEST['form']) {
     $oCategory->limit = 0;
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+    $oCategory->query = ' AND `id` != 55';
     $arrCategories = $oCategory->get();
     $arrCategoriesIds = [];
     foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
@@ -162,6 +165,7 @@ switch ($_REQUEST['form']) {
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
     $oMoney->query .= " AND `to_card` = '0' ";
+    $oMoney->query .= " AND `category` != 55";
     $arrMoneys = $oMoney->get();
     $iMonthSumm = 0;
     foreach ($arrMoneys as $arrMoney) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
@@ -173,6 +177,7 @@ switch ($_REQUEST['form']) {
     $dCurrentDate = date('Y-m');
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' ";
+    $oMoney->query .= " AND `category` != 55";
     $arrMoneys = $oMoney->get();
     $iMonthSummSalary = 0;
     $iMonthSummSalaryWork = 0;

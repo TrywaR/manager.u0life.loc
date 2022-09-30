@@ -151,23 +151,28 @@ switch ($_REQUEST['form']) {
     // Обновление карты
     switch ( (int)$oMoney->type ) {
       case 1: # Расход
-        $oCard = new card( $this->card );
-        $oCard->balance_remove( $oMoney->price );
-        if ( (int)$oMoney->category == 2 ) $oCard->commission_add( $oMoney->price ); # Если комиссия
-        if ( $iPriceOld ) $oCard->balance_add( $iPriceOld ); # Возвращяем то что было, если обновление
+        if ( (int)$oMoney->card ) {
+          $oCard = new card( $oMoney->card );
+          $oCard->balance_remove( $oMoney->price );
+          if ( (int)$oMoney->category == 2 ) $oCard->commission_add( $oMoney->price ); # Если комиссия
+          if ( $iPriceOld ) $oCard->balance_add( $iPriceOld ); # Возвращяем то что было, если обновление
+        }
 
-        if ( $this->to_card ) {
-          $oCardTo = new card( $this->to_card );
+        if ( (int)$oMoney->to_card ) {
+          $oCardTo = new card( $oMoney->to_card );
           $oCardTo->balance_add( $oMoney->price );
           if ( (int)$oMoney->category == 2 ) $oCardTo->commission_remove( $oMoney->price ); # Если комиссия
           if ( $iPriceOld ) $oCardTo->balance_remove( $iPriceOld ); # Возвращяем то что было, если обновление
         }
         break;
+
       case 2: # Зачисления
-        $oCardTo = new card( $this->to_card );
-        $oCardTo->balance_add( $oMoney->price );
-        if ( (int)$oMoney->category == 2 ) $oCardTo->commission_remove( $oMoney->price ); # Если комиссия
-        if ( $iPriceOld ) $oCardTo->balance_remove( $iPriceOld ); # Возвращяем то что было, если обновление
+        if ( (int)$oMoney->card ) {
+          $oCardTo = new card( $oMoney->to_card );
+          $oCardTo->balance_add( $oMoney->price );
+          if ( (int)$oMoney->category == 2 ) $oCardTo->commission_remove( $oMoney->price ); # Если комиссия
+          if ( $iPriceOld ) $oCardTo->balance_remove( $iPriceOld ); # Возвращяем то что было, если обновление
+        }
         break;
     }
 
@@ -182,20 +187,23 @@ switch ($_REQUEST['form']) {
     // Обновление карты
     switch ( (int)$oMoney->type ) {
       case 1: # Расход
-        $oCard = new card( $oMoney->card );
-        $oCard->balance_add( $oMoney->price );
-        if ( (int)$oMoney->category == 2 ) $oCard->commission_remove( $oMoney->price ); # Если комиссия
-
-        if ( $oMoney->to_card ) {
+        if ( (int)$oMoney->card ) {
+          $oCard = new card( $oMoney->card );
+          $oCard->balance_add( $oMoney->price );
+          if ( (int)$oMoney->category == 2 ) $oCard->commission_remove( $oMoney->price ); # Если комиссия
+        }
+        if ( (int)$oMoney->to_card ) {
           $oCardTo = new card( $oMoney->to_card );
           $oCardTo->balance_remove( $oMoney->price );
           if ( (int)$oMoney->category == 2 ) $oCardTo->commission_add( $oMoney->price ); # Если комиссия
         }
         break;
       case 1: # Доход
-        $oCardTo = new card( $oMoney->to_card );
-        $oCardTo->balance_remove( $oMoney->price );
-        if ( (int)$oMoney->category == 2 ) $oCardTo->commission_add( $oMoney->price ); # Если комиссия
+        if ( (int)$oMoney->card ) {
+          $oCardTo = new card( $oMoney->to_card );
+          $oCardTo->balance_remove( $oMoney->price );
+          if ( (int)$oMoney->category == 2 ) $oCardTo->commission_add( $oMoney->price ); # Если комиссия
+        }
         break;
     }
 
