@@ -8,47 +8,91 @@
 
 <div class="main_content">
   <div class="block_docs">
-    <ul class="_sub_menu">
-      <!-- <li class="_item">
-        <a class="_link" href="/info/docs/users">
-          <?=$oLang->get('User')?>
+    <div class="_sub_menu">
+      <!-- <div class="_item">
+      <div class="_title">
+        <?=$oLang->get('User')?>
+      </div>
+        <a class="_link" href="/info/docs/users/">
         </a>
-      </li> -->
-      <li class="_item">
-        <a class="_link" href="/info/docs/moneys">
+      </div> -->
+      <div class="_item">
+        <div class="_title">
           <?=$oLang->get('Moneys')?>
+        </div>
+        <a class="_link" href="/info/docs/moneys/">
         </a>
-      </li>
-      <li class="_item">
-        <a class="_link" href="/info/docs/times">
+        <div class="_icon">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+      </div>
+      <div class="_item">
+        <div class="_title">
+          <?=$oLang->get('Cards')?>
+        </div>
+        <a class="_link" href="/info/docs/cards/">
+        </a>
+        <div class="_icon">
+          <i class="fa-solid fa-credit-card"></i>
+        </div>
+      </div>
+      <div class="_item">
+        <div class="_title">
           <?=$oLang->get('Times')?>
+        </div>
+        <a class="_link" href="/info/docs/times/">
         </a>
-      </li>
-      <li class="_item">
-        <a class="_link" href="/info/docs/tasks">
+        <div class="_icon">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+      </div>
+      <div class="_item">
+        <div class="_title">
           <?=$oLang->get('Tasks')?>
+        </div>
+        <a class="_link" href="/info/docs/tasks/">
         </a>
-      </li>
-      <li class="_item">
-        <a class="_link" href="/info/docs/categories">
+        <div class="_icon">
+          <i class="fa-solid fa-person-digging"></i>
+        </div>
+      </div>
+      <div class="_item">
+        <div class="_title">
           <?=$oLang->get('Categories')?>
+        </div>
+        <a class="_link" href="/info/docs/categories/">
         </a>
-      </li>
-      <li class="_item">
-        <a class="_link" href="/info/docs/subscriptions">
+        <div class="_icon">
+          <i class="fa-solid fa-list"></i>
+        </div>
+      </div>
+      <div class="_item">
+        <div class="_title">
           <?=$oLang->get('Subscriptions')?>
+        </div>
+        <a class="_link" href="/info/docs/subscriptions/">
         </a>
-      </li>
-      <li class="_item">
-        <a class="_link" href="/info/docs/projects">
+        <div class="_icon">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+      </div>
+      <div class="_item">
+        <div class="_title">
           <?=$oLang->get('Projects')?>
+        </div>
+        <a class="_link" href="/info/docs/projects/">
         </a>
-      </li>
-      <!-- <li class="_item">
-        <a class="_link" href="/info/docs/clitents">
-          <?=$oLang->get('Clients')?>
+        <div class="_icon">
+          <i class="fa-solid fa-folder-tree"></i>
+        </div>
+      </div>
+      <!-- <div class="_item">
+      <div class="_title">
+        <?=$oLang->get('Clients')?>
+      </div>
+        <a class="_link" href="/info/docs/clitents/">
         </a>
-      </li> -->
-    </ul>
+      </div> -->
+    </div>
   </div>
 </div>

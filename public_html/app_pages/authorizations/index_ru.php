@@ -1,5 +1,9 @@
 <section class="row">
   <div class="mt-4 col-12 col-md-7 m-auto">
+    1
+    <?
+    print_r($_SESSION);
+    ?>
     <div class="form_block">
       <?php if (isset($_SESSION['user'])) : ?>
         <form class="form_authorization_logout __form_event_default" id="form_authorization_logout" method="post">

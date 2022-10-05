@@ -132,6 +132,14 @@ if ( isset($_SESSION['user']) ) {
     case 'contents': # Содержание
       include_once 'contents/contents.php';
       break;
+
+    case 'notices': # Уведомления
+      include_once 'notices/notices.php';
+      break;
+
+    case 'notices_views': # Просмотр Уведомления
+      include_once 'notices/views/views.php';
+      break;
   }
 }
 

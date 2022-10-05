@@ -108,9 +108,9 @@
                 if ( oData.success.categories ) {
                   $(document).find('#res_weeks_categories').html('')
 
-                  $.get('templates/category_link.htm')
+                  $.get('/templates/category_link.htm')
                   .fail(function(data){
-                    status({'error': 'Шаблон не найден: templates/category_link.htm'})
+                    status({'error': 'Шаблон не найден: /templates/category_link.htm'})
                   })
                   .done(function(data){
                     var
@@ -230,9 +230,9 @@
                 if ( oData.success.categories ) {
                   $(document).find('#res_month_categories').html('')
 
-                  $.get('templates/category_link.htm')
+                  $.get('/templates/category_link.htm')
                   .fail(function(data){
-                    status({'error': 'Шаблон не найден: templates/category_link.htm'})
+                    status({'error': 'Шаблон не найден: /templates/category_link.htm'})
                   })
                   .done(function(data){
                     var
@@ -342,9 +342,9 @@
                 if ( oData.success.categories ) {
                   $(document).find('#res_year_categories').html('')
 
-                  $.get('templates/category_link.htm')
+                  $.get('/templates/category_link.htm')
                   .fail(function(data){
-                    status({'error': 'Шаблон не найден: templates/category_link.htm'})
+                    status({'error': 'Шаблон не найден: /templates/category_link.htm'})
                   })
                   .done(function(data){
                     var

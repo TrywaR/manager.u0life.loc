@@ -9,18 +9,22 @@
 <div class="main_content">
   <div class="block_docs">
     <div class="_doc">
+      <h2 class="_title">
+        How use?
+      </h2>
+      <div class="_icon">
+        <i class="fa-solid fa-calendar-check"></i>
+      </div>
       <div class="_content">
         <p>
-          9In the Subscriptions menu you can create sections of your monthly expenses, so choose the Add button and select the necessary criteria.
+          The "Subscriptions" section keeps track of your monthly payments.
         </p>
         <p>
-          For example, you have subscribed to the streaming service Netflix and your card is charged monthly.
+          Add payments for cellular, internet, Netflix, and more. <br/>
+           This will allow <a href="/subscriptions/month/">to find out</a> how much you spend on payments per month, on what day and how much you need to pay.
         </p>
         <p>
-          To do this select the type: monthly payment, enter the date, amount of payment and from which card the money is written off.
-        </p>
-        <p>
-          Then in the Money menu create a section where we want to add this expense item, select Netflix in the subscription schedule and this way your expense schedule will automatically account for monthly subscriptions.
+          When entering data in the "Money" section, indicate the desired subscription, this information will be taken into account in the general statistics of subscriptions.
         </p>
       </div>
       <div class="_link">

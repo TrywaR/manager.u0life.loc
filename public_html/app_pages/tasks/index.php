@@ -166,13 +166,13 @@ $arrProjects = $oProject->get_projects();
           </div>
 
           <div class="_project">
-            <a href="/projects/analytics/?project_id={{project_id}}" class="btn">
+            <a href="/projects/analytics/?project_id={{project_id}}" class="btn mx-2">
               {{project.title}}
             </a>
           </div>
 
           <div class="_time">
-            <a href="/times/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}" class="btn">
+            <a href="/times/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}" class="btn mx-2">
               <i class="fas fa-clock"></i>
             </a>
 
@@ -181,7 +181,7 @@ $arrProjects = $oProject->get_projects();
           </div>
 
           <div class="_money">
-            <a href="/moneys/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}" class="btn">
+            <a href="/moneys/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}" class="btn mx-2">
               <i class="fas fa-wallet"></i>
             </a>
 

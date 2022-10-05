@@ -17,7 +17,8 @@ switch ($_REQUEST['form']) {
           if ( $_SESSION['user']['section'] ) $sIncludePathContent = $_REQUEST['path'] != '/' ? 'app_pages'.$_REQUEST['path'].'index' : 'app_pages/dashboard/index';
           // Первый вход
           else {
-            $sIncludePathContent = $_REQUEST['path'] != '/' ? 'app_pages'.$_REQUEST['path'].'index' : 'app_pages/info/start/index';
+            // $sIncludePathContent = $_REQUEST['path'] != '/' ? 'app_pages'.$_REQUEST['path'].'index' : 'app_pages/info/start/index';
+            $sIncludePathContent = $_REQUEST['path'] != '/' ? 'app_pages'.$_REQUEST['path'].'index' : 'app_pages/dashboard/index';
             // Сохраняем что показали
             db::query("UPDATE `users` SET `section` = '1' WHERE `users`.`id` = " . $_SESSION['user']['id'] . ";");
           }

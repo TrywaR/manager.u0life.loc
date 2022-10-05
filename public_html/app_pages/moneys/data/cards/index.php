@@ -5,6 +5,9 @@
     </h1>
 
     <div class="_buttons btn-group">
+      <a class="btn" target="_blank" href="/info/docs/cards/">
+        <i class="fa-solid fa-circle-info"></i>
+      </a>
       <?include 'core/templates/elems/filter_button.php'; # Кнопка фильтрации?>
     </div>
   </div>
@@ -115,8 +118,12 @@
             </div>
           </a>
 
-          <a href="#" title="<?=$oLang->get('CardReloadBalanceBtn')?>" class="btn btn-dark content_download _reload" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="reload" data-animate_class="animate__flipInY">
+          <a href="#" title="<?=$oLang->get('CardReloadBalanceBtn')?>" class="btn btn-dark content_loader_save _reload" data-id="{{id}}" data-action="cards" data-elem=".card_item" data-form="reload" data-animate_class="animate__flipInY">
             <i class="fas fa-retweet"></i>
+          </a>
+
+          <a href="/moneys/?card={{id}}" class="btn btn-dark _list">
+            <i class="fa-solid fa-bars"></i>
           </a>
 
           <a data-action="cards" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".card_item" data-form="form" href="javascript:;" class="btn btn-dark content_loader_show _edit">
