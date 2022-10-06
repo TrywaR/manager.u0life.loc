@@ -13,11 +13,6 @@ $arrProject = $oProject->get_project();
 
 <div class="main_content">
   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-    <?/*
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#pills-info" type="button" role="tab" aria-controls="pills-info" aria-selected="true"><?=$oLang->get('Info')?></button>
-    </li>
-    */?>
     <li class="nav-item" role="presentation">
       <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-week" aria-selected="true"><?=$oLang->get('Week')?></button>
     </li>
@@ -33,116 +28,6 @@ $arrProject = $oProject->get_project();
   </ul>
 
   <div class="tab-content" id="pills-tabContent">
-    <!-- Info -->
-    <div class="tab-pane fade" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
-      <div class="project_info">
-        <div class="_block d-flex flex-column justify-content-center px-4 pb-4">
-          <?
-            $iTimeReally = $oProject->get_times_really();
-            $iTimePlanned = $oProject->get_times_planned();
-            // $iMoneyReally = $oProject->get_moneys_really();
-            // $iMoneyPlanned = $oProject->get_moneys_planned();
-            // $iMoneySpent = $oProject->get_moneys_spent();
-          ?>
-          <div class="_values px-3">
-            <div class="_title">
-              <?=$oLang->get('Times')?>
-            </div>
-
-            <div class="_item">
-              <small>
-                <?=$oLang->get('Spent')?>:
-              </small>
-              <span>
-                <?=$iTimeReally?>
-              </span>
-            </div>
-
-            <div class="_item">
-              <small>
-                <?=$oLang->get('Planned')?>:
-              </small>
-              <span>
-                <?=$iTimePlanned?>
-              </span>
-            </div>
-          </div>
-          <?/*
-          <div class="_values px-3">
-            <div class="_title">
-              <?=$oLang->get('Moneys')?>
-            </div>
-
-            <div class="_item">
-              <small>
-                <?=$oLang->get('Received')?>:
-              </small>
-              <span>
-                <?=number_format($iMoneyReally, 2, '.', ' ')?>
-              </span>
-            </div>
-
-            <div class="_item">
-              <small>
-                <?=$oLang->get('Planned')?>:
-              </small>
-              <span>
-                <?=number_format($iMoneyPlanned, 2, '.', ' ')?>
-              </span>
-            </div>
-
-            <div class="_item">
-              <small>
-                <?=$oLang->get('Spent')?>:
-              </small>
-              <span>
-                <?=number_format($iMoneySpent, 2, '.', ' ')?>
-              </span>
-            </div>
-          </div>
-
-          <div class="_values px-3">
-            <div class="moneyforhour_block">
-              <div class="_result _active_">
-                <div class="_icon">
-                  <i class="fas fa-stopwatch"></i>
-                </div>
-                <div class="_value">
-                  <?
-                  $iTime = str_replace(":", ".", $iTimeReally);
-                  echo round($iMoneyReally / $iTime);
-                  ?>
-                </div>
-                <div class="_title">
-                  <?=$oLang->get('MoneyPerHour')?>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        */?>
-
-        <div class="_block d-flex justify-content-center px-4">
-          <div class="_values px-3">
-            <div class="btn-group">
-              <a href="/tasks/?project_id=<?=$oProject->id?>" class="btn btn-lg">
-                <i class="fa-solid fa-person-digging"></i>
-              </a>
-
-              <a href="/times/?project_id=<?=$oProject->id?>" class="btn btn-lg">
-                <i class="fas fa-clock"></i>
-              </a>
-
-              <a href="/moneys/?project_id=<?=$oProject->id?>" class="btn btn-lg">
-                <i class="fas fa-wallet"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
     <!-- Week -->
     <div class="tab-pane fade show active" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab">
       <!-- Фильтр -->

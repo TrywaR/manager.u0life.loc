@@ -2,14 +2,15 @@
 switch ($_REQUEST['form']) {
   case 'login': # Вход
     // Готовим результат вывода
-    $arrResult = [
+    $arrResults = [
       'text' => $oLang->get('ErrorLoginOrPassword')
     ];
     // Кодируем пасс
     $password = hash( 'ripemd128', $_REQUEST['password'] );
     // Вытаскиваем пользователя
     $arrUser = db::query("SELECT * FROM `users` WHERE `login` = '". $_REQUEST['login'] ."' AND `password` = '". $password . "'");
-    if ( $arrUser ) {
+
+    if ( (int)$arrUser['id'] ) {
       // Создаём модель пользователя
       $arrResults['model'] = 'user';
       $arrResults['data'] = $_SESSION['user'] = $arrUser;
@@ -17,7 +18,7 @@ switch ($_REQUEST['form']) {
       $_SESSION['lang'] = $_SESSION['user']['lang'];
       $arrResults['text'] = $oLang->get('SuccessfulLogin');
       $arrResults['location_reload'] = true;
-      // $arrResults['location'] = '/';
+      $arrResults['location'] = '/';
       // Обновляем сессию
       $oSession = new session( 0, $_SESSION['session'] );
       $oSession->name = 'session';
@@ -26,9 +27,10 @@ switch ($_REQUEST['form']) {
       $arrResults['session'] = $oSession->session;
 
       // Возвращяем результат
-      notification::success( $arrResult );
+      notification::success( $arrResults );
     }
-    else notification::error( $arrResult );
+
+    else notification::error( $arrResults );
     break;
 
   case 'logout': # Выход
@@ -39,9 +41,9 @@ switch ($_REQUEST['form']) {
     session_destroy();
     // Возвращяем результат
     $arrResults['text'] = $oLang->get('SuccessfulExit');
-    // $arrResults['location'] = '/';
+    $arrResults['location'] = '/';
     $arrResults['location_reload'] = true;
-    notification::success( $arrResult );
+    notification::success( $arrResults );
     break;
 
   case 'registration': # Регистрация

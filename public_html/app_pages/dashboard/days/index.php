@@ -12,13 +12,13 @@
       <div class="_section _filter">
         <div class="block_date">
           <div class="_group input-group">
-            <select name="year" class="_year form-select btn" id="dashboard_year">
+            <select name="year" class="_year form-select" id="dashboard_year">
               <?for ($i=date('Y'); $i > date('Y') - 3; $i--) {?>
                 <option value="<?=$i?>"><?=$i?></option>
               <?}?>
             </select>
 
-            <select name="month" class="_month form-select btn" id="dashboard_month">
+            <select name="month" class="_month form-select" id="dashboard_month">
               <?for ($i=1; $i < 13; $i++) {?>
                 <? if ( sprintf("%02d", $i) === date('m')  ): ?>
                   <option selected="selected" value="<?=$i?>"><?=$oLang->get(date("F", strtotime(date('Y') . "-" . sprintf("%02d", $i))))?></option>
@@ -41,5 +41,10 @@
 </div>
 
 <script>
+  $(function(){
+    $(document).find('#dashboard_year').select2({selectionCssClass: ':all:'})
+    $(document).find('#dashboard_month').select2({selectionCssClass: ':all:'})
+    $(document).find('#dashboard_day').select2({selectionCssClass: ':all:'})
+  })
   $(dashboard_init)
 </script>
