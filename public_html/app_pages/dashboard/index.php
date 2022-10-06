@@ -79,7 +79,7 @@
           <span class="_val" id="clock_revers"></span>
         </div>
         <div class="_progress progress">
-          <div id="clock_revers_bar" class="_bar progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<?=$iLeftHour?>" aria-valuemin="0" aria-valuemax="100"></div>
+          <div id="clock_revers_bar" class="_bar progress-bar" role="progressbar" aria-valuenow="<?=$iLeftHour?>" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
 
         <script>
