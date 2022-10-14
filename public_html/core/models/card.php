@@ -26,6 +26,7 @@ class card extends model
   public static $min_payment_percent = ''; # Процент минимального платежа
   public static $min_payment_date = ''; # Дата минимального платежа
   public static $not_edit = 0; # Возможность редактировать
+  public static $currency = ''; # Валюты
 
   // Вывод карты
   function get_card( $arrCard = [] ){
@@ -234,6 +235,15 @@ class card extends model
     $arrFields['min_payment_percent'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentPercent'),'type'=>'number','value'=>$this->min_payment_percent];
     $arrFields['min_payment_date'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentDate'),'type'=>'number','value'=>$this->min_payment_date];
 
+    $oCurrency = new currency();
+    $arrCurrencies = $oCurrency->get_currencies();
+    $arrCurrenciesFilter = [];
+    $arrCurrenciesFilter[] = array('id'=>'','name'=>'...');
+    foreach ( $arrCurrencies as $arrCurrency )
+      $arrCurrenciesFilter[] = array('id'=>$arrCurrency['currency_code'],'name'=>$arrCurrency['currency_code'],'description'=>$arrCurrency['currency_name']);
+
+    $arrFields['currency'] = ['section'=>2,'title'=>$oLang->get('Currency'),'type'=>'select','options'=>$arrCurrenciesFilter,'search'=>true,'value'=>$this->currency];
+
     // if ( ! (int)$this->not_edit )
     $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 
@@ -270,12 +280,14 @@ class card extends model
       $this->min_payment_percent = $arrCard['min_payment_percent'];
       $this->min_payment_date = $arrCard['min_payment_date'];
       $this->not_edit = $arrCard['not_edit'];
+      $this->currency = $arrCard['currency'];
     }
 
     $this->arrTypes = [
       array('id'=>0,'name'=>$oLang->get('CardDebit')),
       array('id'=>1,'name'=>$oLang->get('CardCredit')),
       array('id'=>2,'name'=>$oLang->get('CardBill')),
+      array('id'=>3,'name'=>$oLang->get('Cash')),
     ];
   }
 }

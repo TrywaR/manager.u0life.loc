@@ -41,7 +41,7 @@
 
     <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>>
     <?php foreach ($arrTemplateParams['options'] as $arrOption): ?>
-      <option data-color="<?=$arrOption['color']?>" value="<?=$arrOption['id']?>" <?if($arrTemplateParams['value'] == $arrOption['id']) {echo 'selected';}?>><?=$arrOption['name']?></option>
+      <option data-description="<?=$arrOption['description']?>" data-color="<?=$arrOption['color']?>" value="<?=$arrOption['id']?>" <?if($arrTemplateParams['value'] == $arrOption['id']) {echo 'selected';}?>><?=$arrOption['name']?></option>
     <?php endforeach; ?>
   </select>
 
@@ -62,6 +62,12 @@
               )
               return $state
             }
+            if ( $(data.element).data().description ) {
+              var $state = $(
+                '<span class="_text">' + data.text + '</span> <small class="_desc" style="opacity:.4;margin-left:1rem;">' + $(data.element).data().description + '</small>'
+              )
+              return $state
+            }
           }
 
           return data.text;
@@ -71,6 +77,12 @@
             if ( $(data.element).data().color ) {
               var $state = $(
                 '<span class="_color" style="background:' + $(data.element).data().color + ';"></span><span class="_text">' + data.text + '</span>'
+              )
+              return $state
+            }
+            if ( $(data.element).data().description ) {
+              var $state = $(
+                '<span class="_text">' + data.text + '</span> <small class="_desc" style="opacity:.4;margin-left:1rem;">' + $(data.element).data().description + '</small>'
               )
               return $state
             }

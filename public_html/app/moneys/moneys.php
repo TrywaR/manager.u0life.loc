@@ -167,7 +167,7 @@ switch ($_REQUEST['form']) {
         break;
 
       case 2: # Зачисления
-        if ( (int)$oMoney->card ) {
+        if ( (int)$oMoney->to_card ) {
           $oCardTo = new card( $oMoney->to_card );
           $oCardTo->balance_add( $oMoney->price );
           if ( (int)$oMoney->category == 2 ) $oCardTo->commission_remove( $oMoney->price ); # Если комиссия

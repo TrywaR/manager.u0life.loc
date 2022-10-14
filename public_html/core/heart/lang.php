@@ -49,6 +49,8 @@ class lang
       'NoticeView' => 'Просмотр уведомления',
       'NoticesViews' => 'Просмотры уведомлений',
 
+      'Currency' => 'Валюта',
+
       'HelloCards' => 'Добавьте свои карты,<br/> чтобы отслеживать баланс и расходы',
       'HelloSubscriptions' => 'Добавьте ежемесячные платежи<br/> Чтобы отслеживать сколько и когда платить',
       'HelloWelcome' => 'Краткая информация<br/> для знакомства с сервисом',
@@ -326,6 +328,8 @@ class lang
       'Notice' => 'Notice',
       'NoticeView' => 'Notice view',
       'NoticesViews' => 'Notices views',
+
+      'Currency' => 'Currency',
 
       'HelloCards' => 'Add your cards<br/> to track your balance and spending',
       'HelloSubscriptions' => 'Add monthly payments<br/> To track how much and when to pay',

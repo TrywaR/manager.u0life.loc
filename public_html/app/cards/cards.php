@@ -170,7 +170,8 @@ switch ($_REQUEST['form']) {
     }
 
     $oCard = new card( $oCard->id );
-    $arrResult['data'] = $oCard->get_cards();
+    $oCard->balance_reload();
+    $arrResult['data'] = $oCard->get_card();
     $arrResult['text'] = $olang->get('ChangesSaved');
     notification::success($arrResult);
     break;
