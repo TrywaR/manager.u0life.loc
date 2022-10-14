@@ -16,7 +16,7 @@
       <i class="fa-brands fa-patreon"></i>
     </div>
     <div class="_val">
-      <a href="https://www.patreon.com/user?u=76441895">Patreon</a>
+      <a target="_blank" href="https://www.patreon.com/user?u=76441895">Patreon</a>
     </div>
   </div>
 
@@ -25,7 +25,7 @@
       <i class="fa-solid fa-ruble-sign"></i>
     </div>
     <div class="_val">
-      <a href="https://boosty.to/u0life">Boosty.to</a>
+      <a target="_blank" href="https://boosty.to/u0life">Boosty.to</a>
     </div>
   </div>
 
@@ -34,7 +34,7 @@
       <i class="fa-solid fa-ruble-sign"></i>
     </div>
     <div class="_val">
-      <a href="https://www.tinkoff.ru/cf/8nxfBnPIjvD">Tinkoff</a>
+      <a target="_blank" href="https://www.tinkoff.ru/cf/8nxfBnPIjvD">Tinkoff</a>
     </div>
   </div>
 </div>

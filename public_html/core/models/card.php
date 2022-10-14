@@ -82,6 +82,38 @@ class card extends model
     return $iBalance;
   }
 
+  // Получение баланса с учётом кредиток
+  function get_balance_oncredit( $iCardId = 0 ) {
+    $iBalance = 0;
+
+    $oCards = new card();
+    $oCards->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $arrCards = $oCards->get_cards();
+
+    foreach ($arrCards as $arrCard) {
+      $iBalance = (float)$iBalance + (float)$arrCard['limit'];
+      $iBalance = (float)$iBalance + (float)$arrCard['balance'];
+    }
+
+    return $iBalance;
+  }
+
+  // Кредитные карты
+  function get_credit_cards( $iCardId = 0 ) {
+    $arrCreditCards = [];
+
+    $oCards = new card();
+    $oCards->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $arrCards = $oCards->get_cards();
+
+    foreach ($arrCards as $arrCard) {
+      if ( (int)$arrCard['limit'] > 0 )
+        $arrCreditCards[] = $arrCard;
+    }
+
+    return $arrCreditCards;
+  }
+
   // Пополнение баланса карты
   function balance_add( $floatSum ){
     $this->balance = (float)$this->balance + (float)$floatSum;

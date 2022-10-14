@@ -2,33 +2,35 @@
 switch ($_REQUEST['form']) {
   case 'login': # Вход
     // Готовим результат вывода
-    $arrResult = [
+    $arrResults = [
       'text' => $oLang->get('ErrorLoginOrPassword')
     ];
     // Кодируем пасс
     $password = hash( 'ripemd128', $_REQUEST['password'] );
     // Вытаскиваем пользователя
     $arrUser = db::query("SELECT * FROM `users` WHERE `login` = '". $_REQUEST['login'] ."' AND `password` = '". $password . "'");
-    if ( $arrUser ) {
+
+    if ( (int)$arrUser['id'] ) {
       // Создаём модель пользователя
-      $arrResult['model'] = 'user';
-      $arrResult['data'] = $_SESSION['user'] = $arrUser;
+      $arrResults['model'] = 'user';
+      $arrResults['data'] = $_SESSION['user'] = $arrUser;
       $_SESSION['theme'] = $_SESSION['user']['theme'];
       $_SESSION['lang'] = $_SESSION['user']['lang'];
-      $arrResult['text'] = $oLang->get('SuccessfulLogin');
-      $arrResult['location_reload'] = true;
-      // $arrResult['location'] = '/';
+      $arrResults['text'] = $oLang->get('SuccessfulLogin');
+      $arrResults['location_reload'] = true;
+      $arrResults['location'] = '/';
       // Обновляем сессию
       $oSession = new session( 0, $_SESSION['session'] );
       $oSession->name = 'session';
       $oSession->user_id = $arrUser['id'];
       $oSession->save();
-      $arrResult['session'] = $oSession->session;
+      $arrResults['session'] = $oSession->session;
 
       // Возвращяем результат
-      notification::success( $arrResult );
+      notification::success( $arrResults );
     }
-    else notification::error( $arrResult );
+
+    else notification::error( $arrResults );
     break;
 
   case 'logout': # Выход
@@ -38,10 +40,10 @@ switch ($_REQUEST['form']) {
     // Отчищаем сессию
     session_destroy();
     // Возвращяем результат
-    $arrResult['text'] = $oLang->get('SuccessfulExit');
-    // $arrResult['location'] = '/';
-    $arrResult['location_reload'] = true;
-    notification::success( $arrResult );
+    $arrResults['text'] = $oLang->get('SuccessfulExit');
+    $arrResults['location'] = '/';
+    $arrResults['location_reload'] = true;
+    notification::success( $arrResults );
     break;
 
   case 'registration': # Регистрация
@@ -83,19 +85,19 @@ switch ($_REQUEST['form']) {
 
     $arrResults = [];
     $arrResults['text'] = $oLang->get('RegistrationCompletedSuccessfully');
-    $arrResults['location'] = '/authorizations/';
+    // $arrResults['location'] = '/authorizations/';
     $arrResults['location_time'] = 2000;
 
     // Добавляем пользователя
     $iUserId = $oUser->add();
     if ( $iUserId ) {
       // УВЕДОМЛЕНИЕ Отправляем в телегу
-      // $mailNew = new mail();
-      // $telegram_messages = 'Логин: ' . $_REQUEST['login'] . ' %0A';
-      // if ( $_SESSION['referal'] ) {
-      //   $telegram_messages .= '_По приглашению от_: *' . $oUserReferal->login . '* (' . $oUserReferal->id . ')' . '%0A';
-      // }
-      // $oResult = $mailNew->telegram('Зарегистрирован новый пользователь', $telegram_messages);
+      $mailNew = new mail();
+      $telegram_messages = 'Логин: ' . $_REQUEST['login'] . ' %0A';
+      if ( $_SESSION['referal'] ) {
+        $telegram_messages .= '_По приглашению от_: *' . $oUserReferal->login . '* (' . $oUserReferal->id . ')' . '%0A';
+      }
+      $oResult = $mailNew->telegram('Зарегистрирован новый пользователь', $telegram_messages);
 
       // ПОДГОТОВКА ПОЛЬЗОВАТЕЛЯ
       // - Создание счёта для кэша
@@ -129,19 +131,22 @@ switch ($_REQUEST['form']) {
         }
       }
 
-      // Автоматическая авторизация
-      // if ( ! $_SESSION['user'] ) {
-      //   // Обновляем сессию
-      //   $oSession = new session( 0, $_SESSION['session'] );
-      //   if ( $_REQUEST['push'] ) $oSession->push = $_REQUEST['push'];
-      //   $oSession->user_id = $sUserId;
-      //   $oSession->update();
-      //   // Сохраняем данные в сессию
-      //   $arrResult['session'] = $_SESSION['session'] = $arrUser['session'] = $oSession->session;
-      //   $oUser = new user( $sUserId );
-      //   $oUser->show_rewards = true;
-      //   $arrResult['user'] = $_SESSION['user'] = $oUser->get();
-      // }
+      // АВТОМАТИЧЕСКАЯ АВТОРИЗАЦИЯ
+      $arrResults['model'] = 'user';
+      $oUser = new user( $iUserId );
+      $arrUser = $oUser->get_user();
+      $arrResults['data'] = $_SESSION['user'] = $arrUser;
+      $_SESSION['theme'] = $_SESSION['user']['theme'];
+      $_SESSION['lang'] = $_SESSION['user']['lang'];
+      // $arrResults['text'] = $oLang->get('SuccessfulLogin');
+      $arrResults['location_reload'] = true;
+      $arrResults['location'] = '/';
+      // Обновляем сессию
+      $oSession = new session( 0, $_SESSION['session'] );
+      $oSession->name = 'session';
+      $oSession->user_id = $arrUser['id'];
+      $oSession->save();
+      $arrResults['session'] = $oSession->session;
 
       notification::success($arrResults);
     }

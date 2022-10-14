@@ -9,10 +9,6 @@
 <div class="main_content">
   <div class="block_dashboard">
     <div class="_sections">
-      <div class="_sections_title">
-        <?=$oLang->get('Day')?>
-      </div>
-
       <div class="_section _filter">
         <div class="block_date">
           <div class="_group input-group">
@@ -45,5 +41,10 @@
 </div>
 
 <script>
+  $(function(){
+    $(document).find('#dashboard_year').select2({selectionCssClass: ':all:'})
+    $(document).find('#dashboard_month').select2({selectionCssClass: ':all:'})
+    $(document).find('#dashboard_day').select2({selectionCssClass: ':all:'})
+  })
   $(dashboard_init)
 </script>

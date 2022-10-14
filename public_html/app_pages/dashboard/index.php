@@ -8,6 +8,55 @@
 
 <div class="main_content">
   <div class="dashboard_blocks">
+    <!-- Уведомление -->
+    <?
+    $oNotice = new notice();
+    $arrNotices = $oNotice->get_notices();
+    $arrNoticesValids = [];
+
+    foreach ($arrNotices as $arrNotice) {
+      $oNoticeView = new notice_view();
+      $oNoticeView->query .= ' AND `notice_id` = ' . $arrNotice['id'];
+      $oNoticeView->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $arrNoticeViews = $oNoticeView->get_notices_views();
+      if ( count($arrNoticeViews) >= $arrNotice['views'] ) continue;
+
+      $arrNoticesValids[] = $arrNotice;
+      break;
+    }
+    ?>
+    <?php if ( count($arrNoticesValids) ): ?>
+      <div class="_item __href __big block_notice __notice animate__animated ">
+        <div class="_title">
+          <?=$arrNoticesValids[0]['title']?>
+        </div>
+        <div class="_value">
+          <div class="_sub">
+            <?=$arrNoticesValids[0]['content']?>
+          </div>
+        </div>
+        <div class="_icon">
+          <?=$arrNoticesValids[0]['icon']?>
+        </div>
+        <div class="_icon_bg">
+          <i class="fa-regular fa-bell"></i>
+        </div>
+        <div class="_close">
+          <a href="javascript:;" class="content_loader_show" data-action="notices" data-form="add_view" data-id="<?=$arrNoticesValids[0]['id']?>" data-success_click="#notice_hide">
+            <i class="fa-solid fa-xmark"></i>
+          </a>
+        </div>
+        <div class="_href">
+          <a href="javascript:;" class="content_loader_show" data-action="notices" data-form="add_view" data-id="<?=$arrNoticesValids[0]['id']?>" data-success_click="#notice_href">
+          </a>
+        </div>
+        <div class="_hello"></div>
+        <div class="_hover"></div>
+        <a id="notice_hide" onclick="$(this).parents('.block_notice').hide(500);return false;"></a>
+        <a id="notice_href" style="display:none;" href="<?=$arrNoticesValids[0]['href']?>"></a>
+      </div>
+    <?php endif; ?>
+
     <!-- День -->
     <div class="_item __href __big">
       <div class="_title">
@@ -200,62 +249,113 @@
 
     <!-- Баланс -->
     <div class="_item __href">
-      <div class="_title">
-        <?=$oLang->get('Balance')?>
-      </div>
-      <div class="_value">
-        <div class="_sub">
-          <?=$oLang->get('Current')?>
+      <?
+      $oMoney = new money();
+      $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $arrMoneys = $oMoney->get_moneys();
+      ?>
+      <?php if (count($arrMoneys)): ?>
+        <div class="_title">
+          <?=$oLang->get('Balance')?>
         </div>
-        <div class="">
-          <?
-          $oCard = new card();
-          echo number_format($oCard->get_balance(), 2, '.', ' ');
-          ?>
+        <div class="_value">
+          <div class="_sub">
+            <?=$oLang->get('Current')?>
+          </div>
+          <div class="">
+            <?$oCard = new card()?>
+            <?=number_format($oCard->get_balance(), 2, '.', ' ')?>
+          </div>
+          <?php if (count($oCard->get_credit_cards())): ?>
+            <div class="_sub">
+              <?=$oLang->get('BalanceOnCredit')?>
+            </div>
+            <div class="">
+              <?=number_format($oCard->get_balance_oncredit(), 2, '.', ' ')?>
+            </div>
+          <?php endif; ?>
         </div>
-      </div>
-      <div class="_href">
-        <a href="/moneys/data/cards/"></a>
-      </div>
-      <div class="_hover"></div>
+        <div class="_href">
+          <a href="/moneys/data/cards/"></a>
+        </div>
+        <div class="_hover"></div>
+      <?php else: ?>
+        <div class="_title">
+          <?=$oLang->get('Cards')?>
+        </div>
+        <div class="_value">
+          <div class="_sub">
+            <?=$oLang->get('HelloCards')?>
+          </div>
+        </div>
+        <div class="_icon">
+          <i class="fa-solid fa-circle-plus"></i>
+        </div>
+        <div class="_href">
+          <a href="/moneys/data/cards/"></a>
+        </div>
+        <div class="_hello"></div>
+        <div class="_hover"></div>
+      <?php endif; ?>
     </div>
 
     <!-- Подписки -->
     <div class="_item __href">
-      <div class="_title">
-        <?=$oLang->get('Subscriptions')?>
-      </div>
-      <div class="_value">
-        <div class="_group">
-          <div class="_sub">
-            <?=$oLang->get($dDateReally->format('F'))?>
-            <?=$oLang->get($dDateReally->format('Y'))?>
-          </div>
+      <?
+      $oSubscription = new subscription();
+      $oSubscription->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $arrSubscriptions = $oSubscription->get_subscriptions();
+      ?>
+      <?php if (count($arrSubscriptions)): ?>
+        <div class="_title">
+          <?=$oLang->get('Subscriptions')?>
+        </div>
+        <div class="_value">
+          <div class="_group">
+            <div class="_sub">
+              <?=$oLang->get($dDateReally->format('F'))?>
+              <?=$oLang->get($dDateReally->format('Y'))?>
+            </div>
 
-          <?
-          $oSubscription = new subscription();
-          $arrSubscriptionsMonth = $oSubscription->get_month();
-          ?>
-          <div class="_row">
-            <small><?=$oLang->get('SubscriptionSum')?>:</small>
-            <span><?=number_format($arrSubscriptionsMonth['subscriptions_sum'], 2, '.', ' ')?></span>
-          </div>
+            <?$arrSubscriptionsMonth = $oSubscription->get_month()?>
+            <div class="_row">
+              <small><?=$oLang->get('SubscriptionSum')?>:</small>
+              <span><?=number_format($arrSubscriptionsMonth['subscriptions_sum'], 2, '.', ' ')?></span>
+            </div>
 
-          <div class="_row">
-            <small><?=$oLang->get('SubscriptionSumPaid')?>:</small>
-            <span><?=number_format($arrSubscriptionsMonth['subscriptions_sum_paid'], 2, '.', ' ')?></span>
-          </div>
+            <div class="_row">
+              <small><?=$oLang->get('SubscriptionSumPaid')?>:</small>
+              <span><?=number_format($arrSubscriptionsMonth['subscriptions_sum_paid'], 2, '.', ' ')?></span>
+            </div>
 
-          <div class="_row">
-            <small><?=$oLang->get('SubscriptionSumNeedPaid')?>:</small>
-            <span><?=number_format($arrSubscriptionsMonth['subscriptions_sum_need'], 2, '.', ' ')?></span>
+            <div class="_row">
+              <small><?=$oLang->get('SubscriptionSumNeedPaid')?>:</small>
+              <span><?=number_format($arrSubscriptionsMonth['subscriptions_sum_need'], 2, '.', ' ')?></span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="_href">
-        <a href="/subscriptions/month/"></a>
-      </div>
-      <div class="_hover"></div>
+        <div class="_href">
+          <a href="/subscriptions/month/"></a>
+        </div>
+        <div class="_hover"></div>
+      <?php else: ?>
+        <div class="_title">
+          <?=$oLang->get('Subscriptions')?>
+        </div>
+        <div class="_value">
+          <div class="_sub">
+            <?=$oLang->get('HelloSubscriptions')?>
+          </div>
+        </div>
+        <div class="_icon">
+          <i class="fa-solid fa-circle-plus"></i>
+        </div>
+        <div class="_href">
+          <a href="/subscriptions/"></a>
+        </div>
+        <div class="_hello"></div>
+        <div class="_hover"></div>
+      <?php endif; ?>
     </div>
 
     <!-- Задачи -->

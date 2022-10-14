@@ -412,6 +412,22 @@ class nav
             'access' => 500,
             'onlyapp' => true,
           ),
+          '/admin/notices/' => array(
+            'name' => $oLang->get('Notices'),
+            'description' => $oLang->get('Notices'),
+            'url' => '/admin/notices/',
+            'icon' => '<i class="fa-regular fa-bell"></i>',
+            'access' => 500,
+            'onlyapp' => true,
+          ),
+          '/admin/notices/views/' => array(
+            'name' => $oLang->get('NoticesViews'),
+            'description' => $oLang->get('NoticesViews'),
+            'url' => '/admin/notices/views/',
+            'icon' => '<i class="fa-solid fa-bell"></i>',
+            'access' => 500,
+            'onlyapp' => true,
+          ),
         ]
       ),
     ];

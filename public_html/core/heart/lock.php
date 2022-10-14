@@ -47,6 +47,12 @@ class lock
       'RewardsSave' => 500,
       'RewardsDel' => 500,
 
+      'NoticesAll' => 500,
+      'NoticesShow' => 0,
+      'NoticesForm' => 500,
+      'NoticesSave' => 500,
+      'NoticesDel' => 500,
+
       'UsersAll' => 500,
       'UsersShow' => 500,
       'UsersForm' => 500,

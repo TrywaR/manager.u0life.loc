@@ -31,3 +31,5 @@ include_once 'models/chart.php'; # Графики
 include_once 'models/access.php'; # Доступы
 include_once 'models/reward.php'; # Награды
 include_once 'models/reward_user.php'; # Награды пользователей
+include_once 'models/notice.php'; # Уведомления
+include_once 'models/notice_view.php'; # Просмотры Уведомления
