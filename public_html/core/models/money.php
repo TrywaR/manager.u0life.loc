@@ -32,6 +32,16 @@ class money extends model
       $oCard = new card( $arrMoney['card'] );
       $arrMoney['card_val'] = (array)$oCard;
       $arrMoney['card_show'] = 'true';
+
+      if ( $this->show_currency ) {
+        $oCurrency = new currency();
+        $arrMoney['currency_user'] = $oCurrency->get_currency_user();
+        if ( $arrMoney['currency_user'] != $oCard->currency ) {
+          $arrMoney['currency_price'] = $arrMoney['price'] / $oCurrency->get_val( $oCard->currency );
+          $arrMoney['currency_price'] = round($arrMoney['currency_price']);
+        }
+        else $arrMoney['currency_user'] = '';
+      }
     }
 
     if ( $this->show_to_card )
@@ -39,6 +49,16 @@ class money extends model
       $oCardTo = new card( $arrMoney['to_card'] );
       $arrMoney['cardto_val'] = (array)$oCardTo;
       $arrMoney['cardto_show'] = 'true';
+
+      if ( $this->show_currency ) {
+        $oCurrency = new currency();
+        $arrMoney['currency_user'] = $oCurrency->get_currency_user();
+        if ( $arrMoney['currency_user'] != $oCardTo->currency ) {
+          $arrMoney['currency_price'] = $arrMoney['price'] / $oCurrency->get_val( $oCardTo->currency );
+          $arrMoney['currency_price'] = round($arrMoney['currency_price']);
+        }
+        else $arrMoney['currency_user'] = '';
+      }
     }
 
     if ( $this->show_category )

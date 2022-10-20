@@ -82,6 +82,15 @@
              <li class="list-group-item">
                <small>
                  <span class="icon">
+                   <i class="fa-solid fa-wallet"></i>
+                 </span>
+                 <?=$oLang->get('Currency')?>:
+               </small>
+               <?=$_SESSION['user']['currency']?>
+             </li>
+             <li class="list-group-item">
+               <small>
+                 <span class="icon">
                    <i class="fas fa-tint"></i>
                  </span>
                  <?=$oLang->get('Theme')?>:

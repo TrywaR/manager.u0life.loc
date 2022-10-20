@@ -100,6 +100,11 @@
 
         <div class="badge bg-primary _balance" title="Balance">
           <span>{{balance}}</span> / <small>{{limit}}</small>
+          <span style="margin-left: auto; opacity: .1;">{{currency}}</span>
+        </div>
+
+        <div class="badge bg-secondary text-dark _currency d-none{{currency_user}}" title="Cyrrency">
+          {{currency_balance}} {{currency_user}}
         </div>
 
         <div class="badge bg-warning text-dark _commission" title="Commission">

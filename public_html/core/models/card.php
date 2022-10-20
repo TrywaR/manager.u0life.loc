@@ -44,6 +44,18 @@ class card extends model
 
     // Обработка данных
     $arrCard['balance'] = substr($arrCard['balance'], 0, -2);
+
+    // Валюта
+    if ( $this->show_currency ) {
+      $oCurrency = new currency();
+      $arrCard['currency_user'] = $oCurrency->get_currency_user();
+      if ( $arrCard['currency'] != $arrCard['currency_user'] ) {
+        $arrCard['currency_balance'] = $arrCard['balance'] / $oCurrency->get_val( $arrCard['currency'] );
+        $arrCard['currency_balance'] = round($arrCard['currency_balance']);
+      }
+      else $arrCard['currency_user'] = '';
+    }
+
     $arrCard['limit'] = substr($arrCard['limit'], 0, -2);
     $arrCard['commission'] = substr($arrCard['commission'], 0, -2);
     if ( (float)$arrCard['commission'] > 0 ) $arrCard['commission_show'] = 'true';
@@ -163,6 +175,7 @@ class card extends model
     foreach ($arrMoneys as $arrMoney) $this->balance = (float)$this->balance + (float)$arrMoney['price'];
 
     $this->date_update = date("Y-m-d H:i:s");
+    unset($this->not_edit);
     $this->save();
     return $this->balance;
   }
@@ -171,6 +184,7 @@ class card extends model
   function commission_add( $floatSum ){
     $this->commission = (float)$this->commission + (float)$floatSum;
     $this->date_update = date("Y-m-d H:i:s");
+    unset($this->not_edit);
     $this->save();
     return $this->commission;
   }
@@ -179,6 +193,7 @@ class card extends model
   function commission_remove( $floatSum ){
     $this->commission = (float)$this->commission - (float)$floatSum;
     $this->date_update = date("Y-m-d H:i:s");
+    unset($this->not_edit);
     $this->save();
     return $this->commission;
   }
@@ -205,8 +220,8 @@ class card extends model
     $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
 
     // Возможность редактировать
-    if ( (int)$this->not_edit )
-      $arrFields['not_edit'] = ['title'=>'NotEdit','type'=>'hidden','value'=>$this->not_edit]; # Возможность редактировать
+    // if ( (int)$this->not_edit )
+    //   $arrFields['not_edit'] = ['title'=>'NotEdit','type'=>'hidden','value'=>$this->not_edit]; # Возможность редактировать
 
     $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
 

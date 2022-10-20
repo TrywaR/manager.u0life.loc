@@ -225,7 +225,7 @@ $arrTypes = [
     $(function(){
       // $(document).find('#moneys').content_loader()
       $(document).find('#content_filter').content_filter()
-      $(document).find('#content_manager_buttons').content_manager()
+      // $(document).find('#content_manager_buttons').content_manager()
       // $(document).find('#footer_actions').content_actions( {'action':'moneys'} )
     })
   </script>
@@ -249,6 +249,16 @@ $arrTypes = [
       <div class="fw-bold d-flex align-items-center">
         <div class="badge bg-primary _price" style="font-size: 1rem; font-weight: normal; background: {{categroy_val.color}} ! important; margin-right:.5rem;">
           {{price}}
+          <span style="opacity: .3;">
+            {{card_val.currency}}
+          </span>
+        </div>
+
+        <div class="badge bg-secondary _currency d-none{{currency_user}} mx-2">
+          {{currency_price}}
+          <span style="opacity: .3;">
+            {{currency_user}}
+          </span>
         </div>
 
         <span class="_title">

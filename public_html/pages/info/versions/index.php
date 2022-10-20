@@ -11,7 +11,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_5_2">5.5.2 Projects</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_5_3">5.5.3 Currency</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_5_2">5.5.2 Projects</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_5_1">5.5.1 Interface</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_5_0">5.5.0 Dashboard</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_4_9">5.4.9 Clients</a>
@@ -75,6 +76,19 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_5_3">5.5.3 Currency</h2>
+            <ol>
+              <li>
+                Возможность задавать валюту пользователя
+              </li>
+              <li>
+                Высчитывается валюта пользователя в картах
+              </li>
+              <li>
+                Высчитывается валюта пользователя в списке трат и поступлений
+              </li>
+            </ol>
+
             <h2 id="list-item-5_5_2">5.5.2 Interface</h2>
             <ol>
               <li>

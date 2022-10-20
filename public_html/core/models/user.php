@@ -19,6 +19,7 @@ class user extends model
   public static $protect = '';
   public static $arrProtectTypes = '';
   public static $section = '';
+  public static $currency = '';
 
   public function get_user( $arrUser = [] ) {
     if ( ! $arrUser['id'] ) $arrUser = $this->get();
@@ -89,8 +90,17 @@ class user extends model
     $arrFields['login'] = ['title'=>$oLang->get('Login'),'type'=>'text','value'=>$this->login];
     $arrFields['phone'] = ['title'=>$oLang->get('Phone'),'type'=>'text','value'=>$this->phone];
     $arrFields['email'] = ['title'=>$oLang->get('Email'),'type'=>'text','value'=>$this->email];
-    $arrFields['section'] = ['title'=>$oLang->get('Section'),'type'=>'number','value'=>$this->section];
+    // $arrFields['section'] = ['title'=>$oLang->get('Section'),'type'=>'number','value'=>$this->section];
     $arrFields['date_registration'] = ['title'=>$oLang->get('DateRegistration'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_registration];
+
+    $oCurrency = new currency();
+    $arrCurrencies = $oCurrency->get_currencies();
+    $arrCurrenciesFilter = [];
+    $arrCurrenciesFilter[] = array('id'=>'','name'=>'...');
+    foreach ( $arrCurrencies as $arrCurrency )
+      $arrCurrenciesFilter[] = array('id'=>$arrCurrency['currency_code'],'name'=>$arrCurrency['currency_code'],'description'=>$arrCurrency['currency_name']);
+
+    $arrFields['currency'] = ['section'=>2,'title'=>$oLang->get('Currency'),'type'=>'select','options'=>$arrCurrenciesFilter,'search'=>true,'value'=>$this->currency];
 
     $oLock = new lock();
     if ( $oLock->check('UsersAll') || (int)$this->role > 100 ) {
@@ -130,6 +140,7 @@ class user extends model
       $this->referal = $arrUser['referal'];
       $this->protect = $arrUser['protect'];
       $this->section = $arrUser['section'];
+      $this->currency = $arrUser['currency'];
     }
     else {
       $this->lang = 'en';

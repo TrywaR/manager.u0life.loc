@@ -92,6 +92,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oCard->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oCard->limit = $_REQUEST['limit'];
 
+    $oCard->show_currency = true;
     $oCard->sortname = 'sort';
     $oCard->sortdir = 'ASC';
     $oCard->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';

@@ -28,6 +28,7 @@ switch ($_REQUEST['form']) {
     $oMoney->show_project = true;
     $oMoney->show_task = true;
     $oMoney->show_subscription = true;
+    $oMoney->show_currency = true;
 
     $oMoney->sortMulti = ' `date` DESC, `date_update` DESC ';
     $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
