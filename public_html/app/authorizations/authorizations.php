@@ -101,14 +101,14 @@ switch ($_REQUEST['form']) {
 
       // ПОДГОТОВКА ПОЛЬЗОВАТЕЛЯ
       // - Создание счёта для кэша
-      $oCard = new card();
-      $oCard->title = 'Cash';
-      $oCard->user_id = $iUserId;
-      $oCard->sort = 0;
-      $oCard->color = '#7661db';
-      $oCard->date_update = date('Y-m-d H:i:s');
-      $oCard->active = 1;
-      $oCard->add();
+      // $oCard = new card();
+      // $oCard->title = 'Cash';
+      // $oCard->user_id = $iUserId;
+      // $oCard->sort = 0;
+      // $oCard->color = '#7661db';
+      // $oCard->date_update = date('Y-m-d H:i:s');
+      // $oCard->active = 1;
+      // $oCard->add();
 
       // НАГРАДЫ
       // - Смотрим награды за регистрацию

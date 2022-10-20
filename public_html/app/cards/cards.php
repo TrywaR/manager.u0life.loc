@@ -40,9 +40,10 @@ switch ($_REQUEST['form']) {
       // array('id'=>1,'name'=>$oLang->get('CardCredit')),
       // array('id'=>2,'name'=>$oLang->get('CardBill')),
       switch ($arrCard['type']) {
-        case 0: # Депетовая
+        case 0: # Кэш
           break;
-        case 1: # Кредитовая
+        case 1: # Дебетовая
+        case 2: # Кредитовая
           // Оплата за обслуживание
           // Оплата коммиссии
           // - Определяем когда оплата за обслуживание
@@ -51,7 +52,7 @@ switch ($_REQUEST['form']) {
           // - Если время платить, собираем денежку
           // $arrMoneys
           break;
-        case 2: # Счёт
+        case 3: # Счёт
           // Начисление
           break;
       }

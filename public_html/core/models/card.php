@@ -284,10 +284,10 @@ class card extends model
     }
 
     $this->arrTypes = [
-      array('id'=>0,'name'=>$oLang->get('CardDebit')),
-      array('id'=>1,'name'=>$oLang->get('CardCredit')),
-      array('id'=>2,'name'=>$oLang->get('CardBill')),
-      array('id'=>3,'name'=>$oLang->get('Cash')),
+      array('id'=>0,'name'=>$oLang->get('Cash')),
+      array('id'=>1,'name'=>$oLang->get('CardDebit')),
+      array('id'=>2,'name'=>$oLang->get('CardCredit')),
+      array('id'=>3,'name'=>$oLang->get('CardBill')),
     ];
   }
 }
