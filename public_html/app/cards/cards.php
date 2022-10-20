@@ -182,6 +182,7 @@ switch ($_REQUEST['form']) {
     $arrResult = [];
     $oCard = new card( $_REQUEST['id'] );
     $oCard->balance_reload();
+    $oCard->show_currency = true;
     $arrResult['data'] = $oCard->get_card();
     $arrResult['event'] = 'save';
     $arrResult['text'] = $olang->get('CardUpdate');
