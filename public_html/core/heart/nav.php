@@ -428,6 +428,14 @@ class nav
             'access' => 500,
             'onlyapp' => true,
           ),
+          '/admin/currencies/' => array(
+            'name' => $oLang->get('Currencies'),
+            'description' => $oLang->get('Currencies'),
+            'url' => '/admin/currencies/',
+            'icon' => '<i class="fa-solid fa-wallet"></i>',
+            'access' => 500,
+            'onlyapp' => true,
+          ),
         ]
       ),
     ];

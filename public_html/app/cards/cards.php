@@ -151,7 +151,8 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oCard->get_cards();
+    $oCard->show_currency = true;
+    $arrResults['data'] = $oCard->get_card();
 
     $arrResults['action'] = 'cards';
     notification::send($arrResults);
@@ -173,6 +174,7 @@ switch ($_REQUEST['form']) {
 
     $oCard = new card( $oCard->id );
     $oCard->balance_reload();
+    $oCard->show_currency = true;
     $arrResult['data'] = $oCard->get_card();
     $arrResult['text'] = $olang->get('ChangesSaved');
     notification::success($arrResult);

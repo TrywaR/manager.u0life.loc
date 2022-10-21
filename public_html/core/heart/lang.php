@@ -50,6 +50,7 @@ class lang
       'NoticesViews' => 'Просмотры уведомлений',
 
       'Currency' => 'Валюта',
+      'Currencies' => 'Валюты',
 
       'HelloCards' => 'Добавьте свои карты,<br/> чтобы отслеживать баланс и расходы',
       'HelloSubscriptions' => 'Добавьте ежемесячные платежи<br/> Чтобы отслеживать сколько и когда платить',
@@ -330,6 +331,7 @@ class lang
       'NoticesViews' => 'Notices views',
 
       'Currency' => 'Currency',
+      'Currencies' => 'Currencies',
 
       'HelloCards' => 'Add your cards<br/> to track your balance and spending',
       'HelloSubscriptions' => 'Add monthly payments<br/> To track how much and when to pay',

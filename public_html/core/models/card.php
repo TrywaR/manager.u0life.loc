@@ -43,21 +43,36 @@ class card extends model
     // if ( $iLastMoney > $iLastUpdateCard ) $arrCard['balance'] = $this->balance_reload();
 
     // Обработка данных
-    $arrCard['balance'] = substr($arrCard['balance'], 0, -2);
+    $arrCard['balance'] = round($arrCard['balance']);
+
+    $arrCard['limit'] = round($arrCard['limit']);
+    if ( ! $arrCard['limit'] ) $arrCard['limit'] = '-';
+
+    $arrCard['commission'] = round($arrCard['commission']);
+    if ( ! $arrCard['commission'] ) $arrCard['commission'] = '-';
 
     // Валюта
-    if ( $this->show_currency ) {
+    $oLock = new lock();
+    if ( $this->show_currency && $oLock->check('Currency') ) {
       $oCurrency = new currency();
       $arrCard['currency_user'] = $oCurrency->get_currency_user();
+      $arrCard['currency_card'] = $arrCard['currency'];
       if ( $arrCard['currency'] != $arrCard['currency_user'] ) {
-        $arrCard['currency_balance'] = $arrCard['balance'] / $oCurrency->get_val( $arrCard['currency'] );
-        $arrCard['currency_balance'] = round($arrCard['currency_balance']);
+        $arrCard['currency_balance'] = round($arrCard['balance']);
+        $arrCard['balance'] = round( $arrCard['balance'] / $oCurrency->get_val( $arrCard['currency'] ) );
+
+        $arrCard['currency_card'] = $oCurrency->get_currency_user();
+        $arrCard['currency_user'] = $arrCard['currency'];
+
+        if ( (int)$arrCard['limit'] )
+          $arrCard['limit'] = round( $arrCard['limit'] / $oCurrency->get_val( $arrCard['limit'] ) );
+        if ( (int)$arrCard['commission'] )
+          $arrCard['commission'] = round( $arrCard['commission'] / $oCurrency->get_val( $arrCard['commission'] ) );
       }
       else $arrCard['currency_user'] = '';
     }
+    if ( ! $arrCard['balance'] ) $arrCard['balance'] = '-';
 
-    $arrCard['limit'] = substr($arrCard['limit'], 0, -2);
-    $arrCard['commission'] = substr($arrCard['commission'], 0, -2);
     if ( (float)$arrCard['commission'] > 0 ) $arrCard['commission_show'] = 'true';
     if ( (int)$arrCard['user_id'] > 0 ) $arrCard['edit_show'] = 'true';
     if ( (int)$arrCard['not_edit'] > 0 ) {

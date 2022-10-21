@@ -140,6 +140,10 @@ if ( isset($_SESSION['user']) ) {
     case 'notices_views': # Просмотр Уведомления
       include_once 'notices/views/views.php';
       break;
+
+    case 'currencies': # Валюты
+      include_once 'currencies/currencies.php';
+      break;
   }
 }
 

@@ -56,7 +56,10 @@ switch ($_REQUEST['form']) {
       if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
       if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
 
-      $arrData = $oMoney->get();
+      $oMoney->show_currency = true;
+      $oMoney->show_card = true;
+      $oMoney->show_to_card = true;
+      $arrData = $oMoney->get_moneys();
 
       // Сумма
       $arrResultsSum = 0;
@@ -145,7 +148,11 @@ switch ($_REQUEST['form']) {
       $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $iMonth) . '-' . sprintf("%02d", $i) . "%'";
       if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
       if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
-      $arrMoneys = $oMoney->get();
+
+      $oMoney->show_currency = true;
+      $oMoney->show_card = true;
+      $oMoney->show_to_card = true;
+      $arrMoneys = $oMoney->get_moneys();
 
       // Подготавливаем категории
       foreach ($arrCategories as $key => $arrCategory) {
@@ -233,7 +240,10 @@ switch ($_REQUEST['form']) {
       if ( isset($_REQUEST['money_type']) ) $oMoney->query .= " AND `type` = '" . $_REQUEST['money_type'] . "'";
       if ( isset($_REQUEST['money_to_card']) ) $oMoney->query .= " AND `to_card` = '" . $_REQUEST['money_to_card'] . "'";
 
-      $arrMoneys = $oMoney->get();
+      $oMoney->show_currency = true;
+      $oMoney->show_card = true;
+      $oMoney->show_to_card = true;
+      $arrMoneys = $oMoney->get_moneys();
 
       // Подготавливаем категории
       foreach ($arrCategories as $key => $arrCategory) {

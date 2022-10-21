@@ -22,6 +22,7 @@ class money extends model
 
   public function get_money( $arrMoney = [] ){
     if ( ! $arrMoney['id'] ) $arrMoney = $this->get();
+    $oLock = new lock();
 
     $arrDate = explode(' ', $arrMoney['date']);
     $arrMoney['date'] = $arrDate[0];
@@ -33,12 +34,15 @@ class money extends model
       $arrMoney['card_val'] = (array)$oCard;
       $arrMoney['card_show'] = 'true';
 
-      if ( $this->show_currency ) {
+      if ( $this->show_currency && $oLock->check('Currency') ) {
         $oCurrency = new currency();
         $arrMoney['currency_user'] = $oCurrency->get_currency_user();
         if ( $arrMoney['currency_user'] != $oCard->currency ) {
-          $arrMoney['currency_price'] = $arrMoney['price'] / $oCurrency->get_val( $oCard->currency );
-          $arrMoney['currency_price'] = round($arrMoney['currency_price']);
+          $arrMoney['currency_price'] = round($arrMoney['price']);
+          $arrMoney['currency_card'] = $oCard->currency;
+
+          $arrMoney['price'] = $arrMoney['price'] / $oCurrency->get_val( $oCard->currency );
+          $arrMoney['price'] = round($arrMoney['price']);
         }
         else $arrMoney['currency_user'] = '';
       }
@@ -50,12 +54,15 @@ class money extends model
       $arrMoney['cardto_val'] = (array)$oCardTo;
       $arrMoney['cardto_show'] = 'true';
 
-      if ( $this->show_currency ) {
+      if ( $this->show_currency && $oLock->check('Currency') ) {
         $oCurrency = new currency();
         $arrMoney['currency_user'] = $oCurrency->get_currency_user();
         if ( $arrMoney['currency_user'] != $oCardTo->currency ) {
-          $arrMoney['currency_price'] = $arrMoney['price'] / $oCurrency->get_val( $oCardTo->currency );
-          $arrMoney['currency_price'] = round($arrMoney['currency_price']);
+          $arrMoney['currency_price'] = round($arrMoney['price']);
+          $arrMoney['currency_card'] = $oCardTo->currency;
+
+          $arrMoney['price'] = $arrMoney['price'] / $oCurrency->get_val( $oCardTo->currency );
+          $arrMoney['price'] = round($arrMoney['price']);
         }
         else $arrMoney['currency_user'] = '';
       }

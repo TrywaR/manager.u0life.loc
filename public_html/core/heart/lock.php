@@ -40,12 +40,19 @@ class lock
       'MoneysCostsAnalyticYear' => 1,
       'MoneysWagesAnalyticYear' => 1,
       'TimesCostsAnalyticYear' => 1,
+      'Currency' => 1,
 
       'RewardsAll' => 500,
       'RewardsShow' => 0,
       'RewardsForm' => 500,
       'RewardsSave' => 500,
       'RewardsDel' => 500,
+
+      'CurrencyAll' => 500,
+      'CurrencyShow' => 0,
+      'CurrencyForm' => 500,
+      'CurrencySave' => 500,
+      'CurrencyDel' => 500,
 
       'NoticesAll' => 500,
       'NoticesShow' => 0,

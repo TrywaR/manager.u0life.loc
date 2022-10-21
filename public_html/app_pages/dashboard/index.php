@@ -164,7 +164,12 @@
         $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
         $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' AND `category` != 55";
         $oMoney->query .= " AND `to_card` = '0' ";
-        $arrMoneys = $oMoney->get();
+
+        $oMoney->show_currency = true;
+        $oMoney->show_card = true;
+        $oMoney->show_to_card = true;
+        $arrMoneys = $oMoney->get_moneys();
+
         $iMonthSumm = 0;
         foreach ($arrMoneys as $arrMoney) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
         $arrResults['moneys']['costs'] = number_format($iMonthSumm, 2, '.', ' ');
@@ -175,7 +180,12 @@
         $dCurrentDate = date('Y-m');
         $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
         $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' AND `category` != 55";
-        $arrMoneys = $oMoney->get();
+
+        $oMoney->show_currency = true;
+        $oMoney->show_card = true;
+        $oMoney->show_to_card = true;
+        $arrMoneys = $oMoney->get_moneys();
+
         $iMonthSummSalary = 0;
         $iMonthSummSalaryWork = 0;
         foreach ($arrMoneys as $arrMoney) {
@@ -189,7 +199,10 @@
         $oCard = new card();
         $oCard->active = true;
         $oCard->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-        $arrCards = $oCard->get();
+
+        $oCard->show_currency = true;
+        $arrCards = $oCard->get_cards();
+
         $iBalance = 0;
         foreach ( $arrCards as & $arrCard ) $iBalance = (int)$iBalance + (int)$arrCard['balance'];
         if ( (int)$iBalance > 0 ) $arrResults['balance'] = number_format($iBalance, 2, '.', ' ');
@@ -252,6 +265,7 @@
       <?
       $oMoney = new money();
       $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oMoney->limit = 1;
       $arrMoneys = $oMoney->get_moneys();
       ?>
       <?php if (count($arrMoneys)): ?>
@@ -304,6 +318,7 @@
       <?
       $oSubscription = new subscription();
       $oSubscription->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oSubscription->linit = 1;
       $arrSubscriptions = $oSubscription->get_subscriptions();
       ?>
       <?php if (count($arrSubscriptions)): ?>
