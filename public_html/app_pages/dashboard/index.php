@@ -263,12 +263,12 @@
     <!-- Баланс -->
     <div class="_item __href">
       <?
-      $oMoney = new money();
-      $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
-      $oMoney->limit = 1;
-      $arrMoneys = $oMoney->get_moneys();
+      $oCard = new card();
+      $oCard->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
+      $oCard->limit = 1;
+      $arrCards = $oCard->get_cards();
       ?>
-      <?php if (count($arrMoneys)): ?>
+      <?php if (count($arrCards)): ?>
         <div class="_title">
           <?=$oLang->get('Balance')?>
         </div>

@@ -46,10 +46,10 @@ class card extends model
     $arrCard['balance'] = round($arrCard['balance']);
 
     $arrCard['limit'] = round($arrCard['limit']);
-    if ( ! $arrCard['limit'] ) $arrCard['limit'] = '-';
+    if ( ! (int)$arrCard['limit'] ) $arrCard['limit'] = '-';
 
     $arrCard['commission'] = round($arrCard['commission']);
-    if ( ! $arrCard['commission'] ) $arrCard['commission'] = '-';
+    if ( ! (int)$arrCard['commission'] ) $arrCard['commission'] = '-';
 
     // Валюта
     $oLock = new lock();
@@ -71,7 +71,7 @@ class card extends model
       }
       else $arrCard['currency_user'] = '';
     }
-    if ( ! $arrCard['balance'] ) $arrCard['balance'] = '-';
+    if ( ! (int)$arrCard['balance'] ) $arrCard['balance'] = '-';
 
     if ( (float)$arrCard['commission'] > 0 ) $arrCard['commission_show'] = 'true';
     if ( (int)$arrCard['user_id'] > 0 ) $arrCard['edit_show'] = 'true';

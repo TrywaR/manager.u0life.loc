@@ -52,7 +52,7 @@ class lang
       'Currency' => 'Валюта',
       'Currencies' => 'Валюты',
 
-      'HelloCards' => 'Добавьте свои карты,<br/> чтобы отслеживать баланс и расходы',
+      'HelloCards' => 'Добавьте свои карты, счета и наличные,<br/> чтобы отслеживать баланс и расходы',
       'HelloSubscriptions' => 'Добавьте ежемесячные платежи<br/> Чтобы отслеживать сколько и когда платить',
       'HelloWelcome' => 'Краткая информация<br/> для знакомства с сервисом',
 
@@ -333,7 +333,7 @@ class lang
       'Currency' => 'Currency',
       'Currencies' => 'Currencies',
 
-      'HelloCards' => 'Add your cards<br/> to track your balance and spending',
+      'HelloCards' => 'Add your cards, bills and cash,<br/> to track your balance and spending',
       'HelloSubscriptions' => 'Add monthly payments<br/> To track how much and when to pay',
       'HelloWelcome' => 'Brief information <br/> to get acquainted with the service',
 
