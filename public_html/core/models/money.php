@@ -24,6 +24,11 @@ class money extends model
     if ( ! $arrMoney['id'] ) $arrMoney = $this->get();
     $oLock = new lock();
 
+    if ( $this->show_currency ) {
+      $this->show_card = true;
+      $this->show_to_card = true;
+    }
+
     $arrDate = explode(' ', $arrMoney['date']);
     $arrMoney['date'] = $arrDate[0];
     $arrMoney['price'] = substr($arrMoney['price'], 0, -2);

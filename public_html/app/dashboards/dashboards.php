@@ -7,7 +7,6 @@ function get_day ( $iDay = 0, $iMonth = 0, $iYear = 0 ) {
   $oCategory->limit = 0;
   $oCategory->sortname = 'sort';
   $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-  $oCategory->query .= ' AND `id` != 55';
   $arrCategories = $oCategory->get_categories();
   $arrCategoriesIds = [];
   foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
@@ -18,22 +17,27 @@ function get_day ( $iDay = 0, $iMonth = 0, $iYear = 0 ) {
 
   // Собираем деньги
   $oMoney = new money();
-  $oMoney->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+  $oMoney->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
   $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $iMonth) . '-' . sprintf("%02d", $iDay) . "%'";
-  $oMoney->query .= " AND `to_card` = '0'";
   $oMoney->query .= " AND `category` != 55";
-  $arrMoneys = $oMoney->get();
+
+  $oMoney->show_currency = true;
+  $arrMoneys = $oMoney->get_moneys();
+
   $arrMoneysCategoriesIds = [];
   $iMoneysCategoriesSum = 0;
   foreach ($arrMoneys as $arrMoney) {
     $arrMoneysCategoriesIds[$arrMoney['category']]['elems'] = $arrMoney;
-    if ( (int)$arrMoney['type'] == 1 ) {
-      $arrMoneysCategoriesIds[$arrMoney['category']]['sum'] = (float)$arrMoneysCategoriesIds[$arrMoney['category']]['sum'] - (float)$arrMoney['price'];
-      $iMoneysCategoriesSum = (float)$iMoneysCategoriesSum - (float)$arrMoney['price'];
-    }
-    if ( (int)$arrMoney['type'] == 2 ) {
-      $arrMoneysCategoriesIds[$arrMoney['category']]['sum'] = (float)$arrMoneysCategoriesIds[$arrMoney['category']]['sum'] + (float)$arrMoney['price'];
-      $iMoneysCategoriesSum = (float)$iMoneysCategoriesSum + (float)$arrMoney['price'];
+    switch ( (int)$arrMoney['type'] ) {
+      case 1:
+        if ( (int)$arrMoney['to_card'] ) continue;
+        $arrMoneysCategoriesIds[$arrMoney['category']]['sum'] = (float)$arrMoneysCategoriesIds[$arrMoney['category']]['sum'] - (float)$arrMoney['price'];
+        $iMoneysCategoriesSum = (float)$iMoneysCategoriesSum - (float)$arrMoney['price'];
+        break;
+      case 2:
+        $arrMoneysCategoriesIds[$arrMoney['category']]['sum'] = (float)$arrMoneysCategoriesIds[$arrMoney['category']]['sum'] + (float)$arrMoney['price'];
+        $iMoneysCategoriesSum = (float)$iMoneysCategoriesSum + (float)$arrMoney['price'];
+        break;
     }
   }
 
@@ -110,6 +114,8 @@ switch ($_REQUEST['form']) {
     $oCard->sortdir = 'ASC';
     $oCard->active = true;
     $oCard->query .= ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
+
+    $oCard->show_currency = true;
     $arrResults['cards'] = $oCard->get_cards();
 
     $iBalance = 0;
@@ -133,7 +139,6 @@ switch ($_REQUEST['form']) {
     $oCategory->limit = 0;
     $oCategory->sortname = 'sort';
     $oCategory->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
-    $oCategory->query = ' AND `id` != 55';
     $arrCategories = $oCategory->get();
     $arrCategoriesIds = [];
     foreach ($arrCategories as &$arrCategory) $arrCategoriesIds[$arrCategory['id']] = $arrCategory;
@@ -166,7 +171,10 @@ switch ($_REQUEST['form']) {
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '1' ";
     $oMoney->query .= " AND `to_card` = '0' ";
     $oMoney->query .= " AND `category` != 55";
-    $arrMoneys = $oMoney->get();
+
+    $oMoney->show_currency = true;
+    $arrMoneys = $oMoney->get_moneys();
+
     $iMonthSumm = 0;
     foreach ($arrMoneys as $arrMoney) $iMonthSumm = (int)$arrMoney['price'] + (int)$iMonthSumm;
     $arrResults['moneys']['costs'] = number_format($iMonthSumm, 2, '.', ' ');
@@ -174,11 +182,13 @@ switch ($_REQUEST['form']) {
     // За месяц пришло
     $oMoney = new money();
     $oMoney->sortname = 'date';
-    $dCurrentDate = date('Y-m');
     $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oMoney->query .= " AND `date` LIKE '" . $dMonth . "%' AND `type` = '2' ";
     $oMoney->query .= " AND `category` != 55";
-    $arrMoneys = $oMoney->get();
+
+    $oMoney->show_currency = true;
+    $arrMoneys = $oMoney->get_moneys();
+
     $iMonthSummSalary = 0;
     $iMonthSummSalaryWork = 0;
     foreach ($arrMoneys as $arrMoney) {

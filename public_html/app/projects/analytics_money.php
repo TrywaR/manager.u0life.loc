@@ -36,7 +36,9 @@ switch ($_REQUEST['form']) {
       $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oMoney->query .= " AND `date` = '" . $dDateCurrent . "'";
       $oMoney->query .= " AND `project_id` = '" . $iProjectId . "'";
-      $arrData = $oMoney->get();
+
+      $oMoney->show_currency = true;
+      $arrData = $oMoney->get_moneys();
 
       // Сумма
       $arrResultsSum = 0;
@@ -106,7 +108,9 @@ switch ($_REQUEST['form']) {
       $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $iMonth) . '-' . sprintf("%02d", $i) . "%'";
       $oMoney->query .= " AND `project_id` = '" . $iProjectId . "'";
-      $arrMoneys = $oMoney->get();
+
+      $oMoney->show_currency = true;
+      $arrMoneys = $oMoney->get_moneys();
 
       // Подготавливаем категории
       foreach ($arrCategories as $key => $arrCategory) {
@@ -164,7 +168,9 @@ switch ($_REQUEST['form']) {
       $oMoney->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
       $oMoney->query .= " AND `date` LIKE '" . $iYear . '-' . sprintf("%02d", $i) . "%'";
       $oMoney->query .= " AND `project_id` = '" . $iProjectId . "'";
-      $arrMoneys = $oMoney->get();
+
+      $oMoney->show_currency = true;
+      $arrMoneys = $oMoney->get_moneys();
 
       // Подготавливаем категории
       foreach ($arrCategories as $key => $arrCategory) {
