@@ -146,6 +146,7 @@ class card extends model
   function balance_add( $floatSum ){
     $this->balance = (float)$this->balance + (float)$floatSum;
     $this->date_update = date("Y-m-d H:i:s");
+    unset($this->not_edit);
     $this->save();
     return $this->balance;
   }
@@ -154,6 +155,7 @@ class card extends model
   function balance_remove( $floatSum ){
     $this->balance = (float)$this->balance - (float)$floatSum;
     $this->date_update = date("Y-m-d H:i:s");
+    unset($this->not_edit);
     $this->save();
     return $this->balance;
   }
