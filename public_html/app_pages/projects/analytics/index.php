@@ -142,6 +142,10 @@ $arrProject = $oProject->get_project();
               <a href="/moneys/?project_id=<?=$oProject->id?>" class="btn btn-lg">
                 <i class="fas fa-wallet"></i>
               </a>
+
+              <a data-action="projects" data-animate_class="animate__flipInY" data-id="<?=$oProject->id?>" data-elem=".project" data-form="form" href="javascript:;" class="btn content_loader_show">
+                <i class="fas fa-pen-square"></i>
+              </a>
             </div>
           </div>
         </div>

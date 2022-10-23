@@ -48,6 +48,8 @@ class lang
       'Notice' => 'Уведомление',
       'NoticeView' => 'Просмотр уведомления',
       'NoticesViews' => 'Просмотры уведомлений',
+      'Telegram' => 'Телеграм',
+      'Instagram' => 'Инстаграм',
 
       'Currency' => 'Валюта',
       'Currencies' => 'Валюты',
@@ -329,6 +331,8 @@ class lang
       'Notice' => 'Notice',
       'NoticeView' => 'Notice view',
       'NoticesViews' => 'Notices views',
+      'Telegram' => 'Telegram',
+      'Instagram' => 'Instagram',
 
       'Currency' => 'Currency',
       'Currencies' => 'Currencies',

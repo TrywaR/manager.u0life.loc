@@ -78,6 +78,11 @@ class project extends model
   function get_project( $arrProject = [] ) {
     if ( ! $arrProject['id'] ) $arrProject = $this->get();
 
+    if ( $this->show_client ) {
+      $oClient = new client( $arrProject['client_id'] );
+      $arrProject['client'] = (array)$oClient;
+    }
+
     if ( (int)$arrProject['active'] ) $arrProject['active_show'] = 'true';
     else $arrProject['active_show'] = 'false';
 
@@ -107,6 +112,7 @@ class project extends model
     $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $arrClients = $oClient->get();
     $arrClientsFilter = [];
+    $arrClientsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrClients as $arrClient) $arrClientsFilter[] = array('id'=>$arrClient['id'],'name'=>$arrClient['title']);
     $arrFields['client_id'] = ['title'=>$oLang->get('Client'),'type'=>'select','options'=>$arrClientsFilter,'search'=>true,'value'=>$this->client_id];
 

@@ -14,7 +14,10 @@ $arrClient = $oClient->get_client();
 <div class="main_content">
   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button onclick="week_show()" class="nav-link active" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-wekk" aria-selected="true"><?=$oLang->get('Week')?></button>
+      <button class="nav-link active" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#pills-info" type="button" role="tab" aria-controls="pills-wekk" aria-selected="true"><?=$oLang->get('Info')?></button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button onclick="week_show()" class="nav-link" id="pills-week-tab" data-bs-toggle="pill" data-bs-target="#pills-week" type="button" role="tab" aria-controls="pills-wekk" aria-selected="true"><?=$oLang->get('Week')?></button>
     </li>
     <li class="nav-item" role="presentation">
       <button onclick="month_show()" class="nav-link" id="pills-month-tab" data-bs-toggle="pill" data-bs-target="#pills-month" type="button" role="tab" aria-controls="pills-month" aria-selected="true"><?=$oLang->get('Month')?></button>
@@ -28,8 +31,53 @@ $arrClient = $oClient->get_client();
   </ul>
 
   <div class="tab-content" id="pills-tabContent">
+    <!-- Info   -->
+    <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+      <div class="px-4 py-4">
+        <?=$arrClient['description']?>
+      </div>
+
+      <div class="btn-group">
+        <a target="_blank" href="tel:<?=$arrClient['phone']?>" class="btn __icon content_ignore d-none<?=$arrClient['phone']?>">
+          <span class="_icon">
+            <i class="fa-solid fa-phone"></i>
+          </span>
+          <span class="_text">
+            <?=$arrClient['phone']?>
+          </span>
+        </a>
+
+        <a target="_blank" href="mailto:<?=$arrClient['email']?>" class="btn __icon content_ignore d-none<?=$arrClient['email']?>">
+          <span class="_icon">
+            <i class="fa-solid fa-envelope"></i>
+          </span>
+          <span class="_text">
+            <?=$arrClient['email']?>
+          </span>
+        </a>
+
+        <a target="_blank" href="https://t.me/<?=$arrClient['telegram']?>" class="btn __icon d-none<?=$arrClient['telegram']?>">
+          <span class="_icon">
+            <i class="fa-brands fa-telegram"></i>
+          </span>
+          <span class="_text">
+            <?=$arrClient['telegram']?>
+          </span>
+        </a>
+
+        <a target="_blank" href="https://instagram.com/<?=$arrClient['instagram']?>" class="btn __icon d-none<?=$arrClient['instagram']?>">
+          <span class="_icon">
+            <i class="fa-brands fa-instagram"></i>
+          </span>
+          <span class="_text">
+            <?=$arrClient['instagram']?>
+          </span>
+        </a>
+      </div>
+    </div>
+
     <!-- Week -->
-    <div class="tab-pane fade show active" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab">
+    <div class="tab-pane fade show" id="pills-week" role="tabpanel" aria-labelledby="pills-week-tab">
       <!-- Фильтр -->
       <form class="content_filter week_filter pb-4 __no_ajax" action="">
         <div class="input-group mb-2">
@@ -129,7 +177,6 @@ $arrClient = $oClient->get_client();
             })
           }
         }
-        week_show()
       </script>
     </div>
 

@@ -14,6 +14,56 @@
     <form class="content_filter __no_ajax" action="" id="content_filter" data-content_filter_block="#clients" data-content_filter_status="#content_filter_show">
       <div class="input-group _filter_block">
         <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="fa-solid fa-font"></i>
+            </span>
+          </span>
+          <input type="text" name="title" class="form-control" placeholder="<?=$olang->get('Title')?>" value="">
+        </div>
+
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="fa-solid fa-phone"></i>
+            </span>
+          </span>
+          <input type="text" name="phone" class="form-control" placeholder="<?=$olang->get('Phone')?>" value="">
+        </div>
+
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="fa-solid fa-envelope"></i>
+            </span>
+          </span>
+          <input type="text" name="email" class="form-control" placeholder="<?=$olang->get('Email')?>" value="">
+        </div>
+
+      </div>
+
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="fa-brands fa-instagram"></i>
+            </span>
+          </span>
+          <input type="text" name="instagram" class="form-control" placeholder="<?=$olang->get('Instagram')?>" value="">
+        </div>
+
+        <div class="_filter_input">
+          <span class="input-group-text">
+            <span class="_icon">
+              <i class="fa-brands fa-telegram"></i>
+            </span>
+          </span>
+          <input type="text" name="telegram" class="form-control" placeholder="<?=$olang->get('Telegram')?>" value="">
+        </div>
+      </div>
+
+      <div class="input-group _filter_block">
+        <div class="_filter_input">
           <div class="input_checkbox form-check">
             <input
               type="checkbox"
@@ -83,6 +133,44 @@
             <small>#{{id}}</small>
             <h5 class="card-title">{{title}}</h5>
             <p class="card-text">{{description}}</p>
+
+            <div class="btn-group">
+              <a target="_blank" href="tel:{{phone}}" class="btn __icon content_ignore d-none{{phone}}">
+                <span class="_icon">
+                  <i class="fa-solid fa-phone"></i>
+                </span>
+                <span class="_text">
+                  {{phone}}
+                </span>
+              </a>
+
+              <a target="_blank" href="mailto:{{email}}" class="btn __icon content_ignore d-none{{email}}">
+                <span class="_icon">
+                  <i class="fa-solid fa-envelope"></i>
+                </span>
+                <span class="_text">
+                  {{email}}
+                </span>
+              </a>
+
+              <a target="_blank" href="https://t.me/{{telegram}}" class="btn __icon d-none{{telegram}}">
+                <span class="_icon">
+                  <i class="fa-brands fa-telegram"></i>
+                </span>
+                <span class="_text">
+                  {{telegram}}
+                </span>
+              </a>
+
+              <a target="_blank" href="https://instagram.com/{{instagram}}" class="btn __icon d-none{{instagram}}">
+                <span class="_icon">
+                  <i class="fa-brands fa-instagram"></i>
+                </span>
+                <span class="_text">
+                  {{instagram}}
+                </span>
+              </a>
+            </div>
           </div>
           <div class="col-12 col-xl-6 d-flex justify-content-end align-items-start">
             <div class="btn-group" role="group">
@@ -101,6 +189,10 @@
 
               <a href="/projects/?client_id={{id}}" class="btn">
                 <i class="fa-solid fa-folder-tree"></i>
+              </a>
+
+              <a href="/tasks/?client_id={{id}}" class="btn">
+                <i class="fa-solid fa-person-digging"></i>
               </a>
 
               <a data-action="clients" data-animate_class="animate__flipInY" data-id="{{id}}" data-elem=".client" data-form="form" href="javascript:;" class="btn content_loader_show">

@@ -115,6 +115,17 @@ $arrClients = $oClient->get_clients();
               <p class="card-text">
                 {{description}}
               </p>
+
+              <div class="btn-group">
+                <a href="/clients/analytics/?client_id={{client_id}}" class="btn __icon d-none{{client_id}}">
+                  <span class="_icon">
+                    <i class="fa-solid fa-folder"></i>
+                  </span>
+                  <span class="_text">
+                    {{client.title}}
+                  </span>
+                </a>
+              </div>
             </div>
 
             <div class="col-12 col-xl-6 d-flex justify-content-end align-items-start">

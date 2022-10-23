@@ -25,6 +25,7 @@ switch ($_REQUEST['form']) {
     $oProject->sortname = 'sort';
     $oProject->sortdir = 'ASC';
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $oProject->show_client = true;
 
     $oFilter = new filter();
     $oFilter->arrParamsIngores['no_active_show'] = true;

@@ -285,8 +285,9 @@ class model
     $mySqlDel .= " WHERE `id` = '" . $id . "'";
 
     // Удаляем
-    if ( ! db::query($mySqlDel) ) notification::success( 'Delete success!' );
-    else notification::error( 'Error delete!' );
+    if ( db::query($mySqlDel) ) notification::error( 'Error delete!' );
+    // if ( ! db::query($mySqlDel) ) notification::success( 'Delete success!' );
+    // else notification::error( 'Error delete!' );
   }
 
   // function __construct()

@@ -11,6 +11,10 @@ class client extends model
   public static $sort = '';
   public static $active = '';
   public static $user_id = '';
+  public static $phone = '';
+  public static $email = '';
+  public static $telegram = '';
+  public static $instagram = '';
 
   function get_client( $arrClient = [] ) {
     if ( ! $arrClient['id'] ) $arrClient = $this->get();
@@ -42,6 +46,11 @@ class client extends model
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
 
+    $arrFields['phone'] = ['title'=>$oLang->get('Phone'),'icon'=>'<i class="fa-solid fa-phone"></i>','type'=>'text','value'=>$this->phone];
+    $arrFields['email'] = ['title'=>$oLang->get('Email'),'icon'=>'<i class="fa-solid fa-envelope"></i>','type'=>'text','value'=>$this->email];
+    $arrFields['telegram'] = ['title'=>$oLang->get('Telegram'),'icon'=>'<i class="fa-brands fa-telegram"></i>','type'=>'text','value'=>$this->telegram];
+    $arrFields['instagram'] = ['title'=>$oLang->get('Instagram'),'icon'=>'<i class="fa-brands fa-instagram"></i>','type'=>'text','value'=>$this->instagram];
+
     $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 
     return $arrFields;
@@ -62,6 +71,10 @@ class client extends model
       $this->sort = $arrClient['sort'];
       $this->active = $arrClient['active'];
       $this->user_id = $arrClient['user_id'];
+      $this->phone = $arrClient['phone'];
+      $this->email = $arrClient['email'];
+      $this->telegram = $arrClient['telegram'];
+      $this->instagram = $arrClient['instagram'];
     }
   }
 }

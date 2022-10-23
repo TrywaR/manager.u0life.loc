@@ -10,6 +10,7 @@ class task extends model
   public static $description = '';
   public static $sort = '';
   public static $active = '';
+  public static $client_id = '';
   public static $project_id = '';
   public static $user_id = '';
   public static $price_planned = '';
@@ -34,6 +35,13 @@ class task extends model
           $arrTask['status_val'] = $arrStatus['name'];
           $arrTask['status_color'] = $arrStatus['color'];
         }
+    }
+
+    // Client
+    if ( (int)$arrTask['client_id'] ) {
+      $oClient = new client( $arrTask['client_id'] );
+      $arrTask['client'] = (array)$oClient;
+      $arrTask['client_show'] = 'true';
     }
 
     // Project
@@ -121,6 +129,14 @@ class task extends model
     $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','value'=>$this->title];
     $arrFields['description'] = ['title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description];
 
+    $oClient = new client();
+    $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+    $arrClients = $oClient->get();
+    $arrClientsFilter = [];
+    $arrClientsFilter[] = array('id'=>0,'name'=>'...');
+    foreach ($arrClients as $arrClient) $arrClientsFilter[] = array('id'=>$arrClient['id'],'name'=>$arrClient['title']);
+    $arrFields['client_id'] = ['title'=>$oLang->get('Client'),'type'=>'select','options'=>$arrClientsFilter,'search'=>true,'value'=>$this->client_id];
+
     $oProject = new project();
     $oProject->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
     $oProject->active = true;
@@ -166,6 +182,7 @@ class task extends model
       $this->description = base64_decode($arrProject['description']);
       $this->sort = $arrProject['sort'];
       $this->active = $arrProject['active'];
+      $this->client_id = $arrProject['client_id'];
       $this->project_id = $arrProject['project_id'];
       $this->user_id = $arrProject['user_id'];
       $this->price_planned = $arrProject['price_planned'];

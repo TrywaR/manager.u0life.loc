@@ -1,6 +1,10 @@
 <?
 $oTask = new task();
 
+$oClient = new client();
+$oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
+$arrClients = $oClient->get();
+
 $oProject = new project();
 $oProject->sort = 'sort';
 $oProject->sortDir = 'ASC';
@@ -29,6 +33,22 @@ $arrProjects = $oProject->get_projects();
       <div class="input-group _filter_block">
         <div class="_filter_input">
           <span class="input-group-text">
+            <i class="fa-solid fa-folder"></i>
+          </span>
+          <select name="client_id" class="form-select">
+            <option value="0" selected><?=$oLang->get('Client')?></option>
+            <?php foreach ($arrClients as $iIndex => $arrClient): ?>
+              <?php if ( $_REQUEST['client_id'] && $_REQUEST['client_id'] == $arrClient['id'] ): ?>
+                <option selected="selected" value="<?=$arrClient['id']?>"><?=$arrClient['title']?></option>
+              <?php else: ?>
+                <option value="<?=$arrClient['id']?>"><?=$arrClient['title']?></option>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          </select>
+        </div>
+
+        <div class="_filter_input">
+          <span class="input-group-text">
             <i class="fa-solid fa-folder-tree"></i>
           </span>
           <select name="project_id" class="form-select">
@@ -42,7 +62,9 @@ $arrProjects = $oProject->get_projects();
             <?php endforeach; ?>
           </select>
         </div>
+      </div>
 
+      <div class="input-group _filter_block">
         <div class="_filter_input">
           <span class="input-group-text">
             <i class="fas fa-spinner"></i>
@@ -57,9 +79,7 @@ $arrProjects = $oProject->get_projects();
             <?php endforeach; ?>
           </select>
         </div>
-      </div>
 
-      <div class="input-group _filter_block">
         <div class="_filter_input">
           <div class="input_checkbox form-check">
             <input
@@ -121,7 +141,7 @@ $arrProjects = $oProject->get_projects();
 </section>
 
 <section class="block_template">
-  <div class="task _elem progress_block _time_show_{{time_show}} _description_show_{{description_show}}  _money_show_{{money_show}} _status_show_{{status_show}} _project_show_{{project_show}} _active_show_{{active_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
+  <div class="task _elem progress_block _time_show_{{time_show}} _description_show_{{description_show}}  _money_show_{{money_show}} _status_show_{{status_show}} _client_show_{{client_show}} _project_show_{{project_show}} _active_show_{{active_show}}" data-content_manager_item_id="{{id}}"  data-id="{{id}}">
     <div class="card w-100">
       <div class="card-header position-relative">
         <div class="row">
@@ -160,19 +180,33 @@ $arrProjects = $oProject->get_projects();
       </div>
 
       <div class="card-body">
+        <div class="_path btn-group">
+          <a href="/clients/analytics/?client_id={{client_id}}" class="btn __icon _client">
+            <span class="_icon">
+              <i class="fa-solid fa-folder"></i>
+            </span>
+            <span class="_text">
+              {{client.title}}
+            </span>
+          </a>
+
+          <a href="/projects/analytics/?project_id={{project_id}}" class="btn __icon _project">
+            <span class="_icon">
+              <i class="fa-solid fa-folder-tree"></i>
+            </span>
+            <span class="_text">
+              {{project.title}}
+            </span>
+          </a>
+        </div>
+
         <div class="_sub">
           <div class="_status" style="background: {{status_color}}">
             {{status_val}}
           </div>
 
-          <div class="_project">
-            <a href="/projects/analytics/?project_id={{project_id}}" class="btn mx-2">
-              {{project.title}}
-            </a>
-          </div>
-
           <div class="_time">
-            <a href="/times/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}" class="btn mx-2">
+            <a href="/times/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}&category_id=4" class="btn mx-2">
               <i class="fas fa-clock"></i>
             </a>
 
@@ -181,7 +215,7 @@ $arrProjects = $oProject->get_projects();
           </div>
 
           <div class="_money">
-            <a href="/moneys/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}" class="btn mx-2">
+            <a href="/moneys/?task_id={{id}}&project_id={{project_id}}&client_id={{project.client_id}}&category_id=4" class="btn mx-2">
               <i class="fas fa-wallet"></i>
             </a>
 
