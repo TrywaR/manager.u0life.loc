@@ -64,10 +64,10 @@ class card extends model
         $arrCard['currency_card'] = $oCurrency->get_currency_user();
         $arrCard['currency_user'] = $arrCard['currency'];
 
-        if ( (int)$arrCard['limit'] )
-          $arrCard['limit'] = round( $arrCard['limit'] / $oCurrency->get_val( $arrCard['limit'] ) );
-        if ( (int)$arrCard['commission'] )
-          $arrCard['commission'] = round( $arrCard['commission'] / $oCurrency->get_val( $arrCard['commission'] ) );
+        if ( $arrCard['limit'] != '-' && (int)$arrCard['limit'] > 0 )
+          $arrCard['limit'] = round( $arrCard['limit'] / $oCurrency->get_val( $arrCard['currency'] ) );
+        if ( $arrCard['limit'] != '-' && (int)$arrCard['commission'] > 0 )
+          $arrCard['commission'] = round( $arrCard['commission'] / $oCurrency->get_val( $arrCard['currency'] ) );
       }
       else $arrCard['currency_user'] = '';
     }
