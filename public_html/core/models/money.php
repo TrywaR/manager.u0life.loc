@@ -31,7 +31,7 @@ class money extends model
 
     $arrDate = explode(' ', $arrMoney['date']);
     $arrMoney['date'] = $arrDate[0];
-    $arrMoney['price'] = substr($arrMoney['price'], 0, -2);
+    $arrMoney['price'] = bcdiv($arrMoney['price'], 1, 2);
 
     if ( $this->show_card )
     if ( (int)$arrMoney['card'] ) {
@@ -43,11 +43,11 @@ class money extends model
         $oCurrency = new currency();
         $arrMoney['currency_user'] = $oCurrency->get_currency_user();
         if ( $arrMoney['currency_user'] != $oCard->currency ) {
-          $arrMoney['currency_price'] = round($arrMoney['price']);
+          $arrMoney['currency_price'] = substr($arrMoney['price'], 0, -2);
           $arrMoney['currency_card'] = $oCard->currency;
 
           $arrMoney['price'] = $arrMoney['price'] / $oCurrency->get_val( $oCard->currency );
-          $arrMoney['price'] = round($arrMoney['price']);
+          $arrMoney['price'] = bcdiv($arrMoney['price'], 1, 2);
         }
         else $arrMoney['currency_user'] = '';
       }
@@ -63,11 +63,11 @@ class money extends model
         $oCurrency = new currency();
         $arrMoney['currency_user'] = $oCurrency->get_currency_user();
         if ( $arrMoney['currency_user'] != $oCardTo->currency ) {
-          $arrMoney['currency_price'] = round($arrMoney['price']);
+          $arrMoney['currency_price'] = bcdiv($arrMoney['price'], 1, 2);
           $arrMoney['currency_card'] = $oCardTo->currency;
 
           $arrMoney['price'] = $arrMoney['price'] / $oCurrency->get_val( $oCardTo->currency );
-          $arrMoney['price'] = round($arrMoney['price']);
+          $arrMoney['price'] = bcdiv($arrMoney['price'], 1, 2);
         }
         else $arrMoney['currency_user'] = '';
       }
