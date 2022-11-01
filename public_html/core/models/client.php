@@ -15,12 +15,19 @@ class client extends model
   public static $email = '';
   public static $telegram = '';
   public static $instagram = '';
+  public static $site = '';
 
   function get_client( $arrClient = [] ) {
     if ( ! $arrClient['id'] ) $arrClient = $this->get();
 
     if ( (int)$arrClient['active'] ) $arrClient['active_show'] = 'true';
     else $arrClient['active_show'] = 'false';
+
+    if ( $arrClient['site'] )
+    if ( strripos($arrClient['site'], 'http') === false )
+      $arrClient['site_host'] = $arrClient['site'];
+    else
+      $arrClient['site_host'] = parse_url($arrClient['site'], PHP_URL_HOST);
 
     return $arrClient;
   }
@@ -50,6 +57,7 @@ class client extends model
     $arrFields['email'] = ['title'=>$oLang->get('Email'),'icon'=>'<i class="fa-solid fa-envelope"></i>','type'=>'text','value'=>$this->email];
     $arrFields['telegram'] = ['title'=>$oLang->get('Telegram'),'icon'=>'<i class="fa-brands fa-telegram"></i>','type'=>'text','value'=>$this->telegram];
     $arrFields['instagram'] = ['title'=>$oLang->get('Instagram'),'icon'=>'<i class="fa-brands fa-instagram"></i>','type'=>'text','value'=>$this->instagram];
+    $arrFields['site'] = ['title'=>$oLang->get('Site'),'icon'=>'<i class="fa-solid fa-globe"></i>','type'=>'text','value'=>$this->site];
 
     $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 
@@ -75,6 +83,7 @@ class client extends model
       $this->email = $arrClient['email'];
       $this->telegram = $arrClient['telegram'];
       $this->instagram = $arrClient['instagram'];
+      $this->site = $arrClient['site'];
     }
   }
 }

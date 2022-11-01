@@ -61,7 +61,8 @@ class lock
       'NoticesDel' => 500,
 
       'UsersAll' => 500,
-      'UsersShow' => 500,
+      'UsersShow' => 0,
+      'UsersPublics' => 0,
       'UsersForm' => 500,
       'UsersSave' => 500,
       'UsersDel' => 500,

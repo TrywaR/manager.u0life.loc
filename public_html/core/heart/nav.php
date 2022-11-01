@@ -147,15 +147,6 @@ class nav
         'onlyapp' => true,
       ),
 
-      '/users/' => array(
-        'name' => $oLang->get('Users'),
-        'description' => $oLang->get('Users'),
-        'url' => '/users/',
-        'icon' => '<i class="fa-solid fa-users"></i>',
-        'access' => 0,
-        'menu_hide' => true,
-      ),
-
       '/dashboard/' => array(
         'name' => $oLang->get('Dashboard'),
         'description' => $oLang->get('Dashboard'),
@@ -325,6 +316,25 @@ class nav
         'icon' => '<i class="fa-solid fa-folder-tree"></i>',
         'access' => 0,
         'onlyapp' => true,
+      ),
+
+      '/users/' => array(
+        'name' => $oLang->get('Users'),
+        'description' => $oLang->get('Users'),
+        'url' => '/users/',
+        'icon' => '<i class="fa-solid fa-users"></i>',
+        'access' => 0,
+        // 'menu_hide' => true,
+        'subs' => [
+          '/users/user/' => array(
+            'name' => $oLang->get('User'),
+            'description' => $oLang->get('User'),
+            'url' => '/users/user/',
+            'icon' => '<i class="fa-solid fa-user"></i>',
+            'access' => 0,
+            'menu_hide' => true,
+          ),
+        ]
       ),
 
       '/info/' => array(

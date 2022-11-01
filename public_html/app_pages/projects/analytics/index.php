@@ -131,6 +131,10 @@ $arrProject = $oProject->get_project();
         <div class="_block d-flex justify-content-center px-4">
           <div class="_values px-3">
             <div class="btn-group">
+              <a href="/clients/analytics/?client_id=<?=$oProject->client_id?>" class="btn d-none<?=$oProject->client_id?>">
+                <i class="fa-solid fa-folder"></i>
+              </a>
+
               <a href="/tasks/?project_id=<?=$oProject->id?>" class="btn btn-lg">
                 <i class="fa-solid fa-person-digging"></i>
               </a>

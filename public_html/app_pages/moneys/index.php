@@ -137,7 +137,9 @@ $arrTypes = [
 
         <div class="_filter_input">
           <span class="input-group-text">
-            <i class="fas fa-wrench"></i>
+            <span class="_icon">
+              <i class="fas fa-wrench"></i>
+            </span>
           </span>
           <select name="task_id" class="form-select">
             <option value=""><?=$oLang->get('Task')?></option>
@@ -247,17 +249,17 @@ $arrTypes = [
       </div>
 
       <div class="fw-bold d-flex align-items-center">
-        <div class="badge bg-primary _price" style="font-size: 1rem; font-weight: normal; background: {{categroy_val.color}} ! important; margin-right:.5rem;">
+        <div class="badge bg-primary _price" style="font-size: 1em; font-weight: normal; background: {{categroy_val.color}} ! important; margin-right:.5em;">
           {{price}}
-          <span style="opacity: .3;">
-            {{card_val.currency}}
+          <span style="opacity: .7;">
+            {{currency_user}}
           </span>
         </div>
 
         <div class="badge bg-secondary _currency d-none{{currency_user}} mx-2">
           {{currency_price}}
-          <span style="opacity: .3;">
-            {{currency_user}}
+          <span style="opacity: .7; font-size: .8em; font-weight: normal;">
+            {{currency_card}}
           </span>
         </div>
 

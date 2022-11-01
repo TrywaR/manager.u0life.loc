@@ -33,46 +33,81 @@ $arrClient = $oClient->get_client();
   <div class="tab-content" id="pills-tabContent">
     <!-- Info   -->
     <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
-      <div class="px-4 py-4">
-        <?=$arrClient['description']?>
-      </div>
+      <div class="client_info">
+        <div class="_block d-flex justify-content-center px-4">
+          <div class="_values px-3">
+            <?=$arrClient['description']?>
+          </div>
+        </div>
 
-      <div class="btn-group">
-        <a target="_blank" href="tel:<?=$arrClient['phone']?>" class="btn __icon content_ignore d-none<?=$arrClient['phone']?>">
-          <span class="_icon">
-            <i class="fa-solid fa-phone"></i>
-          </span>
-          <span class="_text">
-            <?=$arrClient['phone']?>
-          </span>
-        </a>
+        <div class="_block d-flex justify-content-center px-4">
+          <div class="_values px-3">
+            <div class="btn-group">
+              <a target="_blank" href="tel:<?=$arrClient['phone']?>" class="btn __icon content_ignore d-none<?=$arrClient['phone']?>">
+                <span class="_icon">
+                  <i class="fa-solid fa-phone"></i>
+                </span>
+                <span class="_text">
+                  <?=$arrClient['phone']?>
+                </span>
+              </a>
 
-        <a target="_blank" href="mailto:<?=$arrClient['email']?>" class="btn __icon content_ignore d-none<?=$arrClient['email']?>">
-          <span class="_icon">
-            <i class="fa-solid fa-envelope"></i>
-          </span>
-          <span class="_text">
-            <?=$arrClient['email']?>
-          </span>
-        </a>
+              <a target="_blank" href="mailto:<?=$arrClient['email']?>" class="btn __icon content_ignore d-none<?=$arrClient['email']?>">
+                <span class="_icon">
+                  <i class="fa-solid fa-envelope"></i>
+                </span>
+                <span class="_text">
+                  <?=$arrClient['email']?>
+                </span>
+              </a>
 
-        <a target="_blank" href="https://t.me/<?=$arrClient['telegram']?>" class="btn __icon d-none<?=$arrClient['telegram']?>">
-          <span class="_icon">
-            <i class="fa-brands fa-telegram"></i>
-          </span>
-          <span class="_text">
-            <?=$arrClient['telegram']?>
-          </span>
-        </a>
+              <a target="_blank" href="https://t.me/<?=$arrClient['telegram']?>" class="btn __icon d-none<?=$arrClient['telegram']?>">
+                <span class="_icon">
+                  <i class="fa-brands fa-telegram"></i>
+                </span>
+                <span class="_text">
+                  <?=$arrClient['telegram']?>
+                </span>
+              </a>
 
-        <a target="_blank" href="https://instagram.com/<?=$arrClient['instagram']?>" class="btn __icon d-none<?=$arrClient['instagram']?>">
-          <span class="_icon">
-            <i class="fa-brands fa-instagram"></i>
-          </span>
-          <span class="_text">
-            <?=$arrClient['instagram']?>
-          </span>
-        </a>
+              <a target="_blank" href="https://instagram.com/<?=$arrClient['instagram']?>" class="btn __icon d-none<?=$arrClient['instagram']?>">
+                <span class="_icon">
+                  <i class="fa-brands fa-instagram"></i>
+                </span>
+                <span class="_text">
+                  <?=$arrClient['instagram']?>
+                </span>
+              </a>
+
+              <a target="_blank" href="<?=$arrClient['site']?>" class="btn __icon d-none<?=$arrClient['site_host']?>">
+                <span class="_icon">
+                  <i class="fa-solid fa-globe"></i>
+                </span>
+                <span class="_text">
+                  <?=$arrClient['site_host']?>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="_block d-flex justify-content-center px-4">
+          <div class="_values px-3">
+            <div class="btn-group">
+              <a href="/projects/?client_id=<?=$arrClient['id']?>" class="btn">
+                <i class="fa-solid fa-folder-tree"></i>
+              </a>
+
+              <a href="/tasks/?client_id=<?=$arrClient['id']?>" class="btn">
+                <i class="fa-solid fa-person-digging"></i>
+              </a>
+
+              <a data-action="clients" data-animate_class="animate__flipInY" data-id="<?=$arrClient['id']?>" data-elem=".client" data-form="form" href="javascript:;" class="btn content_loader_show">
+                <i class="fas fa-pen-square"></i>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

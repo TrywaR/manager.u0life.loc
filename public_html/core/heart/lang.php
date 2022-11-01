@@ -50,6 +50,7 @@ class lang
       'NoticesViews' => 'Просмотры уведомлений',
       'Telegram' => 'Телеграм',
       'Instagram' => 'Инстаграм',
+      'Site' => 'Сайт',
 
       'Currency' => 'Валюта',
       'Currencies' => 'Валюты',
@@ -178,6 +179,7 @@ class lang
       'Effeciency' => 'Эффективность',
 
       'User' => 'Пользователь',
+      'UserPublic' => 'Публичная страница',
       'Users' => 'Пользователи',
       'UserEdit' => 'Редактирование пользователя',
       'UserPasswordEdit' => 'Редактирование пароля пользователя',
@@ -333,6 +335,7 @@ class lang
       'NoticesViews' => 'Notices views',
       'Telegram' => 'Telegram',
       'Instagram' => 'Instagram',
+      'Site' => 'Site',
 
       'Currency' => 'Currency',
       'Currencies' => 'Currencies',
@@ -461,6 +464,7 @@ class lang
       'Effeciency' => 'Effeciency',
 
       'User' => 'User',
+      'UserPublic' => 'User public',
       'Users' => 'Users',
       'UserEdit' => 'User edit',
       'UserPasswordEdit' => 'User password edit',

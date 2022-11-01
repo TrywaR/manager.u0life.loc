@@ -170,6 +170,15 @@
                   {{instagram}}
                 </span>
               </a>
+
+              <a target="_blank" href="{{site}}" class="btn __icon d-none{{site_host}}">
+                <span class="_icon">
+                  <i class="fa-solid fa-globe"></i>
+                </span>
+                <span class="_text">
+                  {{site_host}}
+                </span>
+              </a>
             </div>
           </div>
           <div class="col-12 col-xl-6 d-flex justify-content-end align-items-start">

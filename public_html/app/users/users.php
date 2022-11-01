@@ -3,18 +3,17 @@ switch ($_REQUEST['form']) {
   case 'show': # Вывод элементов
     if ( ! $oLock->check('UsersShow') ) notification::error($oLang->get('AccessesDenied'));
 
-    // $iUserId = $_SESSION['user']['id'];
-    if ( (int)$_SESSION['user']['role'] > 500 ) {
-      if ( $_REQUEST['id'] ) $iUserId = $_REQUEST['id'];
-    }
-    $oUser = new user( $iUserId );
-
+    $oUser = new user( $_REQUEST['id'] );
     $oUser->show_role_val = true;
     $oUser->show_rewards = true;
     $oUser->show_access = true;
 
     if ( $_REQUEST['from'] ) $oUser->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oUser->limit = $_REQUEST['limit'];
+
+    if ( $oLock->iUserRole < 500 ) {
+      $oUser->query .= ' AND `public` > 0';
+    }
 
     $arrUsers = $oUser->get_users();
 

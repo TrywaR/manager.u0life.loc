@@ -20,6 +20,9 @@ class user extends model
   public static $arrProtectTypes = '';
   public static $section = '';
   public static $currency = '';
+  public static $city = '';
+  public static $contry = '';
+  public static $public = '';
 
   public function get_user( $arrUser = [] ) {
     if ( ! $arrUser['id'] ) $arrUser = $this->get();
@@ -111,6 +114,8 @@ class user extends model
       $arrFields['role'] = ['title'=>$oLang->get('Role'),'type'=>'number','value'=>$this->role];
     }
 
+    $arrFields['public'] = ['section'=>2,'title'=>$oLang->get('UserPublic'),'type'=>'checkbox','search'=>true,'value'=>$this->public];
+
     // $arrFields['price'] = ['title'=>$oLang->get('Price'),'type'=>'number','value'=>substr($this->price, 0, -2)];
     // $arrFields['date'] = ['title'=>$oLang->get('Date'),'type'=>'date','value'=>$this->date];
 
@@ -141,6 +146,9 @@ class user extends model
       $this->protect = $arrUser['protect'];
       $this->section = $arrUser['section'];
       $this->currency = $arrUser['currency'];
+      $this->city = $arrUser['city'];
+      $this->cantry = $arrUser['cantry'];
+      $this->public = $arrUser['public'];
     }
     else {
       $this->lang = 'en';
