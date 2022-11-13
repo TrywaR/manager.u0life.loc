@@ -252,20 +252,20 @@ class card extends model
     $iSort = $this->sort ? $this->sort : 100;
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$iSort];
 
-    $arrFields['limit'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('Limit'),'type'=>'number','value'=>substr($this->limit, 0, -2),'step'=>'0.01'];
-    $arrFields['percent'] = ['section'=>2,'class'=>'switch_values switch_type-1 switch_type-2','title'=>$oLang->get('Percent'),'type'=>'number','value'=>substr($this->percent, 0, -2),'step'=>'0.01'];
+    $arrFields['limit'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('Limit'),'type'=>'number','value'=>substr($this->limit, 0, -2),'step'=>'0.01'];
+    $arrFields['percent'] = ['section'=>2,'class'=>'switch_values switch_type-2 switch_type-1','title'=>$oLang->get('Percent'),'type'=>'number','value'=>substr($this->percent, 0, -2),'step'=>'0.01'];
     // $arrFields['price'] = ['title'=>$oLang->get('Price'),'type'=>'number','value'=>substr($this->price, 0, -2),'step'=>'0.01'];
 
-    $arrFields['service'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardService'),'type'=>'number','value'=>substr($this->service, 0, -2),'step'=>'0.01'];
-    $arrFields['date_service'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardServiceDate'),'type'=>'date','value'=>$this->date_service];
+    $arrFields['service'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('CardService'),'type'=>'number','value'=>substr($this->service, 0, -2),'step'=>'0.01'];
+    $arrFields['date_service'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('CardServiceDate'),'type'=>'date','value'=>$this->date_service];
 
-    $arrFields['free_days_limit'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardFreeDaysLimit'),'type'=>'number','value'=>$this->free_days_limit];
-    $arrFields['date_commission'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardDateCommissions'),'type'=>'date','value'=>$this->date_commission];
-    $arrFields['date_bill_percent'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('CardDateBillPercent'),'type'=>'date','value'=>$this->date_bill_percent];
+    $arrFields['free_days_limit'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('CardFreeDaysLimit'),'type'=>'number','value'=>$this->free_days_limit];
+    $arrFields['date_commission'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('CardDateCommissions'),'type'=>'date','value'=>$this->date_commission];
+    $arrFields['date_bill_percent'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardDateBillPercent'),'type'=>'date','value'=>$this->date_bill_percent];
 
-    $arrFields['min_payment'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPayment'),'type'=>'number','value'=>$this->min_payment];
-    $arrFields['min_payment_percent'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentPercent'),'type'=>'number','value'=>$this->min_payment_percent];
-    $arrFields['min_payment_date'] = ['section'=>2,'class'=>'switch_values switch_type-1','title'=>$oLang->get('CardMinPaymentDate'),'type'=>'number','value'=>$this->min_payment_date];
+    $arrFields['min_payment'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('CardMinPayment'),'type'=>'number','value'=>$this->min_payment];
+    $arrFields['min_payment_percent'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('CardMinPaymentPercent'),'type'=>'number','value'=>$this->min_payment_percent];
+    $arrFields['min_payment_date'] = ['section'=>2,'class'=>'switch_values switch_type-2','title'=>$oLang->get('CardMinPaymentDate'),'type'=>'number','value'=>$this->min_payment_date];
 
     $oCurrency = new currency();
     $arrCurrencies = $oCurrency->get_currencies();
