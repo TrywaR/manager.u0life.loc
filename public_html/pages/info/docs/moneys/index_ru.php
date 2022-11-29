@@ -45,7 +45,7 @@
         </p>
       </div>
       <div class="_link">
-        <a href="/moneys/analytics/costs/">
+        <a href="https://web.u0life.com/moneys/analytics/costs/">
           <?=$oLang->get('Try')?>
         </a>
       </div>

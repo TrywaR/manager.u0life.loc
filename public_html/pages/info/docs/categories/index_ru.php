@@ -22,7 +22,7 @@
         </p>
       </div>
       <div class="_link">
-        <a href="/categories/">
+        <a href="https://web.u0life.com/categories/">
           <?=$oLang->get('Try')?>
         </a>
       </div>

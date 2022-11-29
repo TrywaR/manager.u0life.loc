@@ -28,7 +28,7 @@
         </p>
       </div>
       <div class="_link">
-        <a href="/subscriptions/">
+        <a href="https://web.u0life.com/subscriptions/">
           <?=$oLang->get('Try')?>
         </a>
       </div>

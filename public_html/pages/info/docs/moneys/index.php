@@ -44,6 +44,11 @@
           Graph by time period (week/month/year) for all categories you set (see Categories) and separately graph by amount of expenses.
         </p>
       </div>
+      <div class="_link">
+        <a href="https://web.u0life.com/moneys/analytics/costs/">
+          <?=$oLang->get('Try')?>
+        </a>
+      </div>
     </div>
 
     <div class="_doc">

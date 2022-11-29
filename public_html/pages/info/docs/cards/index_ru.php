@@ -30,7 +30,7 @@
         </p>
       </div>
       <div class="_link">
-        <a href="/moneys/data/cards/">
+        <a href="https://web.u0life.com/moneys/data/cards/">
           <?=$oLang->get('Try')?>
         </a>
       </div>
