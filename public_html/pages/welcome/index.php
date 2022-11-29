@@ -90,14 +90,14 @@
 
    <div class="_section _info">
      <div class="_block">
-       <div class="_icon">
+       <!-- <div class="_icon">
          <i class="fa-solid fa-circle-info"></i>
+       </div> -->
+       <div class="_content">
+         <h2 class="_block_title">Info</h2>
+          <p>Do you have any questions? <a href="/info/">Details</a></p>
        </div>
-         <div class="_content">
-           <h2 class="_block_title">Info</h2>
-            <p>Do you have any questions? <a href="/info/">Details</a></p>
-         </div>
-       </div>
+     </div>
    </div>
 
    <?php if ( ! isset($_SESSION['user'])): ?>

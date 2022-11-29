@@ -179,7 +179,7 @@ class model
           break;
         case 'tinyint':
           $mySqlAdd .= "'";
-          $mySqlAdd .= isset($arrAddFields[$arrField['Field']]) ? 1 : 0;
+          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) && $arrAddFields[$arrField['Field']] ? 1 : 0;
           $mySqlAdd .= "'";
           break;
         case 'datetime':
@@ -196,9 +196,10 @@ class model
     $mySqlAdd .= ")";
 
     // Добавляем
-    // die($mySqlAdd);
+    if ( $this->show_query ) die($mySqlAdd);
+
     $this->id = db::insert($mySqlAdd);
-    // if ( $iNewTableElemId ) notification::success( 'Успешное добавление!' );
+
     if ( $this->id ) return $this->id;
     else notification::error( 'Add error!' );
   }
@@ -252,7 +253,7 @@ class model
           break;
         case 'tinyint':
           $mySqlSave .= "'";
-          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) ? 1 : 0;
+          $mySqlSave .= isset($arrAddFields[$arrField['Field']]) && $arrAddFields[$arrField['Field']] ? 1 : 0;
           $mySqlSave .= "'";
           break;
         case 'init':

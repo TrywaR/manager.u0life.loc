@@ -172,7 +172,7 @@ class card extends model
     $this->balance = $this->limit;
 
     // Если кридитка, считаем комиссии
-    if ( (float)$this->limit > 0 ) $this->commission = $this->commission_reload();
+    // if ( (float)$this->limit > 0 ) $this->commission = $this->commission_reload();
 
     // Анализируем затраты
     $oMoney = new money();

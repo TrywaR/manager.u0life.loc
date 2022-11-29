@@ -93,7 +93,8 @@ body {
     justify-content: space-between;
     max-width: 1000px;
     width: 100%;
-    background: #222228;
+    background: #191a20;
+    border-radius: 0 0 0.5rem 0.5rem;
     margin: 0 auto;
     z-index: 3; }
     body header:after {
@@ -1810,8 +1811,7 @@ body .content_manager_buttons {
       position: relative;
       z-index: 2; }
       .welcome_container ._section._title ._block {
-        color: white;
-        background: linear-gradient(rgba(24, 26, 32, 0.8), rgba(35, 36, 36, 0.9)); }
+        color: white; }
         .welcome_container ._section._title ._block ._content {
           display: flex;
           justify-content: center;
@@ -1892,16 +1892,13 @@ body .content_manager_buttons {
         opacity: 0.5; }
     .welcome_container ._section._times {
       position: relative;
-      z-index: 2;
-      background: #232424; }
+      z-index: 2; }
       .welcome_container ._section._times ._block_title,
       .welcome_container ._section._times ._icon {
         color: #7FC6A4; }
-    .welcome_container ._section._moneys {
-      background: #20292b; }
-      .welcome_container ._section._moneys ._block_title,
-      .welcome_container ._section._moneys ._icon {
-        color: #4F9497; }
+    .welcome_container ._section._moneys ._block_title,
+    .welcome_container ._section._moneys ._icon {
+      color: #4F9497; }
     .welcome_container ._section._info {
       padding-top: 4rem;
       padding-bottom: 4rem; }

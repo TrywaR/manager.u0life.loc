@@ -48,7 +48,7 @@ body {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  color: black;
+  color: #242424;
   background: white;
   font-family: "Geometria";
   font-size: 16px;
@@ -93,7 +93,8 @@ body {
     justify-content: space-between;
     max-width: 1000px;
     width: 100%;
-    background: white;
+    background: #f2f6ff;
+    border-radius: 0 0 0.5rem 0.5rem;
     margin: 0 auto;
     z-index: 3; }
     body header:after {
@@ -204,7 +205,7 @@ body {
     font-weight: 100;
     opacity: 0.3; }
     .block_footer ._bottom ._copy a {
-      color: black; }
+      color: #242424; }
       .block_footer ._bottom ._copy a:hover {
         opacity: 0.5; }
 
@@ -350,7 +351,7 @@ body .block_nav {
     border-radius: 0.5rem;
     z-index: 1; }
     body .block_nav ._subs .nav-item .nav-link {
-      color: black; }
+      color: #242424; }
       body .block_nav ._subs .nav-item .nav-link:before {
         top: 4%;
         bottom: 4%;
@@ -389,10 +390,10 @@ body #fttm_modal {
     filter: blur(0.1rem); } }
 select {
   background: #ecf2fd;
-  color: black; }
+  color: #242424; }
   select option {
     background: #ecf2fd;
-    color: black; }
+    color: #242424; }
 
 .input_checkbox,
 .block_input {
@@ -460,17 +461,17 @@ select {
 
 body .accordion-button,
 body .accordion-button:not(.collapsed) {
-  color: black;
+  color: #242424;
   background: #edf3fe; }
 body .accordion-item {
-  color: black;
+  color: #242424;
   background: #edf3fe; }
 body .form-select,
 body .form-select:focus,
 body .form-control,
 body .form-control:focus,
 body .form-control:disabled {
-  color: black;
+  color: #242424;
   background: #dae8fb;
   border-color: #dae8fb; }
 body .form-control:disabled {
@@ -482,7 +483,7 @@ body .datepicker table tr td.active:active,
 body .datepicker table tr td.active.highlighted:active,
 body .datepicker table tr td.active.active,
 body .datepicker table tr td.active.highlighted.active {
-  color: black;
+  color: #242424;
   background: #edf3fe; }
 body .btn {
   position: relative;
@@ -490,7 +491,7 @@ body .btn {
   justify-content: center;
   align-items: center;
   padding: 0.6rem;
-  color: black;
+  color: #242424;
   border-radius: 0.5rem !important;
   border: none !important;
   outline: none !important;
@@ -587,7 +588,7 @@ body .btn-group-vertical .btn {
 body .card {
   position: relative;
   z-index: 1;
-  color: black;
+  color: #242424;
   background: transparent; }
   body .card .card-text {
     opacity: 0.5; }
@@ -599,7 +600,7 @@ body .list-group-numbered .list-group-item:before {
   font-weight: 300;
   padding: 0 0.2rem 0 0; }
 body .list-group-item {
-  color: black;
+  color: #242424;
   background: #edf3fe;
   z-index: 1; }
   body .list-group-item .icon {
@@ -641,7 +642,7 @@ body .input-group {
     opacity: 0.1;
     z-index: -2; }
 body .input-group-text {
-  color: black;
+  color: #242424;
   font-size: 1em;
   line-height: 1em;
   font-weight: 400;
@@ -654,7 +655,7 @@ body .input-group-text {
     overflow: hidden; }
 body .form-label {
   opacity: 0.8;
-  color: black;
+  color: #242424;
   font-size: 1em;
   line-height: 1em;
   font-weight: 400; }
@@ -664,10 +665,10 @@ body .badge {
   body .badge.bg-primary {
     background: #7661db !important; }
 body .navbar .home_link {
-  color: black;
+  color: #242424;
   text-decoration: none; }
 body .form-control-plaintext {
-  color: black; }
+  color: #242424; }
 body .modal {
   z-index: 9998; }
   body .modal .modal-dialog .modal-content {
@@ -676,7 +677,7 @@ body .modal {
     body .modal .modal-dialog .modal-content .modal-header {
       border: none; }
       body .modal .modal-dialog .modal-content .modal-header .btn-close {
-        color: black; }
+        color: #242424; }
     body .modal .modal-dialog .modal-content .modal-footer {
       border: none;
       justify-content: space-between; }
@@ -824,7 +825,7 @@ body .nav-pills .nav-link.active, body .nav-pills .nav-link.show {
       margin-left: auto;
       opacity: 0.4;
       text-decoration: none;
-      color: black; }
+      color: #242424; }
 
 .block_social {
   display: flex;
@@ -836,13 +837,13 @@ body .nav-pills .nav-link.active, body .nav-pills .nav-link.show {
     font-size: 1.3em;
     box-sizing: border-box;
     text-decoration: none;
-    color: black;
+    color: #242424;
     opacity: 0.15; }
     .block_social ._item.__donate {
       border-radius: 0.5rem;
       background: #ecf2fd; }
     .block_social ._item:hover {
-      color: black;
+      color: #242424;
       opacity: 1; }
 
 @media screen and (max-width: 1000px) {
@@ -919,7 +920,7 @@ body .nav-pills .nav-link.active, body .nav-pills .nav-link.show {
 .icon {
   font-size: 1.2rem;
   line-height: 1;
-  color: black; }
+  color: #242424; }
 
 .switch_icons > *:nth-child(1) {
   display: flex; }
@@ -1178,7 +1179,7 @@ body .block_date {
     display: flex;
     background: none;
     border: none;
-    color: black;
+    color: #242424;
     border-radius: 0.5rem;
     padding: 0.3rem;
     background: #ecf2fd; }
@@ -1211,7 +1212,7 @@ body .block_date {
       opacity: 0.5; }
       .block_swich ._vals ._val._select_ {
         background: #ecf2fd;
-        color: black;
+        color: #242424;
         opacity: 1; }
 
 .odometer.odometer-theme-minimal .odometer-digit {
@@ -1320,7 +1321,7 @@ body .block_date {
     background: #edf3fe; }
   .block_slider .slick-prev:before,
   .block_slider .slick-next:before {
-    color: black; }
+    color: #242424; }
   .block_slider ._slider_item {
     position: relative;
     display: flex;
@@ -1425,7 +1426,7 @@ body .block_date {
       background: #dae8fb;
       text-align: left;
       z-index: 100;
-      color: black; }
+      color: #242424; }
       .block_calendar .calendar-item .calendar-popup:before {
         content: "";
         border: solid transparent;
@@ -1810,8 +1811,7 @@ body .content_manager_buttons {
       position: relative;
       z-index: 2; }
       .welcome_container ._section._title ._block {
-        color: white;
-        background: linear-gradient(rgba(24, 26, 32, 0.8), rgba(35, 36, 36, 0.9)); }
+        color: white; }
         .welcome_container ._section._title ._block ._content {
           display: flex;
           justify-content: center;
@@ -1892,16 +1892,13 @@ body .content_manager_buttons {
         opacity: 0.5; }
     .welcome_container ._section._times {
       position: relative;
-      z-index: 2;
-      background: #232424; }
+      z-index: 2; }
       .welcome_container ._section._times ._block_title,
       .welcome_container ._section._times ._icon {
         color: #7FC6A4; }
-    .welcome_container ._section._moneys {
-      background: #20292b; }
-      .welcome_container ._section._moneys ._block_title,
-      .welcome_container ._section._moneys ._icon {
-        color: #4F9497; }
+    .welcome_container ._section._moneys ._block_title,
+    .welcome_container ._section._moneys ._icon {
+      color: #4F9497; }
     .welcome_container ._section._info {
       padding-top: 4rem;
       padding-bottom: 4rem; }
@@ -1909,7 +1906,7 @@ body .content_manager_buttons {
         top: 6rem;
         right: 1rem;
         opacity: 1;
-        background: black;
+        background: #242424;
         border-radius: 50%;
         padding: 0.5rem;
         color: #dae8fb; }
@@ -1954,7 +1951,7 @@ body .content_manager_buttons {
   font-weight: 100;
   opacity: 0.3; }
   .block_contact ._copy a {
-    color: black; }
+    color: #242424; }
     .block_contact ._copy a:hover {
       opacity: 0.5; }
 
@@ -2150,14 +2147,11 @@ body .block_nav ._subs .nav-item .nav-link:before,
 body .block_nav ._main .nav-item .nav-link:before {
   background: white; }
 body .welcome_container ._section._title ._block {
-  color: black;
-  background: linear-gradient(#f2f6ff, #f6f6ff);
+  color: #242424;
   border-radius: 5%; }
   body .welcome_container ._section._title ._block h1 {
     color: #7661db;
     text-shadow: none; }
-body .welcome_container ._section._moneys {
-  background: rgba(210, 210, 210, 0.1); }
 body .welcome_container ._section._times {
   background: none; }
 body .block_logo {

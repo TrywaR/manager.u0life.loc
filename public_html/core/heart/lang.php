@@ -59,6 +59,9 @@ class lang
       'HelloSubscriptions' => 'Добавьте ежемесячные платежи<br/> Чтобы отслеживать сколько и когда платить',
       'HelloWelcome' => 'Краткая информация<br/> для знакомства с сервисом',
 
+      'AppVersionForAndroid' => 'Версия для Android',
+      'AppVersionForIphone' => 'Версия для iPhone',
+
       'ErrorLoginOrPassword' => 'Неправильный логин или пароль!',
       'SuccessfulLogin' => 'Успешный вход!',
       'SuccessfulExit' => 'Успешный выход!',
@@ -343,6 +346,9 @@ class lang
       'HelloCards' => 'Add your cards, bills and cash,<br/> to track your balance and spending',
       'HelloSubscriptions' => 'Add monthly payments<br/> To track how much and when to pay',
       'HelloWelcome' => 'Brief information <br/> to get acquainted with the service',
+
+      'AppVersionForAndroid' => 'Version for Android',
+      'AppVersionForIphone' => 'Version for iPhone',
 
       'ErrorLoginOrPassword' => 'Error entering login or password!',
       'SuccessfulLogin' => 'Successful login!',

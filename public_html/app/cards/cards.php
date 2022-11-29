@@ -160,8 +160,9 @@ switch ($_REQUEST['form']) {
 
   case 'save': # Сохранение изменений
     $arrResult = [];
-    $oCard = $_REQUEST['id'] ? new card( $_REQUEST['id'] ) : new card();
+    $oCard = new card( $_REQUEST['id'] );
     $oCard->arrAddFields = $_REQUEST;
+    // $oCard->show_query = true;
 
     if ( $_REQUEST['id'] ) {
       $arrResult['event'] = 'save';

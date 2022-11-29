@@ -15,10 +15,12 @@
     name="<?=$arrTemplateParams['name']?>"
     <?if ( $arrTemplateParams['disabled'] ) echo 'disabled="disabled"'?>
     <?if ( $arrTemplateParams['required'] ) echo 'required="required"'?>
-    <?php if ($arrTemplateParams['value']): ?>
+    <?php if ((int)$arrTemplateParams['value']): ?>
       checked
+      value="true"
+    <?php else: ?>
+      value="false"
     <?php endif; ?>
-    value="<?=$arrTemplateParams['value']?>"
     id="checkbox_<?=$arrTemplateParams['name']?>"
   >
   <label class="form-check-label" for="checkbox_<?=$arrTemplateParams['name']?>">

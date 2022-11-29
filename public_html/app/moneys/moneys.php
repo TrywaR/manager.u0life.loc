@@ -143,10 +143,11 @@ switch ($_REQUEST['form']) {
     $oMoney->show_to_card = true;
     $oMoney->show_category = true;
     $oMoney->show_project = true;
+    $oMoney->show_currency = true;
     $oMoney->show_task = true;
     $oMoney->show_subscription = true;
 
-    $arrResult['data'] = $oMoney->get_moneys();
+    $arrResult['data'] = $oMoney->get_money();
     $arrResult['text'] = $oLang->get("ChangesSaved");
 
     // Обновление карты

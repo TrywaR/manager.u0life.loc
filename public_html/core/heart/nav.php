@@ -387,6 +387,20 @@ class nav
             'icon' => '<i class="fas fa-book-dead"></i>',
             'menu_hide' => false,
           ),
+          '/info/android/' => array(
+            'name' => $oLang->get('AppVersionForAndroid'),
+            'description' => $oLang->get('AppVersionForAndroid'),
+            'url' => '/info/android/',
+            'icon' => '<i class="fa-brands fa-google"></i>',
+            'menu_hide' => true,
+          ),
+          '/info/apple/' => array(
+            'name' => $oLang->get('AppVersionForIphone'),
+            'description' => $oLang->get('AppVersionForIphone'),
+            'url' => '/info/apple/',
+            'icon' => '<i class="fa-brands fa-apple"></i>',
+            'menu_hide' => true,
+          ),
         ],
       ),
 

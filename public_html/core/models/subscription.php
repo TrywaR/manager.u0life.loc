@@ -19,6 +19,7 @@ class subscription extends model
   public static $active = '';
   public static $user_id = '';
   public static $description = '';
+  public static $currency = '';
   public static $sDateQuery = '';
 
   public function get_subscription( $arrSubscription = [] ){
@@ -162,6 +163,8 @@ class subscription extends model
     $arrFields['id'] = ['title'=>'ID','type'=>'hidden','disabled'=>'disabled','value'=>$this->id]; # Для передачи в параметры
     $arrFields['user_id'] = ['title'=>$oLang->get('User'),'type'=>'hidden','value'=>$_SESSION['user']['id']];
 
+    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title];
+
     $arrFields['type'] = ['class'=>'switch','title'=>$oLang->get('Type'),'type'=>'select','options'=>$this->arrTypes,'value'=>$this->type];
     $arrFields['day'] = ['title'=>$oLang->get('PaymentDay'),'type'=>'number','value'=>$this->day];
 
@@ -203,12 +206,19 @@ class subscription extends model
     foreach ($arrCategories as $arrCategory) $arrCategoriesFilter[] = array('id'=>$arrCategory['id'],'name'=>$arrCategory['title'],'color'=>$arrCategory['color']);
     $arrFields['category'] = ['title'=>$oLang->get('Category'),'type'=>'select','options'=>$arrCategoriesFilter,'search'=>true,'value'=>$this->category];
 
-    $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','required'=>'required','value'=>$this->title];
+    $oCurrency = new currency();
+    $arrCurrencies = $oCurrency->get_currencies();
+    $arrCurrenciesFilter = [];
+    $arrCurrenciesFilter[] = array('id'=>'','name'=>'...');
+    foreach ( $arrCurrencies as $arrCurrency )
+      $arrCurrenciesFilter[] = array('id'=>$arrCurrency['currency_code'],'name'=>$arrCurrency['currency_code'],'description'=>$arrCurrency['currency_name']);
+
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
 
+    $arrFields['currency'] = ['section'=>2,'title'=>$oLang->get('Currency'),'type'=>'select','options'=>$arrCurrenciesFilter,'search'=>true,'value'=>$this->currency];
     // $arrFields['sum'] = ['title'=>$oLang->get('Sum'),'type'=>'number','value'=>$this->sum];
-    $arrFields['price'] = ['title'=>$oLang->get('Payment'),'type'=>'number','value'=>substr($this->price, 0, -2),'step'=>'0.01'];
-    $arrFields['sum'] = ['title'=>$oLang->get('Sum'),'type'=>'number','value'=>substr($this->sum, 0, -2),'step'=>'0.01'];
+    $arrFields['price'] = ['section'=>2,'title'=>$oLang->get('Payment'),'type'=>'number','value'=>substr($this->price, 0, -2),'step'=>'0.01'];
+    $arrFields['sum'] = ['section'=>2,'title'=>$oLang->get('Sum'),'type'=>'number','value'=>substr($this->sum, 0, -2),'step'=>'0.01'];
 
     $arrFields['description'] = ['title'=>$oLang->get('Description'),'type'=>'textarea','value'=>$this->description];
 
@@ -243,6 +253,7 @@ class subscription extends model
       $this->active = $arrSubscription['active'];
       $this->description = base64_decode($arrSubscription['description']);
       $this->user_id = $arrSubscription['user_id'];
+      $this->currency = $arrSubscription['currency'];
     }
 
     $this->arrTypes = [
