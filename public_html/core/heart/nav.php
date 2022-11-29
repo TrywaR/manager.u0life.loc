@@ -324,6 +324,7 @@ class nav
         'url' => '/users/',
         'icon' => '<i class="fa-solid fa-users"></i>',
         'access' => 0,
+        'onlyapp' => true,
         // 'menu_hide' => true,
         'subs' => [
           '/users/user/' => array(
