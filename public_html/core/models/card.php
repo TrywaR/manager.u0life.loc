@@ -43,13 +43,18 @@ class card extends model
     // if ( $iLastMoney > $iLastUpdateCard ) $arrCard['balance'] = $this->balance_reload();
 
     // Обработка данных
-    $arrCard['balance'] = round($arrCard['balance']);
+    if ( $arrCard['balance'] != 0 )
+      $arrCard['balance'] = bcdiv($arrCard['balance'], 1, 2);
 
-    $arrCard['limit'] = round($arrCard['limit']);
-    if ( ! (int)$arrCard['limit'] ) $arrCard['limit'] = '-';
+    if ( $arrCard['limit'] != 0 ) {
+      $arrCard['limit'] = bcdiv($arrCard['limit'], 1, 2);
+      if ( ! (int)$arrCard['limit'] ) $arrCard['limit'] = '-';
+    }
 
-    $arrCard['commission'] = round($arrCard['commission']);
-    if ( ! (int)$arrCard['commission'] ) $arrCard['commission'] = '-';
+    if ( $arrCard['commission'] != 0 ) {
+      $arrCard['commission'] = bcdiv($arrCard['commission'], 1, 2);
+      if ( ! (int)$arrCard['commission'] ) $arrCard['commission'] = '-';
+    }
 
     // Валюта
     $oLock = new lock();
@@ -57,17 +62,19 @@ class card extends model
       $oCurrency = new currency();
       $arrCard['currency_user'] = $oCurrency->get_currency_user();
       $arrCard['currency_card'] = $arrCard['currency'];
-      if ( $arrCard['currency'] != $arrCard['currency_user'] ) {
-        $arrCard['currency_balance'] = round($arrCard['balance']);
-        $arrCard['balance'] = round( $arrCard['balance'] / $oCurrency->get_val( $arrCard['currency'] ) );
+      if ( $arrCard['currency'] != '' && $arrCard['currency'] != $arrCard['currency_user'] ) {
+        if ( (int)$arrCard['balance'] != 0 ) {
+          $arrCard['currency_balance'] = bcdiv($arrCard['balance'], 1, 2);
+          $arrCard['balance'] = bcdiv( $arrCard['balance'] / $oCurrency->get_val( $arrCard['currency'] ), 1, 2 );
+        }
 
         $arrCard['currency_card'] = $oCurrency->get_currency_user();
         $arrCard['currency_user'] = $arrCard['currency'];
 
         if ( $arrCard['limit'] != '-' && (int)$arrCard['limit'] > 0 )
-          $arrCard['limit'] = round( $arrCard['limit'] / $oCurrency->get_val( $arrCard['currency'] ) );
+          $arrCard['limit'] = bcdiv( $arrCard['limit'] / $oCurrency->get_val( $arrCard['currency'] ), 1, 2);
         if ( $arrCard['limit'] != '-' && (int)$arrCard['commission'] > 0 )
-          $arrCard['commission'] = round( $arrCard['commission'] / $oCurrency->get_val( $arrCard['currency'] ) );
+          $arrCard['commission'] = bcdiv( $arrCard['commission'] / $oCurrency->get_val( $arrCard['currency'] ), 1, 2);
       }
       else $arrCard['currency_user'] = '';
     }
