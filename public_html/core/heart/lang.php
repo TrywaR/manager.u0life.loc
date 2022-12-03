@@ -55,6 +55,9 @@ class lang
       'Currency' => 'Валюта',
       'Currencies' => 'Валюты',
 
+      'Templates' => 'Шаблоны',
+      'TemplatesTasks' => 'Шаблоны задач',
+
       'HelloCards' => 'Добавьте свои карты, счета и наличные,<br/> чтобы отслеживать баланс и расходы',
       'HelloSubscriptions' => 'Добавьте ежемесячные платежи<br/> Чтобы отслеживать сколько и когда платить',
       'HelloWelcome' => 'Краткая информация<br/> для знакомства с сервисом',
@@ -342,6 +345,9 @@ class lang
 
       'Currency' => 'Currency',
       'Currencies' => 'Currencies',
+
+      'Templates' => 'Templates',
+      'TemplatesTasks' => 'Tasks templates',
 
       'HelloCards' => 'Add your cards, bills and cash,<br/> to track your balance and spending',
       'HelloSubscriptions' => 'Add monthly payments<br/> To track how much and when to pay',

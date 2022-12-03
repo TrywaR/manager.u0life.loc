@@ -251,6 +251,24 @@ class nav
         'icon' => '<i class="fa-solid fa-person-digging"></i>',
         'access' => 0,
         'onlyapp' => true,
+        'subs' => [
+          '/tasks/' => array(
+            'name' => $oLang->get('Thread'),
+            'description' => $oLang->get('Thread'),
+            'url' => '/tasks/',
+            'icon' => '<i class="fa-solid fa-bars"></i>',
+            'access' => 0,
+            'onlyapp' => true,
+          ),
+          '/tasks/templates/' => array(
+            'name' => $oLang->get('Templates'),
+            'description' => $oLang->get('Templates'),
+            'url' => '/tasks/templates/',
+            'icon' => '<i class="fa-solid fa-copy"></i>',
+            'access' => 0,
+            'onlyapp' => true,
+          ),
+        ],
       ),
 
       '/categories/' => array(

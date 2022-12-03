@@ -145,5 +145,7 @@ switch ($_REQUEST['form']) {
   case 'del': # Удаление
     $oTask = new task( $_REQUEST['id'] );
     $oTask->del();
+    $arrResult['text'] = $oLang->get("DeleteSuccess");
+    notification::success($arrResult);
     break;
 }
