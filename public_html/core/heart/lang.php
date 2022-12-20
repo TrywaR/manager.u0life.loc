@@ -101,11 +101,15 @@ class lang
       'RewardsForReferal' => 'Доступ за приглашение пользователя',
       'RewardUser' => 'Награда пользователя',
       'Access' => 'Доступ',
-      'Accesses' => 'Доступы',
       'AccessesDenied' => 'Нет доступа',
       'Admin' => 'Администратор',
       'AdminPanel' => 'Админ панель',
       'Accesses' => 'Доступы',
+
+      'List' => 'Список',
+      'Lists' => 'Списки',
+      'ListsElem' => 'Элемент списка',
+      'ListsElems' => 'Элементы списка',
 
       'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Оцифровка твоей жизни. Система управления деньгами, временем и задачами.',
@@ -392,11 +396,15 @@ class lang
       'RewardsForReferal' => 'Rewards for referal',
       'RewardUser' => 'RewardUser',
       'Access' => 'Access',
-      'Accesses' => 'Accesses',
       'AccessesDenied' => 'Accesses denied',
       'Admin' => 'Admin',
       'AdminPanel' => 'Admin panel',
       'Accesses' => 'Accesses',
+
+      'List' => 'List',
+      'Lists' => 'Lists',
+      'ListsElem' => 'Lists elem',
+      'ListsElems' => 'Lists elems',
 
       'HomePageTitle' => 'u0life',
       'HomePageDescription' => 'Digitization you life. Time, money, tasks manager system!',

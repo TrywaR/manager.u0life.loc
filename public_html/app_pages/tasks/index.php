@@ -226,10 +226,22 @@ $arrProjects = $oProject->get_projects();
           <button type="button" class="btn _description_show" name="button" data-shower="#desc_{{id}}" data-shower_class="animate__fadeIn">
             <i class="fa-solid fa-align-left"></i>
           </button>
+
+          <!-- <button type="button" class="btn _lists_show" name="button" data-shower="#lists_{{id}}" data-shower_class="animate__fadeIn">
+            <i class="fa-solid fa-list-check"></i>
+          </button> -->
         </div>
 
         <div class="_description_prev animate__animated" id="desc_{{id}}">
           {{description_prev}}
+        </div>
+
+        <div class="_lists_prev animate__animated" id="lists_{{id}}">
+          <div class="block_buttons __center">
+            <button type="button" class="btn __big __gradient content_loader_show" data-action="tasks_lists" data-form="form" data-task_id="{{id}}" name="button">
+              <i class="fa-solid fa-circle-plus"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>

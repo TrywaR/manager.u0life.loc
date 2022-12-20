@@ -20,8 +20,6 @@ include_once 'models/session.php'; # Сессии
 include_once 'models/user.php'; # Пользователь
 include_once 'models/client.php'; # Клиент
 include_once 'models/project.php'; # Проект
-include_once 'models/task.php'; # Задачи
-include_once 'models/task_template.php'; # Задачи (шаблоны)
 include_once 'models/money.php'; # Деньги
 include_once 'models/card.php'; # Карты для денег
 include_once 'models/category.php'; # Категории
@@ -35,3 +33,8 @@ include_once 'models/reward_user.php'; # Награды пользователе
 include_once 'models/notice.php'; # Уведомления
 include_once 'models/notice_view.php'; # Просмотры Уведомления
 include_once 'models/currency.php'; # Валюты
+
+include_once 'models/tasks/task.php'; # Задачи
+include_once 'models/tasks/task_template.php'; # Задачи (шаблоны)
+include_once 'models/tasks/lists/list.php'; # Списки
+include_once 'models/tasks/lists/list_elem.php'; # Элемент списка

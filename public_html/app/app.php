@@ -87,6 +87,14 @@ if ( isset($_SESSION['user']) ) {
       include_once 'tasks/templates.php';
       break;
 
+    case 'tasks_lists': # Списки к задачам
+      include_once 'tasks/lists/lists.php';
+      break;
+
+    case 'tasks_lists_elems': # Списки к задачам
+      include_once 'tasks/lists/lists_elems.php';
+      break;
+
     case 'times': # Время
       include_once 'times/times.php';
       include_once 'times/analytics.php';

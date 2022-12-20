@@ -11,7 +11,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_0">5.6.0 Fixer</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_0_1">5.6.1 Prelist</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_0_0">5.6.0 Fixer</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_5_51">5.5.51 Public users</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_5_5">5.5.5 Task micro</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_5_4">5.5.4 MEGA Currency</a>
@@ -80,6 +81,16 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_6_1">5.6.0 Prelist</h2>
+            <ol>
+              <li>
+                Подготовка для ввода списка задач в задчи
+              </li>
+              <li>
+                Стилевые изменения дня
+              </li>
+            </ol>
+
             <h2 id="list-item-5_6_0">5.6.0 Fixer</h2>
             <ol>
               <li>
