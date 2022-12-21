@@ -33,7 +33,13 @@
 
       <div class="_section _day">
         <div class="_section_content _show_">
-          <div class="block_liveliner _loading_" id="dashboard_days"></div>
+          <div class="block_liveliner _loading_" id="dashboard_days">
+            <div class="block_loading">
+              <div class="_icon">
+                <i class="fas fa-chart-area"></i>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

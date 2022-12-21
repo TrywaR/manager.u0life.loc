@@ -8,7 +8,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oTaskList->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oTaskList->limit = $_REQUEST['limit'];
 
-    $oTaskList->sortname = 'date_update';
+    $oTaskList->sortname = 'sort';
     $oTaskList->sortdir = 'DESC';
     // $oTaskList->sortMulti = '`sort` DESC, `date_update` DESC';
     $oTaskList->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
@@ -81,6 +81,32 @@ switch ($_REQUEST['form']) {
     $arrResults['data'] = $oTaskList->get_task_list();
 
     $arrResults['action'] = 'tasks_lists';
+    notification::send($arrResults);
+    break;
+
+  case 'add': # Тупо добавление
+    // Параметры
+    $arrResults = [];
+    $arrResults['event'] = 'add';
+    $oTaskList = new task_list();
+
+    // Случайное имя для корректной работы
+    $arrDefaultsNames = array(
+      'Task for reflection',
+      'The best way',
+      'Good name, good job',
+    );
+
+    // Создаем элемент
+    $oTaskList->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
+    $oTaskList->user_id = $_SESSION['user']['id'];
+    $oTaskList->task_id = $_REQUEST['task_id'];
+    $oTaskList = new task_list( $oTaskList->add() );
+    $oTaskList->active = 1;
+    $oTaskList->save();
+
+    // Бережно отдаём данные
+    $arrResults['data'] = $oTaskList->get_task_list();
     notification::send($arrResults);
     break;
 
