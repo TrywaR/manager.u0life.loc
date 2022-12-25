@@ -11,7 +11,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_6_2">5.6.2 Prelist editor</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_6_3">5.6.3 Prelist elements</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_6_2">5.6.2 Prelist editor</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_6_1">5.6.1 Prelist</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_6_0">5.6.0 Fixer</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_5_51">5.5.51 Public users</a>
@@ -82,6 +83,13 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_6_3">5.6.3 Prelist elements</h2>
+            <ol>
+              <li>
+                Возможность добавлять элементы списков и менять их статус
+              </li>
+            </ol>
+
             <h2 id="list-item-5_6_2">5.6.2 Prelist editor</h2>
             <ol>
               <li>
