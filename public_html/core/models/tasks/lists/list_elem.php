@@ -13,6 +13,7 @@ class task_list_elem extends model
   public static $user_id = '';
   public static $date_create = '';
   public static $date_update = '';
+  public static $status = '';
 
   function get_task_list_elem( $arrTaskListElem = [] ) {
     if ( ! $arrTaskListElem['id'] ) $arrTaskListElem = $this->get();
@@ -42,6 +43,7 @@ class task_list_elem extends model
     $arrFields['title'] = ['title'=>$oLang->get('Title'),'type'=>'text','value'=>$this->title];
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
+    $arrFields['status'] = ['title'=>$oLang->get('Status'),'type'=>'checkbox','value'=>$this->status];
     $arrFields['date_create'] = ['title'=>$oLang->get('DateCreate'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_create];
     $arrFields['date_update'] = ['title'=>$oLang->get('DateUpdate'),'type'=>'date_time','disabled'=>'disabled','value'=>$this->date_update];
 
@@ -67,6 +69,7 @@ class task_list_elem extends model
       $this->list_id = $arrTaskListElem['list_id'];
       $this->date_create = $arrTaskListElem['date_create'];
       $this->date_update = $arrTaskListElem['date_update'];
+      $this->status = $arrTaskListElem['status'];
     }
     else {
       $this->date_create = date("Y-m-d H:i:s");

@@ -9,7 +9,7 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['limit'] ) $oTaskList->limit = $_REQUEST['limit'];
 
     $oTaskList->sortname = 'sort';
-    $oTaskList->sortdir = 'DESC';
+    $oTaskList->sortdir = 'ASC';
     // $oTaskList->sortMulti = '`sort` DESC, `date_update` DESC';
     $oTaskList->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 
@@ -113,9 +113,10 @@ switch ($_REQUEST['form']) {
   case 'save': # Сохранение изменений
     $arrResult = [];
 
-    $oTaskList = $_REQUEST['id'] ? new task_list( $_REQUEST['id'] ) : new task_list();
-    $oTaskList->arrAddFields = $_REQUEST;
-    $oTaskList->arrAddFields['date_update'] = date("Y-m-d H:i:s");
+    $oTaskList = new task_list( $_REQUEST['id'] );
+    $oTaskList->date_update = date("Y-m-d H:i:s");
+    $oTaskList->sort = $_REQUEST['sort'];
+    $oTaskList->title = $_REQUEST['title'];
 
     if ( $_REQUEST['id'] ) {
       $arrResult['event'] = 'save';
@@ -129,6 +130,20 @@ switch ($_REQUEST['form']) {
     $oTaskList = new task_list( $oTaskList->id );
     $arrResult['data'] = $oTaskList->get_task_list();
     $arrResult['text'] = $oLang->get("ChangesSaved");
+
+    notification::success($arrResult);
+    break;
+
+  case 'sort': # Изменение статуса
+    $arrResult = [];
+    $arrResult['event'] = 'sort';
+
+    $oTaskList = new task_list( $_REQUEST['id'] );
+    $oTaskList->sort = $_REQUEST['sort'];
+    $oTaskList->save();
+
+    $oTaskList = new task_list( $oTaskList->id );
+    $arrResult['data'] = $oTaskList->get_task_list();
 
     notification::success($arrResult);
     break;

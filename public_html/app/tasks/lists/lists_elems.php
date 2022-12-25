@@ -8,8 +8,8 @@ switch ($_REQUEST['form']) {
     if ( $_REQUEST['from'] ) $oTaskListElem->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oTaskListElem->limit = $_REQUEST['limit'];
 
-    $oTaskListElem->sortname = 'date_update';
-    $oTaskListElem->sortdir = 'DESC';
+    $oTaskListElem->sortname = 'sort';
+    $oTaskListElem->sortdir = 'ASC';
     // $oTaskListElem->sortMulti = '`sort` DESC, `date_update` DESC';
     $oTaskListElem->query .= ' AND `user_id` = ' . $_SESSION['user']['id'];
 
@@ -84,12 +84,40 @@ switch ($_REQUEST['form']) {
     notification::send($arrResults);
     break;
 
+  case 'add': # Добавление
+    // Параметры
+    $arrResults = [];
+    $arrResults['event'] = 'add';
+    $oTaskListElem = new task_list_elem();
+
+    // Случайное имя для корректной работы
+    $arrDefaultsNames = array(
+      'Task for reflection',
+      'The best way',
+      'Good name, good job',
+    );
+
+    // Создаем элемент
+    $oTaskListElem->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
+    $oTaskListElem->user_id = $_SESSION['user']['id'];
+    $oTaskListElem->list_id = $_REQUEST['list_id'];
+    $oTaskListElem->sort = $_REQUEST['sort'];
+    $oTaskListElem = new task_list_elem( $oTaskListElem->add() );
+    $oTaskListElem->active = 1;
+    $oTaskListElem->save();
+
+    // Бережно отдаём данные
+    $arrResults['data'] = $oTaskListElem->get_task_list_elem();
+    notification::send($arrResults);
+    break;
+
   case 'save': # Сохранение изменений
     $arrResult = [];
 
-    $oTaskListElem = $_REQUEST['id'] ? new task_list_elem( $_REQUEST['id'] ) : new task_list_elem();
-    $oTaskListElem->arrAddFields = $_REQUEST;
-    $oTaskListElem->arrAddFields['date_update'] = date("Y-m-d H:i:s");
+    $oTaskListElem = new task_list_elem( $_REQUEST['id'] );
+    $oTaskListElem->date_update = date("Y-m-d H:i:s");
+    $oTaskListElem->sort = $_REQUEST['sort'];
+    $oTaskListElem->title = $_REQUEST['title'];
 
     if ( $_REQUEST['id'] ) {
       $arrResult['event'] = 'save';
@@ -103,6 +131,36 @@ switch ($_REQUEST['form']) {
     $oTaskListElem = new task_list_elem( $oTaskListElem->id );
     $arrResult['data'] = $oTaskListElem->get_task_list_elem();
     $arrResult['text'] = $oLang->get("ChangesSaved");
+
+    notification::success($arrResult);
+    break;
+
+  case 'check': # Изменение статуса
+    $arrResult = [];
+    $arrResult['event'] = 'save';
+
+    $oTaskListElem = new task_list_elem( $_REQUEST['id'] );
+    $oTaskListElem->date_update = date("Y-m-d H:i:s");
+    if ( (int)$_REQUEST['status'] ) $oTaskListElem->status = 1;
+    else $oTaskListElem->status = 0;
+    $oTaskListElem->save();
+
+    $oTaskListElem = new task_list_elem( $oTaskListElem->id );
+    $arrResult['data'] = $oTaskListElem->get_task_list_elem();
+
+    notification::success($arrResult);
+    break;
+
+  case 'sort': # Изменение статуса
+    $arrResult = [];
+    $arrResult['event'] = 'sort';
+
+    $oTaskListElem = new task_list_elem( $_REQUEST['id'] );
+    $oTaskListElem->sort = $_REQUEST['sort'];
+    $oTaskListElem->save();
+
+    $oTaskListElem = new task_list_elem( $oTaskListElem->id );
+    $arrResult['data'] = $oTaskListElem->get_task_list_elem();
 
     notification::success($arrResult);
     break;
