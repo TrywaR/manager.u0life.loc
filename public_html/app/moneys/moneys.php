@@ -65,8 +65,9 @@ switch ($_REQUEST['form']) {
       // $oMoney->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oMoney->user_id = $_SESSION['user']['id'];
       $oMoney->date = date('Y-m-d');
-      $oMoney->active = 1;
       $oMoney->add();
+      $oMoney->active = 1;
+      $oMoney->save();
       $oMoney = new money( $oMoney->id );
     }
 

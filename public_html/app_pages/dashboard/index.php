@@ -374,7 +374,7 @@
     </div>
 
     <!-- Задачи -->
-    <div class="_item __href">
+    <div class="_item __href __tasks">
       <div class="_icon">
         <i class="fa-solid fa-person-digging"></i>
       </div>
@@ -388,7 +388,7 @@
     </div>
 
     <!-- Время -->
-    <div class="_item __href">
+    <div class="_item __href __times">
       <div class="_icon">
         <i class="fa-solid fa-clock"></i>
       </div>
@@ -402,7 +402,7 @@
     </div>
 
     <!-- Деньги -->
-    <div class="_item __href">
+    <div class="_item __href __moneys">
       <div class="_icon">
         <i class="fa-solid fa-wallet"></i>
       </div>

@@ -75,8 +75,9 @@ switch ($_REQUEST['form']) {
       $oCategory->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oCategory->user_id = $_SESSION['user']['id'];
       $oCategory->date = date('Y-m-d');
-      $oCategory->active = 1;
       $oCategory->add();
+      $oCategory->active = 1;
+      $oCategory->save();
     }
 
     // Поля для добавления

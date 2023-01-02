@@ -40,8 +40,9 @@ switch ($_REQUEST['form']) {
       // Создаем элемент
       $oClient->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oClient->user_id = $_SESSION['user']['id'];
-      $oClient->active = 1;
       $oClient->add();
+      $oClient->active = 1;
+      $oClient->save();
     }
     // Поля для добавления
     $oForm->arrFields = $oClient->fields();

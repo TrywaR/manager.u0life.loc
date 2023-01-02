@@ -3,7 +3,7 @@ $oTask = new task();
 
 $oClient = new client();
 $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-$arrClients = $oClient->get();
+$arrClients = $oClient->get_clients();
 
 $oProject = new project();
 $oProject->sort = 'sort';

@@ -59,8 +59,9 @@ switch ($_REQUEST['form']) {
       $oTime->time_planned = '00:00';
       $oTime->time_really = '00:00';
       $oTime->date = date('Y-m-d');
-      $oTime->active = 1;
       $oTime->add();
+      $oTime->active = 1;
+      $oTime->save();
     }
 
     // Поля для добавления
@@ -91,7 +92,7 @@ switch ($_REQUEST['form']) {
 
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
-    $arrResults['data'] = $oTime->get_times();
+    $arrResults['data'] = $oTime->get_time();
     $arrResults['action'] = 'times';
 
     notification::send($arrResults);

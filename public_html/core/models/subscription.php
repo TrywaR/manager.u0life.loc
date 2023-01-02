@@ -24,6 +24,7 @@ class subscription extends model
 
   public function get_subscription( $arrSubscription = [] ){
     if ( ! $arrSubscription['id'] ) $arrSubscription = $this->get();
+    $oLock = new lock();
 
     if ( (int)$arrSubscription['active'] ) $arrSubscription['active_show'] = 'true';
     else $arrSubscription['active_show'] = 'false';
@@ -38,7 +39,7 @@ class subscription extends model
       $arrSubscription['card_show'] = 'true';
     }
 
-    // Показать карты
+    // Показать категории
     if ( $this->show_category )
     if ( (int)$arrSubscription['category'] ) {
       $oCategory = new category( $arrSubscription['category'] );
@@ -64,6 +65,36 @@ class subscription extends model
       }
     }
 
+    // Валюты
+    if ( $this->show_currency && $oLock->check('Currency') ) {
+      $oCurrency = new currency();
+      $arrSubscription['currency_user'] = $oCurrency->get_currency_user();
+      if ( $arrSubscription['currency'] != '' && $arrSubscription['currency_user'] != $arrSubscription['currency'] ) {
+        // Платёж
+        $arrSubscription['currency_price'] = $arrSubscription['price'];
+
+        $arrSubscription['price'] = $arrSubscription['price'] / $oCurrency->get_val( $arrSubscription['currency'] );
+        $arrSubscription['price'] = bcdiv($arrSubscription['price'], 1, 2);
+
+        // Уже оплаченно
+        if ( $this->show_paid ) {
+          $arrSubscription['currency_paid_sum'] = $arrSubscription['paid_sum'];
+          $arrSubscription['paid_sum'] = $arrSubscription['paid_sum'] / $oCurrency->get_val( $arrSubscription['currency'] );
+          $arrSubscription['paid_sum'] = bcdiv($arrSubscription['paid_sum'], 1, 2);
+
+          $arrSubscription['currency_paid_need'] = $arrSubscription['paid_need'];
+          $arrSubscription['paid_need'] = $arrSubscription['paid_need'] / $oCurrency->get_val( $arrSubscription['currency'] );
+          $arrSubscription['paid_need'] = bcdiv($arrSubscription['paid_need'], 1, 2);
+        }
+
+        // Общая стоимость
+        $arrSubscription['currency_sum'] = $arrSubscription['sum'];
+        $arrSubscription['sum'] = $arrSubscription['sum'] / $oCurrency->get_val( $arrSubscription['currency'] );
+        $arrSubscription['sum'] = bcdiv($arrSubscription['sum'], 1, 2);
+      }
+      else $arrSubscription['currency_user'] = '';
+    }
+
     return $arrSubscription;
   }
 
@@ -75,8 +106,11 @@ class subscription extends model
   }
 
   public function get_month(){
+    $oLock = new lock();
+
     $oSubscription = new subscription();
     $oSubscription->show_paid = true;
+    $oSubscription->show_currency = true;
     $oSubscription->active = true;
     $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oSubscription->sDateQuery = $this->sDateQuery;
@@ -108,6 +142,19 @@ class subscription extends model
         case 0:
           $arrResults['subscriptions_dates'][$arrSubscription['day']][] = $arrSubscription;
           break;
+      }
+
+      // Валюты
+      if ( $this->show_currency && $oLock->check('Currency') ) {
+      //   $oCurrency = new currency();
+      //   $arrSubscription['currency_user'] = $oCurrency->get_currency_user();
+      //   if ( $arrSubscription['currency_user'] != $arrSubscription['currency'] ) {
+      //     $arrSubscription['currency_price'] = substr($arrSubscription['price'], 0, -2);
+      //
+      //     $arrSubscription['price'] = $arrSubscription['price'] / $oCurrency->get_val( $arrSubscription['currency'] );
+      //     $arrSubscription['price'] = bcdiv($arrSubscription['price'], 1, 2);
+      //   }
+      //   else $arrSubscription['currency_user'] = '';
       }
     }
 

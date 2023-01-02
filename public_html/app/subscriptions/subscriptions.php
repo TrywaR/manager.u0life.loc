@@ -1,5 +1,12 @@
 <?
+// Язык
 $olang = new lang();
+
+// Валюты
+$oLock = new lock();
+$bCurrency = $oLock->check('Currency');
+$oCurrency = new currency();
+$sCurrencyUser = $oCurrency->get_currency_user();
 
 switch ($_REQUEST['form']) {
   case 'actions': # Элементы управления
@@ -29,6 +36,7 @@ switch ($_REQUEST['form']) {
     $oSubscription->show_card = true;
     $oSubscription->show_category = true;
     $oSubscription->show_paid = true;
+    $oSubscription->show_currency = true;
     $oSubscription->active = true;
     $oSubscription->query = ' AND ( `user_id` = ' . $_SESSION['user']['id'] . '  OR `user_id` = 0)';
     $oSubscription->sDateQuery = $dMonth;
@@ -51,6 +59,7 @@ switch ($_REQUEST['form']) {
     $oSubscription->show_card = true;
     $oSubscription->show_category = true;
     $oSubscription->show_paid = true;
+    $oSubscription->show_currency = true;
 
     if ( $_REQUEST['from'] ) $oSubscription->from = $_REQUEST['from'];
     if ( $_REQUEST['limit'] ) $oSubscription->limit = $_REQUEST['limit'];
@@ -80,6 +89,7 @@ switch ($_REQUEST['form']) {
 
     // Подписки
     $oSubscription = new subscription();
+    $oSubscription->show_currency = true;
     $oSubscription->sDateQuery = $dMonth;
     $arrResults = $oSubscription->get_month();
 
@@ -182,12 +192,23 @@ switch ($_REQUEST['form']) {
                 <div class="_price">
                   <small><?=$oLang->get('SubscriptionSum')?></small>
                   <?=$arrSubscription['price']?>
+                  <?php if ( $bCurrency ): ?>
+                    <span style="opacity: .7;">
+                      <?=$sCurrencyUser?>
+                    </span>
+                  <?php endif; ?>
                 </div>
+
 
                 <?php if ( (int)$arrSubscription['paid_sum'] ): ?>
                   <div class="_paid">
                     <small><?=$oLang->get('SubscriptionSumPaid')?></small>
                     <?=$arrSubscription['paid_sum']?>
+                    <?php if ( $bCurrency ): ?>
+                      <span style="opacity: .7;">
+                        <?=$sCurrencyUser?>
+                      </span>
+                    <?php endif; ?>
                   </div>
                 <?php endif; ?>
 
@@ -195,6 +216,22 @@ switch ($_REQUEST['form']) {
                   <div class="_need">
                     <small><?=$oLang->get('SubscriptionSumNeedPaid')?></small>
                     <?=$arrSubscription['paid_need']?>
+                    <?php if ( $bCurrency ): ?>
+                      <span style="opacity: .7;">
+                        <?=$sCurrencyUser?>
+                      </span>
+                    <?php endif; ?>
+                  </div>
+                <?php endif; ?>
+
+                <?php if ( isset($arrSubscription['currency_price']) && $bCurrency ): ?>
+                  <div class="_currency">
+                    <div class="badge bg-secondary _currency d-none<?=$arrSubscription['currency_user']?> mx-2">
+                      <?=$arrSubscription['currency_price']?>
+                      <span style="opacity: .7; font-size: .8em; font-weight: normal;">
+                        <?=$arrSubscription['currency']?>
+                      </span>
+                    </div>
                   </div>
                 <?php endif; ?>
               </div>
@@ -233,8 +270,9 @@ switch ($_REQUEST['form']) {
       // Создаем элемент
       $oSubscription->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oSubscription->user_id = $_SESSION['user']['id'];
-      $oSubscription->active = 1;
       $oSubscription->add();
+      $oSubscription->active = 1;
+      $oSubscription->save();
     }
 
     // Поля для добавления

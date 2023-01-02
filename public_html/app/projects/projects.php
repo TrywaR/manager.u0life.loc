@@ -59,7 +59,8 @@ switch ($_REQUEST['form']) {
       // Создаем элемент
       $oProject->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oProject->user_id = $_SESSION['user']['id'];
-      $oProject->active = 1;
+      $oProject->add();
+      $oProject->save = 1;
       $oProject->add();
     }
 

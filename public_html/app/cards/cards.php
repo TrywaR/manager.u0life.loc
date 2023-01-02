@@ -132,8 +132,9 @@ switch ($_REQUEST['form']) {
       $oCard->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oCard->user_id = $_SESSION['user']['id'];
       $oCard->date_update = date('Y-m-d H:i:s');
-      $oCard->active = 1;
       $oCard->add();
+      $oCard->active = 1;
+      $oCard->save();
     }
 
     // Поля для добавления

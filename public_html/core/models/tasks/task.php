@@ -20,7 +20,6 @@ class task extends model
   public static $date_create = '';
   public static $date_update = '';
 
-
   function get_task( $arrTask = [] ) {
     if ( ! $arrTask['id'] ) $arrTask = $this->get();
 
@@ -52,14 +51,14 @@ class task extends model
     }
 
     // time
-    if ( $arrTask['time_planned'] != '00:00:00' ) {
+    if ( isset($arrTask['time_planned']) && $arrTask['time_planned'] != '00:00:00' ) {
       $arrTask['time_planned'] = date('H:i', strtotime($arrTask['time_planned']));
       $arrTask['time_really'] = '00:00';
       $arrTask['time_show'] = 'true';
 
       $oTime = new time();
       $oTime->query .= ' AND `task_id` = ' . $arrTask['id'];
-      $arrTimes = $oTime->get();
+      $arrTimes = $oTime->get_times();
 
       if ( count($arrTimes) ) {
         $arrTimesResult = [];
@@ -69,7 +68,7 @@ class task extends model
     }
 
     // money
-    if ( (int)$arrTask['price_planned'] ) {
+    if ( isset($arrTask['price_planned']) && (int)$arrTask['price_planned'] ) {
       $arrTask['price_planned'] = substr($arrTask['price_planned'], 0, -5);
       $arrTask['money_show'] = 'true';
       $oMoney = new money();
@@ -116,7 +115,6 @@ class task extends model
     return $arrTasks;
   }
 
-
   public function fields() # Поля для редактирования
   {
     $oLang = new lang();
@@ -131,7 +129,7 @@ class task extends model
 
     $oClient = new client();
     $oClient->query = ' AND `user_id` = ' . $_SESSION['user']['id'];
-    $arrClients = $oClient->get();
+    $arrClients = $oClient->get_clients();
     $arrClientsFilter = [];
     $arrClientsFilter[] = array('id'=>0,'name'=>'...');
     foreach ($arrClients as $arrClient) $arrClientsFilter[] = array('id'=>$arrClient['id'],'name'=>$arrClient['title']);

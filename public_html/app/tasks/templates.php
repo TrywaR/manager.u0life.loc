@@ -82,8 +82,9 @@ switch ($_REQUEST['form']) {
       // Создаем элемент
       $oTaskTemplate->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oTaskTemplate->user_id = $_SESSION['user']['id'];
-      $oTaskTemplate->active = 1;
       $oTaskTemplate->add();
+      $oTaskTemplate->active = 1;
+      $oTaskTemplate->save();
     }
 
     // Поля для добавления

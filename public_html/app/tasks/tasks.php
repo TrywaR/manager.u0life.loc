@@ -80,10 +80,12 @@ switch ($_REQUEST['form']) {
       );
 
       // Создаем элемент
-      $oTask->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
+      // $oTask->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oTask->user_id = $_SESSION['user']['id'];
-      $oTask->active = 1;
+      $oTask->date_create = date("Y-m-d H:i:s");
       $oTask->add();
+      $oTask->active = 1;
+      $oTask->save();
     }
 
     // Поля для добавления
@@ -114,8 +116,8 @@ switch ($_REQUEST['form']) {
     // Вывод результата
     $arrResults['form'] = $sFormHtml;
     $arrResults['data'] = $oTask->get_task();
-
     $arrResults['action'] = 'tasks';
+
     notification::send($arrResults);
     break;
 
