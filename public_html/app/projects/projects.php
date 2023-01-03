@@ -60,8 +60,8 @@ switch ($_REQUEST['form']) {
       $oProject->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oProject->user_id = $_SESSION['user']['id'];
       $oProject->add();
-      $oProject->save = 1;
-      $oProject->add();
+      $oProject->active = 1;
+      $oProject->save();
     }
 
     // Поля для добавления
@@ -109,5 +109,7 @@ switch ($_REQUEST['form']) {
   case 'del': # Удаление
     $oProject = new project( $_REQUEST['id'] );
     $oProject->del();
+    $arrResult['text'] = $oLang->get("DeleteSuccess");
+    notification::success($arrResult);
     break;
 }

@@ -86,6 +86,12 @@ class project extends model
     if ( (int)$arrProject['active'] ) $arrProject['active_show'] = 'true';
     else $arrProject['active_show'] = 'false';
 
+    if ( $arrProject['site'] )
+    if ( strripos($arrProject['site'], 'http') === false )
+      $arrProject['site_host'] = $arrProject['site'];
+    else
+      $arrProject['site_host'] = parse_url($arrProject['site'], PHP_URL_HOST);
+
     return $arrProject;
   }
 
@@ -117,6 +123,9 @@ class project extends model
     $arrFields['client_id'] = ['title'=>$oLang->get('Client'),'type'=>'select','options'=>$arrClientsFilter,'search'=>true,'value'=>$this->client_id];
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
+
+    $arrFields['instagram'] = ['title'=>$oLang->get('Instagram'),'icon'=>'<i class="fa-brands fa-instagram"></i>','type'=>'text','value'=>$this->instagram];
+    $arrFields['site'] = ['title'=>$oLang->get('Site'),'icon'=>'<i class="fa-solid fa-globe"></i>','type'=>'text','value'=>$this->site];
 
     $arrFields['active'] = ['title'=>$oLang->get('Active'),'type'=>'checkbox','value'=>$this->active];
 

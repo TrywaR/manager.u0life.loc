@@ -38,17 +38,18 @@ switch ($_REQUEST['form']) {
       $oTaskList = new task_list();
 
       // Случайное имя для корректной работы
-      $arrDefaultsNames = array(
-        'Task for reflection',
-        'The best way',
-        'Good name, good job',
-      );
+      // $arrDefaultsNames = array(
+      //   'Task for reflection',
+      //   'The best way',
+      //   'Good name, good job',
+      // );
 
       // Создаем элемент
-      $oTaskList->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
+      // $oTaskList->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
       $oTaskList->user_id = $_SESSION['user']['id'];
-      $oTaskList->active = 1;
       $oTaskList->add();
+      $oTaskList->active = 1;
+      $oTaskList->save();
     }
 
     // Поля для добавления
@@ -91,14 +92,14 @@ switch ($_REQUEST['form']) {
     $oTaskList = new task_list();
 
     // Случайное имя для корректной работы
-    $arrDefaultsNames = array(
-      'Task for reflection',
-      'The best way',
-      'Good name, good job',
-    );
+    // $arrDefaultsNames = array(
+    //   'Task for reflection',
+    //   'The best way',
+    //   'Good name, good job',
+    // );
 
     // Создаем элемент
-    $oTaskList->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
+    // $oTaskList->title = $arrDefaultsNames[array_rand($arrDefaultsNames, 1)];
     $oTaskList->user_id = $_SESSION['user']['id'];
     $oTaskList->task_id = $_REQUEST['task_id'];
     $oTaskList = new task_list( $oTaskList->add() );

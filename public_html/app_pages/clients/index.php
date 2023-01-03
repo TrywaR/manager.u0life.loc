@@ -134,8 +134,8 @@
             <h5 class="card-title">{{title}}</h5>
             <p class="card-text">{{description}}</p>
 
-            <div class="btn-group">
-              <a target="_blank" href="tel:{{phone}}" class="btn __icon content_ignore d-none{{phone}}">
+            <div class="btn-group _client_links">
+              <a target="_blank" href="tel:{{phone}}" class="btn __icon content_ignore d-none{{phone}} _client_link">
                 <span class="_icon">
                   <i class="fa-solid fa-phone"></i>
                 </span>
@@ -144,7 +144,7 @@
                 </span>
               </a>
 
-              <a target="_blank" href="mailto:{{email}}" class="btn __icon content_ignore d-none{{email}}">
+              <a target="_blank" href="mailto:{{email}}" class="btn __icon content_ignore d-none{{email}} _client_link">
                 <span class="_icon">
                   <i class="fa-solid fa-envelope"></i>
                 </span>
@@ -153,7 +153,7 @@
                 </span>
               </a>
 
-              <a target="_blank" href="https://t.me/{{telegram}}" class="btn __icon d-none{{telegram}}">
+              <a target="_blank" href="https://t.me/{{telegram}}" class="btn __icon d-none{{telegram}} _client_link">
                 <span class="_icon">
                   <i class="fa-brands fa-telegram"></i>
                 </span>
@@ -162,7 +162,7 @@
                 </span>
               </a>
 
-              <a target="_blank" href="https://instagram.com/{{instagram}}" class="btn __icon d-none{{instagram}}">
+              <a target="_blank" href="https://instagram.com/{{instagram}}" class="btn __icon d-none{{instagram}} _client_link">
                 <span class="_icon">
                   <i class="fa-brands fa-instagram"></i>
                 </span>
@@ -171,7 +171,7 @@
                 </span>
               </a>
 
-              <a target="_blank" href="{{site}}" class="btn __icon d-none{{site_host}}">
+              <a target="_blank" href="{{site}}" class="btn __icon d-none{{site_host}} _client_link">
                 <span class="_icon">
                   <i class="fa-solid fa-globe"></i>
                 </span>

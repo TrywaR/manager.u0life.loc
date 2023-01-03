@@ -116,13 +116,31 @@ $arrClients = $oClient->get_clients();
                 {{description}}
               </p>
 
-              <div class="btn-group">
-                <a href="/clients/analytics/?client_id={{client_id}}" class="btn __icon d-none{{client_id}}">
+              <div class="btn-group _project_links">
+                <a href="/clients/analytics/?client_id={{client_id}}" class="btn __icon d-none{{client_id}} _project_link">
                   <span class="_icon">
                     <i class="fa-solid fa-folder"></i>
                   </span>
                   <span class="_text">
                     {{client.title}}
+                  </span>
+                </a>
+
+                <a target="_blank" href="https://instagram.com/{{instagram}}" class="btn __icon d-none{{instagram}} _project_link">
+                  <span class="_icon">
+                    <i class="fa-brands fa-instagram"></i>
+                  </span>
+                  <span class="_text">
+                    {{instagram}}
+                  </span>
+                </a>
+
+                <a target="_blank" href="{{site}}" class="btn __icon d-none{{site_host}} _project_link">
+                  <span class="_icon">
+                    <i class="fa-solid fa-globe"></i>
+                  </span>
+                  <span class="_text">
+                    {{site_host}}
                   </span>
                 </a>
               </div>

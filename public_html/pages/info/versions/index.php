@@ -11,7 +11,8 @@
     <div class="row">
       <div class="col col-12 col-xl-4 mb-4">
         <div id="list-example" class="list-group" style="height: calc(75vh); overflow-y: auto;">
-          <a class="list-group-item list-group-item-action active" href="#list-item-5_6_5">5.6.5 fix</a>
+          <a class="list-group-item list-group-item-action active" href="#list-item-5_6_6">5.6.6 fix</a>
+          <a class="list-group-item list-group-item-action" href="#list-item-5_6_5">5.6.5 fix</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_6_4">5.6.4 Scroll fix</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_6_3">5.6.3 Prelist elements</a>
           <a class="list-group-item list-group-item-action" href="#list-item-5_6_2">5.6.2 Prelist editor</a>
@@ -85,6 +86,25 @@
       <div class="col col-12 col-xl-8">
         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0" style="height: calc(75vh); overflow-y: auto;">
           <div class="pt-2 pb-2">
+            <h2 id="list-item-5_6_6">5.6.6 fix</h2>
+            <ol>
+              <li>
+                Исправленно: Ошибка при добавлении проектов  (5.6.5)
+              </li>
+              <li>
+                Исправленно: Сообщение об удалении проектов
+              </li>
+              <li>
+                Обновлены стили для светлой темы, фигово, но более менее
+              </li>
+              <li>
+                При добавлении списков в задачах, сразу открываются на редактирование
+              </li>
+              <li>
+                При добавлении задач в списки, сразу открывается редактирование
+              </li>
+            </ol>
+
             <h2 id="list-item-5_6_5">5.6.5 fix</h2>
             <ol>
               <li>
