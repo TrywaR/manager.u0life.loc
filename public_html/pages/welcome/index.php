@@ -88,6 +88,22 @@
        </div>
    </div>
 
+   <div class="_section _tasks">
+     <div class="_block">
+       <div class="_icon">
+         <i class="fa-solid fa-person-digging"></i>
+       </div>
+       <div class="_content">
+         <h2 class="_block_title">Ticket system</h2>
+         <p>
+           The application has a functionality that allows you to maintain a to-do list. Write down which task took how much time and how much money brought.
+           <br>
+           Linking tasks to projects and clients will make it easy to navigate the tasks.
+         </p>
+       </div>
+     </div>
+   </div>
+
    <div class="_section _info">
      <div class="_block">
        <!-- <div class="_icon">

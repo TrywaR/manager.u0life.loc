@@ -1895,10 +1895,13 @@ body .content_manager_buttons {
       z-index: 2; }
       .welcome_container ._section._times ._block_title,
       .welcome_container ._section._times ._icon {
-        color: #7FC6A4; }
+        color: #3594B9; }
     .welcome_container ._section._moneys ._block_title,
     .welcome_container ._section._moneys ._icon {
-      color: #4F9497; }
+      color: #40B392; }
+    .welcome_container ._section._tasks ._block_title,
+    .welcome_container ._section._tasks ._icon {
+      color: #2b2e3e; }
     .welcome_container ._section._info {
       padding-top: 4rem;
       padding-bottom: 4rem; }

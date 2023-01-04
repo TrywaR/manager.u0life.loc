@@ -364,6 +364,7 @@ class nav
         'description' => $oLang->get('Info'),
         'url' => '/info/',
         'icon' => '<i class="fa-solid fa-circle-info"></i>',
+        'access' => -1,
         'menu_hide' => false,
         'subs' => [
           '/info/' => array(
@@ -371,7 +372,7 @@ class nav
             'description' => $oLang->get('Info'),
             'url' => '/info/',
             'icon' => '<i class="fa-solid fa-circle-info"></i>',
-            'access' => 0,
+            'access' => -1,
             'menu_hide' => false,
           ),
           '/info/versions/' => array(

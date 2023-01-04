@@ -72,6 +72,10 @@
         <li>
           Ability to use up to 50 categories
         </li>
+
+        <li>
+          Multicurrency 
+        </li>
       </ol>
     </div>
   </div>

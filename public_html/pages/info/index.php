@@ -33,9 +33,6 @@
       <li>
         Apps for all Google Play and AppStore
       </li>
-      <li>
-        Multicurrency
-      </li>
     </ul>
     <p>
       Already added and updated functionality can be seen in <a href="/info/versions/"><?=$oLang->get('Versions')?></a>
