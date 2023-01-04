@@ -154,7 +154,7 @@ $arrProjects = $oProject->get_projects();
             </span>
           </div>
 
-          <div class="col-12 col-md-4 d-flex justify-content-end">
+          <div class="col-12 col-md-4 d-flex justify-content-end align-items-center">
             <div class="btn-group">
               <a href="#" class="btn content_manager_switch switch_icons">
                 <div class="">
@@ -223,13 +223,17 @@ $arrProjects = $oProject->get_projects();
             <small>{{price_planned}}</small>
           </div>
 
-          <button type="button" class="btn _description_show" name="button" data-shower="#desc_{{id}}" data-shower_class="animate__fadeIn">
-            <i class="fa-solid fa-align-left"></i>
-          </button>
+          <div class="_info">
+            <div class="btn-group">
+              <button type="button" class="btn _description_show" name="button" data-shower="#desc_{{id}}" data-shower_class="animate__fadeIn">
+                <i class="fa-solid fa-align-left"></i>
+              </button>
 
-          <button type="button" class="btn _lists_show __gradient" name="button" data-shower="#lists_{{id}}" data-shower_class="animate__fadeIn" onclick="lists_show( $(document).find('#lists_{{id}}') )">
-            <i class="fa-solid fa-list-check"></i>
-          </button>
+              <button type="button" class="btn _lists_show __gradient" name="button" data-shower="#lists_{{id}}" data-shower_class="animate__fadeIn" onclick="lists_show( $(document).find('#lists_{{id}}') )">
+                <i class="fa-solid fa-list-check"></i>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="_description_prev animate__animated" id="desc_{{id}}">
@@ -239,6 +243,13 @@ $arrProjects = $oProject->get_projects();
         <div class="_lists_prev animate__animated" id="lists_{{id}}" data-task_id="{{id}}">
         </div>
       </div>
+    </div>
+
+    <div class="_client_background">
+      <div class="_color" style="background: radial-gradient({{client.color}} 0%,rgba(0,0,0,0) 70%)"></div>
+    </div>
+    <div class="_project_background">
+      <div class="_color" style="background: radial-gradient({{project.color}} 0%,rgba(0,0,0,0) 70%)"></div>
     </div>
   </div>
 </section>

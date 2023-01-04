@@ -161,7 +161,7 @@ $arrClients = $oClient->get_clients();
                   <i class="fas fa-chart-area"></i>
                 </a>
 
-                <a href="/tasks/?project_id={{id}}" class="btn">
+                <a href="/tasks/?project_id={{id}}&client_id={{client_id}}" class="btn">
                   <i class="fa-solid fa-person-digging"></i>
                 </a>
 
@@ -178,6 +178,12 @@ $arrClients = $oClient->get_clients();
         </div>
         <div class="progress">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+        <div class="_client_background">
+          <div class="_color" style="background: radial-gradient({{client.color}} 0%,rgba(0,0,0,0) 70%)"></div>
+        </div>
+        <div class="_project_background">
+          <div class="_color" style="background: radial-gradient({{color}} 0%,rgba(0,0,0,0) 70%)"></div>
         </div>
       </div>
     </div>

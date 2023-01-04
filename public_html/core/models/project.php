@@ -10,6 +10,7 @@ class project extends model
   public static $description = '';
   public static $sort = '';
   public static $active = '';
+  public static $color = '';
   public static $client_id = '';
   public static $user_id = '';
 
@@ -124,6 +125,10 @@ class project extends model
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
 
+    // $sColor = $this->color ? $this->color : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) );
+    // $arrFields['color'] = ['title'=>$oLang->get('Color'),'type'=>'color','value'=>$sColor];
+    $arrFields['color'] = ['title'=>$oLang->get('Color'),'type'=>'color','value'=>$this->color];
+
     $arrFields['instagram'] = ['title'=>$oLang->get('Instagram'),'icon'=>'<i class="fa-brands fa-instagram"></i>','type'=>'text','value'=>$this->instagram];
     $arrFields['site'] = ['title'=>$oLang->get('Site'),'icon'=>'<i class="fa-solid fa-globe"></i>','type'=>'text','value'=>$this->site];
 
@@ -144,6 +149,7 @@ class project extends model
       $this->id = $arrProject['id'];
       $this->title = $arrProject['title'];
       $this->description = base64_decode($arrProject['description']);
+      $this->color = $arrProject['color'];
       $this->sort = $arrProject['sort'];
       $this->active = $arrProject['active'];
       $this->client_id = $arrProject['client_id'];

@@ -313,6 +313,7 @@ class lang
       'ProtectKeyYes' => 'Защита по ключу',
 
       'Versions' => 'Версии',
+      'VersionsOld' => 'Старые версии',
       'Contacts' => 'Контакты',
       'Donate' => 'Донаты',
       'Docs' => 'Документация',
@@ -608,6 +609,7 @@ class lang
       'ProtectKeyYes' => 'Protect key yes',
 
       'Versions' => 'Versions',
+      'VersionsOld' => 'Old versions',
       'Contacts' => 'Contacts',
       'Donate' => 'Donate',
       'Docs' => 'Docs',

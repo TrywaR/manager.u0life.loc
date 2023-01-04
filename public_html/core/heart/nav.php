@@ -380,6 +380,16 @@ class nav
             'url' => '/info/versions/',
             'icon' => '<i class="fas fa-code-branch"></i>',
             'menu_hide' => false,
+            'subs' => [
+              '/info/versions/old/' => array(
+                'name' => $oLang->get('Versions'),
+                'description' => $oLang->get('Versions'),
+                'url' => '/info/versions/old/',
+                'icon' => '<i class="fa-solid fa-circle-info"></i>',
+                'access' => 0,
+                'menu_hide' => false,
+              ),
+            ]
           ),
           '/info/buy/' => array(
             'name' => $oLang->get('Donate'),

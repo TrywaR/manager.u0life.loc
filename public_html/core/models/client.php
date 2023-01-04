@@ -13,6 +13,7 @@ class client extends model
   public static $user_id = '';
   public static $phone = '';
   public static $email = '';
+  public static $color = '';
   public static $telegram = '';
   public static $instagram = '';
   public static $site = '';
@@ -53,6 +54,9 @@ class client extends model
 
     $arrFields['sort'] = ['title'=>$oLang->get('Sort'),'type'=>'number','value'=>$this->sort];
 
+    $sColor = $this->color ? $this->color : sprintf( '#%02X%02X%02X', rand(0, 255), rand(0, 255), rand(0, 255) );
+    $arrFields['color'] = ['title'=>$oLang->get('Color'),'type'=>'color','value'=>$sColor];
+
     $arrFields['phone'] = ['title'=>$oLang->get('Phone'),'icon'=>'<i class="fa-solid fa-phone"></i>','type'=>'text','value'=>$this->phone];
     $arrFields['email'] = ['title'=>$oLang->get('Email'),'icon'=>'<i class="fa-solid fa-envelope"></i>','type'=>'text','value'=>$this->email];
     $arrFields['telegram'] = ['title'=>$oLang->get('Telegram'),'icon'=>'<i class="fa-brands fa-telegram"></i>','type'=>'text','value'=>$this->telegram];
@@ -84,6 +88,7 @@ class client extends model
       $this->telegram = $arrClient['telegram'];
       $this->instagram = $arrClient['instagram'];
       $this->site = $arrClient['site'];
+      $this->color = $arrClient['color'];
     }
   }
 }

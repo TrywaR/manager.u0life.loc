@@ -218,6 +218,9 @@
       <div class="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
       </div>
+      <div class="_client_background">
+        <div class="_color" style="background: radial-gradient({{color}} 0%,rgba(0,0,0,0) 70%)"></div>
+      </div>
     </div>
   </div>
 </div>
